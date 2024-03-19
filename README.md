@@ -1,1 +1,1 @@
-# MyEvents_tinkoffProject
+# My Events
