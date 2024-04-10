@@ -4,7 +4,6 @@ import SnapKit
 class StartViewController: UIViewController {
 
     private var contentView: StartView = .init()
-    private var coordinator: Coordinator?
 
     override func loadView() {
         view = contentView
@@ -15,12 +14,13 @@ class StartViewController: UIViewController {
         view.backgroundColor = .white
 
         contentView.delegate = self
-        coordinator = Coordinator(navigationController: navigationController ?? UINavigationController())
     }
 
 }
 extension StartViewController: NextScreenStartViewDelegate {
     func nextScreenButtonDidPressed() {
-        coordinator?.goToLoginScreen()
+        let loginModel = LoginModel()
+        let loginVC = LoginViewController()
+        navigationController?.pushViewController(loginVC, animated: true)
     }
 }

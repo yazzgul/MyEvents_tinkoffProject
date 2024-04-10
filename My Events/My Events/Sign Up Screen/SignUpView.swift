@@ -1,26 +1,28 @@
 import UIKit
 import SnapKit
 
-protocol SignUpButtonLoginViewDelegate: AnyObject {
-    func signUpButtonDidPressed()
+protocol BackLoginButtonSignUpViewDelegate: AnyObject {
+    func backLoginButtonDidPressed()
 }
 
-class LoginView: UIView {
-    
+class SignUpView: UIView {
+
     private lazy var appNameLabel: UILabel = UILabel()
-    private lazy var welcomeLabel: UILabel = UILabel()
+    private lazy var createAccountLabel: UILabel = UILabel()
     private lazy var captionLabel: UILabel = UILabel()
     private lazy var haveAccountLabel: UILabel = UILabel()
 
     private lazy var ballonImageView: UIImageView = UIImageView()
 
+    private lazy var userNameTextField: UITextField = UITextField()
     private lazy var emailTextField: UITextField = UITextField()
     private lazy var passwordTextField: UITextField = UITextField()
+    private lazy var passwordCheckTextField: UITextField = UITextField()
 
-    private lazy var loginEnterButton: UIButton = UIButton()
-    private lazy var signUpButton: UIButton = UIButton()
+    private lazy var signUpEnterButton: UIButton = UIButton()
+    private lazy var backLoginButton: UIButton = UIButton()
 
-    weak var signUpButtonDelegate: SignUpButtonLoginViewDelegate?
+    weak var backLoginButtonDelegate: BackLoginButtonSignUpViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,13 +35,15 @@ class LoginView: UIView {
     func setupFunc() {
         setupBalloonImageView()
         setupAppNameLabel()
-        setupWelcomeLabel()
+        setupCreateAccountLabel()
         setupCaptionLabel()
+        setupUserNameTextField()
         setupEmailTextField()
         setupPasswordTextField()
-        setupLoginEnterButton()
+        setupPasswordCheckTextField()
+        setupSignUpEnterButton()
         setupHaveAccountLabel()
-        setupSignUpButton()
+        setupBackLoginButton()
     }
 
     func setupBalloonImageView() {
@@ -71,16 +75,16 @@ class LoginView: UIView {
             make.height.equalTo(20)
         }
     }
-    func setupWelcomeLabel() {
-        addSubview(welcomeLabel)
+    func setupCreateAccountLabel() {
+        addSubview(createAccountLabel)
 
-        welcomeLabel.text = "Welcome Back!"
-        welcomeLabel.numberOfLines = 1
-        welcomeLabel.font = .systemFont(ofSize: 25, weight: .bold)
-        welcomeLabel.textColor = .black
-        welcomeLabel.textAlignment = .center
+        createAccountLabel.text = "Create an Account"
+        createAccountLabel.numberOfLines = 1
+        createAccountLabel.font = .systemFont(ofSize: 25, weight: .bold)
+        createAccountLabel.textColor = .black
+        createAccountLabel.textAlignment = .center
 
-        welcomeLabel.snp.makeConstraints { make in
+        createAccountLabel.snp.makeConstraints { make in
             make.top.equalTo(appNameLabel.snp.bottom).offset(25)
             make.centerX.equalToSuperview()
             make.width.equalTo(250)
@@ -90,14 +94,14 @@ class LoginView: UIView {
     func setupCaptionLabel() {
         addSubview(captionLabel)
 
-        captionLabel.text = "Use Credentials to access your account"
+        captionLabel.text = "Please fill this detail to create an account"
         captionLabel.numberOfLines = 1
         captionLabel.font = .systemFont(ofSize: 15, weight: .medium)
         captionLabel.textColor = .systemGray2
         captionLabel.textAlignment = .center
 
         captionLabel.snp.makeConstraints { make in
-            make.top.equalTo(welcomeLabel.snp.bottom).offset(15)
+            make.top.equalTo(createAccountLabel.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(350)
             make.height.equalTo(15)
@@ -106,7 +110,7 @@ class LoginView: UIView {
     func setupHaveAccountLabel() {
         addSubview(haveAccountLabel)
 
-        haveAccountLabel.text = "Don`t have an account?"
+        haveAccountLabel.text = "Already have an account?"
         haveAccountLabel.numberOfLines = 1
         haveAccountLabel.font = .systemFont(ofSize: 15, weight: .medium)
         haveAccountLabel.textColor = .black
@@ -115,8 +119,25 @@ class LoginView: UIView {
         haveAccountLabel.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-100)
             make.leading.equalToSuperview().offset(75)
-            make.width.equalTo(170)
+            make.width.equalTo(180)
             make.height.equalTo(15)
+        }
+    }
+    func setupUserNameTextField() {
+        addSubview(userNameTextField)
+
+        userNameTextField.placeholder = "Enter Your Name"
+        userNameTextField.backgroundColor = .white
+        userNameTextField.textColor = .systemGray
+        userNameTextField.borderStyle = .roundedRect
+        userNameTextField.font = .systemFont(ofSize: 13, weight: .medium)
+        userNameTextField.autocapitalizationType = .none
+
+        userNameTextField.snp.makeConstraints { make in
+            make.top.equalTo(captionLabel.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(350)
+            make.height.equalTo(50)
         }
     }
     func setupEmailTextField() {
@@ -130,7 +151,7 @@ class LoginView: UIView {
         emailTextField.autocapitalizationType = .none
 
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(captionLabel.snp.bottom).offset(20)
+            make.top.equalTo(userNameTextField.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(350)
             make.height.equalTo(50)
@@ -154,44 +175,60 @@ class LoginView: UIView {
             make.height.equalTo(50)
         }
     }
-    func setupLoginEnterButton() {
-        addSubview(loginEnterButton)
+    func setupPasswordCheckTextField() {
+        addSubview(passwordCheckTextField)
 
-        loginEnterButton.setTitle("Login", for: .normal)
-        loginEnterButton.layer.cornerRadius = 20
-        loginEnterButton.clipsToBounds = true
-        loginEnterButton.backgroundColor = UIColor.vividPinkColor()
-        loginEnterButton.setTitleColor(.white, for: .normal)
+        passwordCheckTextField.placeholder = "Enter Password Again"
+        passwordCheckTextField.backgroundColor = .white
+        passwordCheckTextField.textColor = .black
+        passwordCheckTextField.borderStyle = .roundedRect
+        passwordCheckTextField.font = .systemFont(ofSize: 13, weight: .medium)
+        passwordCheckTextField.autocapitalizationType = .none
+        passwordCheckTextField.isSecureTextEntry = true
 
-//        add action
-
-        loginEnterButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(29)
+        passwordCheckTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(350)
             make.height.equalTo(50)
         }
     }
-    func setupSignUpButton() {
-        addSubview(signUpButton)
+    func setupSignUpEnterButton() {
+        addSubview(signUpEnterButton)
 
-        signUpButton.backgroundColor = .clear
-        signUpButton.setTitle("Sign Up", for: .normal)
-        signUpButton.setTitleColor(UIColor.vividPinkColor(), for: .normal)
-        signUpButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
+        signUpEnterButton.setTitle("Sign Up", for: .normal)
+        signUpEnterButton.layer.cornerRadius = 20
+        signUpEnterButton.clipsToBounds = true
+        signUpEnterButton.backgroundColor = UIColor.vividPinkColor()
+        signUpEnterButton.setTitleColor(.white, for: .normal)
+
+//        add action
+
+        signUpEnterButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordCheckTextField.snp.bottom).offset(29)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(350)
+            make.height.equalTo(50)
+        }
+    }
+    func setupBackLoginButton() {
+        addSubview(backLoginButton)
+
+        backLoginButton.backgroundColor = .clear
+        backLoginButton.setTitle("Login", for: .normal)
+        backLoginButton.setTitleColor(UIColor.vividPinkColor(), for: .normal)
+        backLoginButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .medium)
 
         let action = UIAction { [weak self] _ in
-            self?.signUpButtonDelegate?.signUpButtonDidPressed()
-
+            self?.backLoginButtonDelegate?.backLoginButtonDidPressed()
         }
-        signUpButton.addAction(action, for: .touchUpInside)
+        backLoginButton.addAction(action, for: .touchUpInside)
 
-        signUpButton.snp.makeConstraints { make in
+        backLoginButton.snp.makeConstraints { make in
             make.centerY.equalTo(haveAccountLabel.snp.centerY)
-            make.leading.equalTo(haveAccountLabel.snp.trailing).offset(3)
-            make.width.equalTo(65)
+            make.leading.equalTo(haveAccountLabel.snp.trailing).offset(2)
+            make.width.equalTo(52)
             make.height.equalTo(15)
         }
     }
-
 }

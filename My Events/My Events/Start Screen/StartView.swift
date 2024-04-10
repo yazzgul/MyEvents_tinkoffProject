@@ -6,10 +6,10 @@ protocol NextScreenStartViewDelegate: AnyObject {
 }
 class StartView: UIView {
 
-    lazy var appNameLabel: UILabel = UILabel()
-    lazy var captionLabel: UILabel = UILabel()
-    lazy var ballonImageView: UIImageView = UIImageView()
-    lazy var nextButton: UIButton = UIButton()
+    private lazy var appNameLabel: UILabel = UILabel()
+    private lazy var captionLabel: UILabel = UILabel()
+    private lazy var ballonImageView: UIImageView = UIImageView()
+    private lazy var nextButton: UIButton = UIButton()
 
     weak var delegate: NextScreenStartViewDelegate?
 
@@ -47,7 +47,7 @@ class StartView: UIView {
 
         appNameLabel.text = "MY EVENTS"
         appNameLabel.numberOfLines = .zero
-        appNameLabel.font = .systemFont(ofSize: 55, weight: .heavy)
+        appNameLabel.font = .systemFont(ofSize: 50, weight: .heavy, width: .condensed)
         appNameLabel.textColor = UIColor.vividPinkColor()
         appNameLabel.textAlignment = .center
 
