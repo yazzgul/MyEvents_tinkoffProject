@@ -3,7 +3,16 @@ import UIKit
 class SignUpViewController: UIViewController {
 
     private let contentView: SignUpView = .init()
+    private let viewModel: SignUpModel
 
+    init(viewModel: SignUpModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = contentView
     }
