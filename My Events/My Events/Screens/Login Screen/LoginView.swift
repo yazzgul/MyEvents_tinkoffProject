@@ -4,6 +4,9 @@ import SnapKit
 protocol SignUpButtonLoginViewDelegate: AnyObject {
     func signUpButtonDidPressed()
 }
+protocol LoginButtonLoginViewDelegate: AnyObject {
+    func loginButtonDidPressed()
+}
 
 class LoginView: UIView {
     
@@ -21,6 +24,7 @@ class LoginView: UIView {
     private lazy var signUpButton: UIButton = UIButton()
 
     weak var signUpButtonDelegate: SignUpButtonLoginViewDelegate?
+    weak var loginButtonDelegate: LoginButtonLoginViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -163,7 +167,11 @@ class LoginView: UIView {
         loginEnterButton.backgroundColor = UIColor.vividPinkColor()
         loginEnterButton.setTitleColor(.white, for: .normal)
 
-//        add action
+        let action = UIAction { [weak self] _ in
+            self?.loginButtonDelegate?.loginButtonDidPressed()
+        }
+
+        loginEnterButton.addAction(action, for: .touchUpInside)
 
         loginEnterButton.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(29)

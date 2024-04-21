@@ -20,7 +20,7 @@ class StartViewController: UIViewController {
 extension StartViewController: NextScreenStartViewDelegate {
     func nextScreenButtonDidPressed() {
         let loginModel = LoginModel()
-        let loginVC = LoginViewController()
+        let loginVC = LoginViewController(viewModel: loginModel)
         navigationController?.pushViewController(loginVC, animated: true)
     }
 }
