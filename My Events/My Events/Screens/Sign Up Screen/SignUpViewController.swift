@@ -1,9 +1,12 @@
 import UIKit
+import Combine
 
 class SignUpViewController: UIViewController {
 
     private let contentView: SignUpView = .init()
     private let viewModel: SignUpModel
+
+    private var cancellable: AnyCancellable?
 
     weak var signUpViewControllerCoordinator: SignUpViewControllerCoordinator?
 
@@ -22,14 +25,32 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+        navigationItem.hidesBackButton = true
 
         contentView.backLoginButtonDelegate = self
-        navigationItem.hidesBackButton = true
+        contentView.signUpEnterButtonDelegate = self
+
+        successfulySignUp()
+    }
+
+    func successfulySignUp() {
+        cancellable = viewModel.$successfulySignUp
+            .sink { bool in
+                if bool {
+                    self.signUpViewControllerCoordinator?.goToEventsTabBar()
+                } else {
+                    print("Что то пошло не так! Не удалось зарегистрироваться.")
+                }
+            }
     }
 
 }
-extension SignUpViewController: BackLoginButtonSignUpViewDelegate {
+extension SignUpViewController: BackLoginButtonSignUpViewDelegate, SignUpEnterButtonSignUpViewDelegate {
+
     func backLoginButtonDidPressed() {
         signUpViewControllerCoordinator?.backToLoginScreen()
+    }
+    func signUpEnterButtonDidPressed(email: String, password: String, passwordAgain: String, userName: String) {
+        viewModel.signUpUser(email: email, password: password, passwordAgain: passwordAgain, userName: userName)
     }
 }

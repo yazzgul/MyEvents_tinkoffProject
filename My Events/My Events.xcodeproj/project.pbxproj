@@ -70,6 +70,7 @@
 		28A706602BD543DF00298FEC /* MainViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A7065F2BD543DF00298FEC /* MainViewControllerCoordinator.swift */; };
 		28A706632BD5440500298FEC /* ProfileViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706622BD5440500298FEC /* ProfileViewControllerCoordinator.swift */; };
 		28A706652BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706642BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift */; };
+		28A706692BD58F2800298FEC /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706682BD58F2800298FEC /* AuthService.swift */; };
 		28ADD6EA2BC565E4004C6837 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6E92BC565E4004C6837 /* LoginView.swift */; };
 		28ADD6EC2BC565F0004C6837 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6EB2BC565F0004C6837 /* LoginViewController.swift */; };
 		28ADD6EE2BC565FC004C6837 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6ED2BC565FC004C6837 /* LoginModel.swift */; };
@@ -112,6 +113,7 @@
 		28A7065F2BD543DF00298FEC /* MainViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		28A706622BD5440500298FEC /* ProfileViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		28A706642BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabBarControllerCoordinator.swift; sourceTree = "<group>"; };
+		28A706682BD58F2800298FEC /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		28ADD6E92BC565E4004C6837 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		28ADD6EB2BC565F0004C6837 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		28ADD6ED2BC565FC004C6837 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				28A706432BD5229500298FEC /* GoogleService-Info.plist */,
+				28A706682BD58F2800298FEC /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				28A706502BD52A9400298FEC /* Coordinator.swift in Sources */,
 				28A706562BD53D7E00298FEC /* StartViewControllerCoordinator.swift in Sources */,
 				2826458D2BD41C2200DF7495 /* FavouritesView.swift in Sources */,
+				28A706692BD58F2800298FEC /* AuthService.swift in Sources */,
 				28A706542BD53BDA00298FEC /* BaseCoodinator.swift in Sources */,
 				287809C92BC4899600FA737B /* UIColor.swift in Sources */,
 			);

@@ -4,6 +4,9 @@ import SnapKit
 protocol BackLoginButtonSignUpViewDelegate: AnyObject {
     func backLoginButtonDidPressed()
 }
+protocol SignUpEnterButtonSignUpViewDelegate: AnyObject {
+    func signUpEnterButtonDidPressed(email: String, password: String, passwordAgain: String, userName: String)
+}
 
 class SignUpView: UIView {
 
@@ -23,6 +26,7 @@ class SignUpView: UIView {
     private lazy var backLoginButton: UIButton = UIButton()
 
     weak var backLoginButtonDelegate: BackLoginButtonSignUpViewDelegate?
+    weak var signUpEnterButtonDelegate: SignUpEnterButtonSignUpViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -202,7 +206,12 @@ class SignUpView: UIView {
         signUpEnterButton.backgroundColor = UIColor.vividPinkColor()
         signUpEnterButton.setTitleColor(.white, for: .normal)
 
-//        add action
+        let action = UIAction { [weak self] _ in
+            if let email = self?.emailTextField.text, let password = self?.passwordTextField.text, let passwordCheck = self?.passwordCheckTextField.text, let userName = self?.userNameTextField.text {
+                self?.signUpEnterButtonDelegate?.signUpEnterButtonDidPressed(email: email, password: password, passwordAgain: passwordCheck, userName: userName)
+            }
+        }
+        signUpEnterButton.addAction(action, for: .touchUpInside)
 
         signUpEnterButton.snp.makeConstraints { make in
             make.top.equalTo(passwordCheckTextField.snp.bottom).offset(29)

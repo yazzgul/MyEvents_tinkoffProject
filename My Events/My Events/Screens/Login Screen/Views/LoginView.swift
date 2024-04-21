@@ -5,7 +5,7 @@ protocol SignUpButtonLoginViewDelegate: AnyObject {
     func signUpButtonDidPressed()
 }
 protocol LoginButtonLoginViewDelegate: AnyObject {
-    func loginButtonDidPressed()
+    func loginButtonDidPressed(email: String, password: String)
 }
 
 class LoginView: UIView {
@@ -168,7 +168,9 @@ class LoginView: UIView {
         loginEnterButton.setTitleColor(.white, for: .normal)
 
         let action = UIAction { [weak self] _ in
-            self?.loginButtonDelegate?.loginButtonDidPressed()
+            if let email = self?.emailTextField.text, let password = self?.passwordTextField.text {
+                self?.loginButtonDelegate?.loginButtonDidPressed(email: email, password: password)
+            }
         }
 
         loginEnterButton.addAction(action, for: .touchUpInside)

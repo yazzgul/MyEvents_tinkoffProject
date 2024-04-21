@@ -24,6 +24,13 @@ class ProfileViewController: UIViewController {
 
         view.backgroundColor = .white
 
+        contentView.signOutButtonDelegate = self
+
     }
     
+}
+extension ProfileViewController: SignOutButtonProfileViewDelegate {
+    func signOutButtonDidPressed() {
+        profileViewControllerCoordinator?.signOut()
+    }
 }
