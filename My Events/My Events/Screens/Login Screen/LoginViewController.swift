@@ -5,6 +5,8 @@ class LoginViewController: UIViewController {
     private let contentView: LoginView = .init()
     private let viewModel: LoginModel
 
+    weak var loginViewControllerCoordinator: LoginViewControllerCoordinator?
+
     init(viewModel: LoginModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -31,18 +33,10 @@ class LoginViewController: UIViewController {
 extension LoginViewController: SignUpButtonLoginViewDelegate, LoginButtonLoginViewDelegate {
 
     func loginButtonDidPressed() {
-        let tabBarController = EventsTabBarController()
-
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let sceneDelegate = windowScene.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = tabBarController
-            sceneDelegate.window?.makeKeyAndVisible()
-        }
+        loginViewControllerCoordinator?.goToEventsTabBar()
     }
 
     func signUpButtonDidPressed() {
-        let signUpModel = SignUpModel()
-        let signUpVC = SignUpViewController(viewModel: signUpModel)
-        navigationController?.pushViewController(signUpVC, animated: true)
+        loginViewControllerCoordinator?.goToSignUpScreen()
     }
 }

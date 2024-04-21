@@ -5,6 +5,8 @@ class MainViewController: UIViewController {
     private let contentView: MainView = .init()
     private let viewModel: MainModel
 
+    weak var mainViewControllerCoordinator: MainViewControllerCoordinator?
+
     init(viewModel: MainModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)

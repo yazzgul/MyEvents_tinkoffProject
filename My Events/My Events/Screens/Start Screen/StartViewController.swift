@@ -5,6 +5,8 @@ class StartViewController: UIViewController {
 
     private var contentView: StartView = .init()
 
+    weak var startViewControllerCoordinator: StartViewControllerCoordinator?
+
     override func loadView() {
         view = contentView
     }
@@ -19,8 +21,6 @@ class StartViewController: UIViewController {
 }
 extension StartViewController: NextScreenStartViewDelegate {
     func nextScreenButtonDidPressed() {
-        let loginModel = LoginModel()
-        let loginVC = LoginViewController(viewModel: loginModel)
-        navigationController?.pushViewController(loginVC, animated: true)
+        startViewControllerCoordinator?.goToLoginScreen()
     }
 }

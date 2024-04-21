@@ -5,6 +5,8 @@ class SignUpViewController: UIViewController {
     private let contentView: SignUpView = .init()
     private let viewModel: SignUpModel
 
+    weak var signUpViewControllerCoordinator: SignUpViewControllerCoordinator?
+
     init(viewModel: SignUpModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -28,6 +30,6 @@ class SignUpViewController: UIViewController {
 }
 extension SignUpViewController: BackLoginButtonSignUpViewDelegate {
     func backLoginButtonDidPressed() {
-        navigationController?.popViewController(animated: true)
+        signUpViewControllerCoordinator?.backToLoginScreen()
     }
 }

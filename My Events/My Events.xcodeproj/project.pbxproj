@@ -33,7 +33,6 @@
 		288FA6592BA9D49300BE9195 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288FA6582BA9D49300BE9195 /* StartViewController.swift */; };
 		288FA65E2BA9D49500BE9195 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288FA65D2BA9D49500BE9195 /* Assets.xcassets */; };
 		288FA6612BA9D49500BE9195 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288FA65F2BA9D49500BE9195 /* LaunchScreen.storyboard */; };
-		289A286C2BD04ED700A5F863 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 289A286B2BD04ED700A5F863 /* GoogleService-Info.plist */; };
 		289A286F2BD061B300A5F863 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 289A286E2BD061B300A5F863 /* FirebaseAnalytics */; };
 		289A28712BD061B300A5F863 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 289A28702BD061B300A5F863 /* FirebaseAnalyticsOnDeviceConversion */; };
 		289A28732BD061B300A5F863 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 289A28722BD061B300A5F863 /* FirebaseAnalyticsSwift */; };
@@ -61,6 +60,16 @@
 		289A289F2BD061B300A5F863 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 289A289E2BD061B300A5F863 /* FirebaseRemoteConfigSwift */; };
 		289A28A12BD061B300A5F863 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 289A28A02BD061B300A5F863 /* FirebaseStorage */; };
 		289A28A32BD061B300A5F863 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 289A28A22BD061B300A5F863 /* FirebaseStorageCombine-Community */; };
+		28A706442BD5229500298FEC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28A706432BD5229500298FEC /* GoogleService-Info.plist */; };
+		28A706502BD52A9400298FEC /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A7064F2BD52A9400298FEC /* Coordinator.swift */; };
+		28A706522BD52AB500298FEC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706512BD52AB500298FEC /* AppCoordinator.swift */; };
+		28A706542BD53BDA00298FEC /* BaseCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706532BD53BDA00298FEC /* BaseCoodinator.swift */; };
+		28A706562BD53D7E00298FEC /* StartViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706552BD53D7E00298FEC /* StartViewControllerCoordinator.swift */; };
+		28A7065A2BD5436A00298FEC /* LoginViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706592BD5436A00298FEC /* LoginViewControllerCoordinator.swift */; };
+		28A7065D2BD543B400298FEC /* SignUpViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A7065C2BD543B400298FEC /* SignUpViewControllerCoordinator.swift */; };
+		28A706602BD543DF00298FEC /* MainViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A7065F2BD543DF00298FEC /* MainViewControllerCoordinator.swift */; };
+		28A706632BD5440500298FEC /* ProfileViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706622BD5440500298FEC /* ProfileViewControllerCoordinator.swift */; };
+		28A706652BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A706642BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift */; };
 		28ADD6EA2BC565E4004C6837 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6E92BC565E4004C6837 /* LoginView.swift */; };
 		28ADD6EC2BC565F0004C6837 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6EB2BC565F0004C6837 /* LoginViewController.swift */; };
 		28ADD6EE2BC565FC004C6837 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6ED2BC565FC004C6837 /* LoginModel.swift */; };
@@ -93,7 +102,16 @@
 		288FA65D2BA9D49500BE9195 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		288FA6602BA9D49500BE9195 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		288FA6622BA9D49500BE9195 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		289A286B2BD04ED700A5F863 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		28A706432BD5229500298FEC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		28A7064F2BD52A9400298FEC /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		28A706512BD52AB500298FEC /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		28A706532BD53BDA00298FEC /* BaseCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoodinator.swift; sourceTree = "<group>"; };
+		28A706552BD53D7E00298FEC /* StartViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		28A706592BD5436A00298FEC /* LoginViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		28A7065C2BD543B400298FEC /* SignUpViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		28A7065F2BD543DF00298FEC /* MainViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		28A706622BD5440500298FEC /* ProfileViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		28A706642BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabBarControllerCoordinator.swift; sourceTree = "<group>"; };
 		28ADD6E92BC565E4004C6837 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		28ADD6EB2BC565F0004C6837 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		28ADD6ED2BC565FC004C6837 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
@@ -159,7 +177,7 @@
 		282645882BD41BC200DF7495 /* Favourites Screen */ = {
 			isa = PBXGroup;
 			children = (
-				2826458C2BD41C2200DF7495 /* FavouritesView.swift */,
+				28A7064B2BD5246C00298FEC /* Views */,
 				2826458A2BD41C0100DF7495 /* FavouritesViewController.swift */,
 				2826458E2BD41C3A00DF7495 /* FavouritesModel.swift */,
 			);
@@ -169,7 +187,7 @@
 		282645892BD41BD500DF7495 /* Comments Screen */ = {
 			isa = PBXGroup;
 			children = (
-				282645922BD41CC400DF7495 /* CommentsView.swift */,
+				28A7064C2BD5247600298FEC /* Views */,
 				282645942BD41CD200DF7495 /* CommentsViewController.swift */,
 				282645902BD41CB500DF7495 /* CommentsModel.swift */,
 			);
@@ -179,7 +197,8 @@
 		283C1A882BC5900F008672F8 /* Sign Up Screen */ = {
 			isa = PBXGroup;
 			children = (
-				283C1A8D2BC5908E008672F8 /* SignUpView.swift */,
+				28A7065B2BD5439700298FEC /* Coordinator */,
+				28A706482BD5245100298FEC /* Views */,
 				283C1A8B2BC5907C008672F8 /* SignUpViewController.swift */,
 				283C1A892BC5905F008672F8 /* SignUpModel.swift */,
 			);
@@ -189,7 +208,8 @@
 		284108A12BC6AF1000419447 /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
-				284108A22BC6AF4D00419447 /* MainView.swift */,
+				28A7065E2BD543C900298FEC /* Coordinator */,
+				28A706492BD5245A00298FEC /* Views */,
 				284108A42BC6AF6200419447 /* MainViewController.swift */,
 				284108A62BC6AF8500419447 /* MainModel.swift */,
 			);
@@ -199,7 +219,8 @@
 		2877E4F42BCEC914002B160D /* Profile Screen */ = {
 			isa = PBXGroup;
 			children = (
-				2877E4F72BCEC93F002B160D /* ProfileView.swift */,
+				28A706612BD543F100298FEC /* Coordinator */,
+				28A7064A2BD5246200298FEC /* Views */,
 				2877E4F52BCEC928002B160D /* ProfileViewController.swift */,
 				2877E4F92BCEC94A002B160D /* ProfileModel.swift */,
 			);
@@ -209,7 +230,8 @@
 		287809C12BC471C100FA737B /* Start Screen */ = {
 			isa = PBXGroup;
 			children = (
-				287809C32BC473F000FA737B /* StartView.swift */,
+				28A706572BD541CA00298FEC /* Coordinator */,
+				28A706462BD5242B00298FEC /* Views */,
 				288FA6582BA9D49300BE9195 /* StartViewController.swift */,
 			);
 			path = "Start Screen";
@@ -218,7 +240,6 @@
 		287809C22BC471D400FA737B /* App Life */ = {
 			isa = PBXGroup;
 			children = (
-				2877E4F22BCEC791002B160D /* EventsTabBarController.swift */,
 				288FA6562BA9D49300BE9195 /* SceneDelegate.swift */,
 				288FA6542BA9D49300BE9195 /* AppDelegate.swift */,
 			);
@@ -254,21 +275,171 @@
 		288FA6532BA9D49300BE9195 /* My Events */ = {
 			isa = PBXGroup;
 			children = (
-				282645872BD405C500DF7495 /* Screens */,
-				287809C72BC4896E00FA737B /* Extensions */,
-				287809C22BC471D400FA737B /* App Life */,
-				288FA65D2BA9D49500BE9195 /* Assets.xcassets */,
-				288FA65F2BA9D49500BE9195 /* LaunchScreen.storyboard */,
 				288FA6622BA9D49500BE9195 /* Info.plist */,
-				289A286B2BD04ED700A5F863 /* GoogleService-Info.plist */,
+				28A706452BD523AF00298FEC /* Support */,
+				287809C22BC471D400FA737B /* App Life */,
+				28A7064D2BD52A4700298FEC /* Coordinators */,
+				287809C72BC4896E00FA737B /* Extensions */,
+				28A706402BD521AB00298FEC /* Services */,
+				282645872BD405C500DF7495 /* Screens */,
 			);
 			path = "My Events";
+			sourceTree = "<group>";
+		};
+		28A706402BD521AB00298FEC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				28A706432BD5229500298FEC /* GoogleService-Info.plist */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		28A706452BD523AF00298FEC /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				28A706662BD571FB00298FEC /* EventsTabBar */,
+				288FA65F2BA9D49500BE9195 /* LaunchScreen.storyboard */,
+				288FA65D2BA9D49500BE9195 /* Assets.xcassets */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		28A706462BD5242B00298FEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				287809C32BC473F000FA737B /* StartView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		28A706472BD5244500298FEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28ADD6E92BC565E4004C6837 /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		28A706482BD5245100298FEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				283C1A8D2BC5908E008672F8 /* SignUpView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		28A706492BD5245A00298FEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				284108A22BC6AF4D00419447 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		28A7064A2BD5246200298FEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2877E4F72BCEC93F002B160D /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		28A7064B2BD5246C00298FEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2826458C2BD41C2200DF7495 /* FavouritesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		28A7064C2BD5247600298FEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				282645922BD41CC400DF7495 /* CommentsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		28A7064D2BD52A4700298FEC /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				28A7064E2BD52A7300298FEC /* Protocols */,
+				28A706512BD52AB500298FEC /* AppCoordinator.swift */,
+				28A706532BD53BDA00298FEC /* BaseCoodinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		28A7064E2BD52A7300298FEC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				28A7064F2BD52A9400298FEC /* Coordinator.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		28A706572BD541CA00298FEC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				28A706552BD53D7E00298FEC /* StartViewControllerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		28A706582BD5434E00298FEC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				28A706592BD5436A00298FEC /* LoginViewControllerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		28A7065B2BD5439700298FEC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				28A7065C2BD543B400298FEC /* SignUpViewControllerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		28A7065E2BD543C900298FEC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				28A7065F2BD543DF00298FEC /* MainViewControllerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		28A706612BD543F100298FEC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				28A706622BD5440500298FEC /* ProfileViewControllerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		28A706662BD571FB00298FEC /* EventsTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				28A706672BD5720B00298FEC /* Coordinator */,
+				2877E4F22BCEC791002B160D /* EventsTabBarController.swift */,
+			);
+			path = EventsTabBar;
+			sourceTree = "<group>";
+		};
+		28A706672BD5720B00298FEC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				28A706642BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		28ADD6E82BC565C8004C6837 /* Login Screen */ = {
 			isa = PBXGroup;
 			children = (
-				28ADD6E92BC565E4004C6837 /* LoginView.swift */,
+				28A706582BD5434E00298FEC /* Coordinator */,
+				28A706472BD5244500298FEC /* Views */,
 				28ADD6EB2BC565F0004C6837 /* LoginViewController.swift */,
 				28ADD6ED2BC565FC004C6837 /* LoginModel.swift */,
 			);
@@ -389,7 +560,7 @@
 			files = (
 				288FA6612BA9D49500BE9195 /* LaunchScreen.storyboard in Resources */,
 				288FA65E2BA9D49500BE9195 /* Assets.xcassets in Resources */,
-				289A286C2BD04ED700A5F863 /* GoogleService-Info.plist in Resources */,
+				28A706442BD5229500298FEC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,9 +616,13 @@
 			files = (
 				283C1A8C2BC5907C008672F8 /* SignUpViewController.swift in Sources */,
 				284108A52BC6AF6200419447 /* MainViewController.swift in Sources */,
+				28A706522BD52AB500298FEC /* AppCoordinator.swift in Sources */,
 				284108A32BC6AF4D00419447 /* MainView.swift in Sources */,
 				2877E4F32BCEC791002B160D /* EventsTabBarController.swift in Sources */,
+				28A7065A2BD5436A00298FEC /* LoginViewControllerCoordinator.swift in Sources */,
+				28A706652BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift in Sources */,
 				28ADD6EC2BC565F0004C6837 /* LoginViewController.swift in Sources */,
+				28A7065D2BD543B400298FEC /* SignUpViewControllerCoordinator.swift in Sources */,
 				2826458B2BD41C0100DF7495 /* FavouritesViewController.swift in Sources */,
 				28ADD6EA2BC565E4004C6837 /* LoginView.swift in Sources */,
 				2877E4F62BCEC928002B160D /* ProfileViewController.swift in Sources */,
@@ -458,14 +633,19 @@
 				282645932BD41CC400DF7495 /* CommentsView.swift in Sources */,
 				2877E4FA2BCEC94A002B160D /* ProfileModel.swift in Sources */,
 				2877E4F82BCEC93F002B160D /* ProfileView.swift in Sources */,
+				28A706602BD543DF00298FEC /* MainViewControllerCoordinator.swift in Sources */,
 				288FA6552BA9D49300BE9195 /* AppDelegate.swift in Sources */,
 				288FA6572BA9D49300BE9195 /* SceneDelegate.swift in Sources */,
+				28A706632BD5440500298FEC /* ProfileViewControllerCoordinator.swift in Sources */,
 				28ADD6EE2BC565FC004C6837 /* LoginModel.swift in Sources */,
 				284108A72BC6AF8500419447 /* MainModel.swift in Sources */,
 				283C1A8A2BC5905F008672F8 /* SignUpModel.swift in Sources */,
 				282645952BD41CD200DF7495 /* CommentsViewController.swift in Sources */,
 				287809C42BC473F000FA737B /* StartView.swift in Sources */,
+				28A706502BD52A9400298FEC /* Coordinator.swift in Sources */,
+				28A706562BD53D7E00298FEC /* StartViewControllerCoordinator.swift in Sources */,
 				2826458D2BD41C2200DF7495 /* FavouritesView.swift in Sources */,
+				28A706542BD53BDA00298FEC /* BaseCoodinator.swift in Sources */,
 				287809C92BC4899600FA737B /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
