@@ -1,8 +1,12 @@
 import UIKit
 import SnapKit
 
-class ProfileView: UIView {
+protocol SignOutButtonProfileViewDelegate: AnyObject {
+    func signOutButtonDidPressed()
+}
 
+class ProfileView: UIView {
+//    пока тут все мок
     private lazy var pageNameLabel: UILabel = UILabel()
     private lazy var userFirstnameLabel: UILabel = UILabel()
     private lazy var userSurnameLabel: UILabel = UILabel()
@@ -13,6 +17,8 @@ class ProfileView: UIView {
     private lazy var commentsButton: UIButton = UIButton()
     private lazy var editProfileButton: UIButton = UIButton()
     private lazy var signOutButton: UIButton = UIButton()
+
+    weak var signOutButtonDelegate: SignOutButtonProfileViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -161,6 +167,7 @@ class ProfileView: UIView {
         signOutButton.setTitleColor(.white, for: .normal)
 
         let action = UIAction { [weak self] _ in
+            self?.signOutButtonDelegate?.signOutButtonDidPressed()
         }
         signOutButton.addAction(action, for: .touchUpInside)
 

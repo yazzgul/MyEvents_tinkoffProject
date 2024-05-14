@@ -18,4 +18,9 @@ class SignUpViewControllerCoordinator: BaseCoodinator {
         let loginViewControllerCoordinator = LoginViewControllerCoordinator(navigationController: navigationController)
         loginViewControllerCoordinator.backToLogin(coordinator: self)
     }
+    
+    func goToEventsTabBar() {
+        let eventsTabBarControllerCoordinator = EventsTabBarControllerCoordinator(navigationController: navigationController)
+        eventsTabBarControllerCoordinator.start()
+    }
 }

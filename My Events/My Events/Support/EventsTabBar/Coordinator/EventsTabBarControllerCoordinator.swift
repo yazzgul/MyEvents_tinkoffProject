@@ -10,23 +10,20 @@ class EventsTabBarControllerCoordinator: BaseCoodinator {
 
     override func start() {
 
-        let eventsTabBarController = EventsTabBarController()
+        if !childCoordinators.isEmpty {
+            childCoordinators.removeAll()
+        }
 
-        let mainModel = MainModel()
-        let mainVC = MainViewController(viewModel: mainModel)
-        let mainNavigationController = UINavigationController(rootViewController: mainVC)
+        let eventsTabBarController = EventsTabBarController()
+        let mainNavigationController = UINavigationController()
         mainNavigationController.tabBarItem = UITabBarItem(title: "Main", image: nil, tag: 1)
         let mainViewControllerCoordinator = MainViewControllerCoordinator(navigationController: mainNavigationController)
-        mainVC.mainViewControllerCoordinator = mainViewControllerCoordinator
-        add(coordinator: mainViewControllerCoordinator)
+        mainViewControllerCoordinator.start()
 
-        let profileModel = ProfileModel()
-        let profileVC = ProfileViewController(viewModel: profileModel)
-        let profileNavigationController = UINavigationController(rootViewController: profileVC)
+        let profileNavigationController = UINavigationController()
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: nil, tag: 2)
         let profileViewControllerCoordinator = ProfileViewControllerCoordinator(navigationController: profileNavigationController)
-        profileVC.profileViewControllerCoordinator = profileViewControllerCoordinator
-        add(coordinator: profileViewControllerCoordinator)
+        profileViewControllerCoordinator.start()
 
         let tabBarControllers = [mainNavigationController, profileNavigationController]
         eventsTabBarController.viewControllers = tabBarControllers

@@ -19,7 +19,7 @@ class LoginViewControllerCoordinator: BaseCoodinator {
         add(coordinator: signUpViewControllerCoordinator)
         signUpViewControllerCoordinator.start()
     }
-//    from another screen
+    
     func backToLogin(coordinator: BaseCoodinator) {
         remove(coordinator: coordinator)
         navigationController.popViewController(animated: true)

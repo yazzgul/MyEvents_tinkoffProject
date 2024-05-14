@@ -1,9 +1,12 @@
 import UIKit
+import Combine
 
 class LoginViewController: UIViewController {
 
     private let contentView: LoginView = .init()
     private let viewModel: LoginModel
+
+    private var cancellable: AnyCancellable?
 
     weak var loginViewControllerCoordinator: LoginViewControllerCoordinator?
 
@@ -27,13 +30,25 @@ class LoginViewController: UIViewController {
 
         contentView.signUpButtonDelegate = self
         contentView.loginButtonDelegate = self
+
+        succesfulyEnterLogin()
+    }
+
+    func succesfulyEnterLogin() {
+        cancellable = viewModel.$successfulyEnterLogin
+            .sink { bool in
+                if bool {
+                    self.loginViewControllerCoordinator?.goToEventsTabBar()
+                } else {
+                    print("Что то пошло не так! Не удалось войти.")
+                }
+            }
     }
 
 }
 extension LoginViewController: SignUpButtonLoginViewDelegate, LoginButtonLoginViewDelegate {
-
-    func loginButtonDidPressed() {
-        loginViewControllerCoordinator?.goToEventsTabBar()
+    func loginButtonDidPressed(email: String, password: String) {
+        viewModel.signInUser(email: email, password: password)
     }
 
     func signUpButtonDidPressed() {

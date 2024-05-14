@@ -7,7 +7,6 @@ protocol Coordinator: AnyObject {
     func start()
 
 }
-
 extension Coordinator {
 
     func add(coordinator: Coordinator) {

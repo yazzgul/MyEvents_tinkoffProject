@@ -9,7 +9,12 @@ class MainViewControllerCoordinator: BaseCoodinator {
     }
 
     override func start() {
-        
+        let mainModel = MainModel()
+        let mainVC = MainViewController(viewModel: mainModel)
+        mainVC.mainViewControllerCoordinator = self
+        add(coordinator: self)
+        navigationController.pushViewController(mainVC, animated: true)
+
     }
 
 }

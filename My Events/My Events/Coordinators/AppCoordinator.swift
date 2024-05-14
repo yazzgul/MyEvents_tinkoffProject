@@ -4,7 +4,7 @@ class AppCoordinator: BaseCoodinator {
 
     private var window: UIWindow
 
-    var isLogged = true
+    var isLogged = false
 
     private var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
@@ -19,13 +19,17 @@ class AppCoordinator: BaseCoodinator {
     }
 
     override func start() {
-        if isLogged {
+        if !childCoordinators.isEmpty {
+            childCoordinators.removeAll()
+        }
+        if !isLogged {
             let startViewControllerCoordinator = StartViewControllerCoordinator(navigationController: navigationController)
             add(coordinator: startViewControllerCoordinator)
             startViewControllerCoordinator.start()
-        }
-        else {
-            
+        } else {
+            let eventsTabBarControllerCoordinator = EventsTabBarControllerCoordinator(navigationController: navigationController)
+            add(coordinator: eventsTabBarControllerCoordinator)
+            eventsTabBarControllerCoordinator.start()
         }
 
     }
