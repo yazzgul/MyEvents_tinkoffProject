@@ -1,11 +1,20 @@
 import UIKit
 
+protocol EventsTabBarControllerCoordinatorOutput: AnyObject {
+    func signOut()
+}
+
 class EventsTabBarControllerCoordinator: BaseCoodinator {
 
-    private var navigationController: UINavigationController
+    private let eventsTabBarController: EventsTabBarController
 
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    let mainViewControllerCoordinator = MainViewControllerCoordinator(navigationController: UINavigationController())
+    let profileViewControllerCoordinator = ProfileViewControllerCoordinator(navigationController: UINavigationController())
+    weak var output: EventsTabBarControllerCoordinatorOutput?
+
+    init(eventsTabBarController: EventsTabBarController) {
+        self.eventsTabBarController = eventsTabBarController
+        super.init()
     }
 
     override func start() {
@@ -14,26 +23,25 @@ class EventsTabBarControllerCoordinator: BaseCoodinator {
             childCoordinators.removeAll()
         }
 
-        let eventsTabBarController = EventsTabBarController()
         let mainNavigationController = UINavigationController()
         mainNavigationController.tabBarItem = UITabBarItem(title: "Main", image: nil, tag: 1)
-        let mainViewControllerCoordinator = MainViewControllerCoordinator(navigationController: mainNavigationController)
+        mainViewControllerCoordinator.navigationController = mainNavigationController
         mainViewControllerCoordinator.start()
 
         let profileNavigationController = UINavigationController()
+        profileViewControllerCoordinator.output = self
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: nil, tag: 2)
-        let profileViewControllerCoordinator = ProfileViewControllerCoordinator(navigationController: profileNavigationController)
+        profileViewControllerCoordinator.navigationController = profileNavigationController
         profileViewControllerCoordinator.start()
 
         let tabBarControllers = [mainNavigationController, profileNavigationController]
         eventsTabBarController.viewControllers = tabBarControllers
-
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let sceneDelegate = windowScene.delegate as? SceneDelegate {
-            sceneDelegate.window?.rootViewController = eventsTabBarController
-            sceneDelegate.window?.makeKeyAndVisible()
-        }
-
     }
 
+}
+
+extension EventsTabBarControllerCoordinator: ProfileViewControllerCoordinatorOutput {
+    func signOut() {
+        output?.signOut()
+    }
 }

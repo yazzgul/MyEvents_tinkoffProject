@@ -3,9 +3,9 @@ import UIKit
 class FavouritesViewController: UIViewController {
 
     private let contentView: FavouritesView = .init()
-    private let viewModel: FavouritesModel
+    private let viewModel: FavouritesViewModel
 
-    init(viewModel: FavouritesModel) {
+    init(viewModel: FavouritesViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

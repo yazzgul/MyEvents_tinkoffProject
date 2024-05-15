@@ -1,5 +1,5 @@
 import Foundation
 
-class CommentsModel {
+class ProfileViewModel {
     
 }

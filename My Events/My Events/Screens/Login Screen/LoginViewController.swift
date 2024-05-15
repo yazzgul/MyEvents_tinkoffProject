@@ -4,13 +4,13 @@ import Combine
 class LoginViewController: UIViewController {
 
     private let contentView: LoginView = .init()
-    private let viewModel: LoginModel
+    private let viewModel: LoginViewModel
 
     private var cancellable: AnyCancellable?
 
     weak var loginViewControllerCoordinator: LoginViewControllerCoordinator?
 
-    init(viewModel: LoginModel) {
+    init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

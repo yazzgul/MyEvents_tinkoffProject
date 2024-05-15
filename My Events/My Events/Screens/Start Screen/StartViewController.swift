@@ -1,11 +1,16 @@
 import UIKit
 import SnapKit
 
+protocol StartViewControllerDelegate: AnyObject {
+    func goToLoginScreen()
+}
+
 class StartViewController: UIViewController {
 
     private var contentView: StartView = .init()
 
-    weak var startViewControllerCoordinator: StartViewControllerCoordinator?
+//    weak var startViewControllerCoordinator: StartViewControllerCoordinator?
+    weak var delegate: StartViewControllerDelegate?
 
     override func loadView() {
         view = contentView
@@ -21,6 +26,6 @@ class StartViewController: UIViewController {
 }
 extension StartViewController: NextScreenStartViewDelegate {
     func nextScreenButtonDidPressed() {
-        startViewControllerCoordinator?.goToLoginScreen()
+        delegate?.goToLoginScreen()
     }
 }

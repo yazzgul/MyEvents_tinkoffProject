@@ -4,13 +4,13 @@ import Combine
 class SignUpViewController: UIViewController {
 
     private let contentView: SignUpView = .init()
-    private let viewModel: SignUpModel
+    private let viewModel: SignUpViewModel
 
     private var cancellable: AnyCancellable?
 
     weak var signUpViewControllerCoordinator: SignUpViewControllerCoordinator?
 
-    init(viewModel: SignUpModel) {
+    init(viewModel: SignUpViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

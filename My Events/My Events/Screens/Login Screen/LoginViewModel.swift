@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-class LoginModel {
+class LoginViewModel {
 
     @Published var successfulyEnterLogin = false
 

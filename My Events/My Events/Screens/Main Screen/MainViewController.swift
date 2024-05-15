@@ -3,11 +3,11 @@ import UIKit
 class MainViewController: UIViewController {
 
     private let contentView: MainView = .init()
-    private let viewModel: MainModel
+    private let viewModel: MainViewModel
 
     weak var mainViewControllerCoordinator: MainViewControllerCoordinator?
 
-    init(viewModel: MainModel) {
+    init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

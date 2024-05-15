@@ -6,34 +6,64 @@ protocol NextScreenStartViewDelegate: AnyObject {
 }
 class StartView: UIView {
 
-    private lazy var appNameLabel: UILabel = UILabel()
-    private lazy var captionLabel: UILabel = UILabel()
-    private lazy var ballonImageView: UIImageView = UIImageView()
-    private lazy var nextButton: UIButton = UIButton()
+    private lazy var appNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "MY EVENTS"
+        label.numberOfLines = .zero
+        label.font = .systemFont(ofSize: 50, weight: .heavy, width: .condensed)
+        label.textColor = UIColor.vividPinkColor()
+        label.textAlignment = .center
+        return label
+    }()
+    private lazy var captionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Find your favourite events here..."
+        label.numberOfLines = .zero
+        label.font = .systemFont(ofSize: 17, weight: .regular)
+        label.textColor = .black
+        label.textAlignment = .justified
+        return label
+    }()
+    private lazy var ballonImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "ballon_pink_clean")
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
+    private lazy var nextButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Next", for: .normal)
+        button.layer.cornerRadius = 20
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor.vividPinkColor()
+        button.setTitleColor(.white, for: .highlighted)
+
+        let action = UIAction { [weak self] _ in
+            self?.delegate?.nextScreenButtonDidPressed()
+
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
 
     weak var delegate: NextScreenStartViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupFunc()
+        configureView()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupFunc() {
-        setupBalloonImageView()
-        setupAppNameLabel()
-        setupCaptionLabel()
-        setupNextButton()
-    }
-
-    func setupBalloonImageView() {
+}
+extension StartView {
+    func configureView() {
         addSubview(ballonImageView)
-
-        ballonImageView.image = UIImage(named: "ballon_pink_clean")
-        ballonImageView.contentMode = .scaleToFill
+        addSubview(appNameLabel)
+        addSubview(captionLabel)
+        addSubview(nextButton)
 
         ballonImageView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-5)
@@ -41,54 +71,18 @@ class StartView: UIView {
             make.width.equalTo(280)
             make.height.equalTo(300)
         }
-    }
-    func setupAppNameLabel() {
-        addSubview(appNameLabel)
-
-        appNameLabel.text = "MY EVENTS"
-        appNameLabel.numberOfLines = .zero
-        appNameLabel.font = .systemFont(ofSize: 50, weight: .heavy, width: .condensed)
-        appNameLabel.textColor = UIColor.vividPinkColor()
-        appNameLabel.textAlignment = .center
-
         appNameLabel.snp.makeConstraints { make in
             make.top.equalTo(ballonImageView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(400)
             make.height.equalTo(40)
         }
-    }
-    func setupCaptionLabel() {
-        addSubview(captionLabel)
-
-        captionLabel.text = "Find your favourite events here..."
-        captionLabel.numberOfLines = .zero
-        captionLabel.font = .systemFont(ofSize: 17, weight: .regular)
-        captionLabel.textColor = .black
-        captionLabel.textAlignment = .justified
-
         captionLabel.snp.makeConstraints { make in
             make.top.equalTo(appNameLabel.snp.bottom).offset(15)
             make.leading.equalToSuperview().offset(20)
             make.width.equalTo(400)
             make.height.equalTo(35)
         }
-    }
-    func setupNextButton() {
-        addSubview(nextButton)
-
-        nextButton.setTitle("Next", for: .normal)
-        nextButton.layer.cornerRadius = 20
-        nextButton.clipsToBounds = true
-        nextButton.backgroundColor = UIColor.vividPinkColor()
-        nextButton.setTitleColor(.white, for: .highlighted)
-
-        let action = UIAction { [weak self] _ in
-            self?.delegate?.nextScreenButtonDidPressed()
-
-        }
-        nextButton.addAction(action, for: .touchUpInside)
-
         nextButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-100)
             make.centerX.equalToSuperview()
@@ -96,5 +90,5 @@ class StartView: UIView {
             make.height.equalTo(50)
         }
     }
-    
+
 }

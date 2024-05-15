@@ -3,7 +3,7 @@ import FirebaseCore
 import FirebaseAuth
 import Combine
 
-class SignUpModel {
+class SignUpViewModel {
 
     @Published var successfulySignUp = false
 
