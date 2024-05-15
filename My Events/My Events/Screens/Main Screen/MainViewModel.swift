@@ -1,5 +1,5 @@
 import Foundation
 
-class MainModel {
+class MainViewModel {
 
 }

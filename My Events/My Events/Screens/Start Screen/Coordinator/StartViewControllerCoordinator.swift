@@ -1,8 +1,16 @@
 import UIKit
 
+protocol StartViewControllerCoordinatorOutput: AnyObject {
+    func coordinatorDidLogin()
+}
+
 class StartViewControllerCoordinator: BaseCoodinator {
 
     private var navigationController: UINavigationController
+    weak var output: StartViewControllerCoordinatorOutput?
+
+    var loginViewControllerCoordinator: LoginViewControllerCoordinator?
+    var signUpViewControllerCoordinator: SignUpViewControllerCoordinator?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -10,14 +18,45 @@ class StartViewControllerCoordinator: BaseCoodinator {
 
     override func start() {
         let startVC = StartViewController()
-        startVC.startViewControllerCoordinator = self
+        startVC.delegate = self
         navigationController.pushViewController(startVC, animated: true)
     }
 
+}
+
+extension StartViewControllerCoordinator: StartViewControllerDelegate {
     func goToLoginScreen() {
-        let loginViewControllerCoordinator = LoginViewControllerCoordinator(navigationController: navigationController)
-        add(coordinator: loginViewControllerCoordinator)
-        loginViewControllerCoordinator.start()
+        let coordinator = LoginViewControllerCoordinator(navigationController: navigationController)
+        loginViewControllerCoordinator = coordinator
+
+        coordinator.output = self
+        add(coordinator: coordinator)
+        coordinator.start()
+    }
+}
+
+extension StartViewControllerCoordinator: LoginViewControllerCoordinatorOutput {
+    func coordinatorDidLogin() {
+        loginViewControllerCoordinator.map { remove(coordinator: $0) }
+        output?.coordinatorDidLogin()
     }
 
+    func coordinatorWantsToSignUp() {
+        let coordinator = SignUpViewControllerCoordinator(navigationController: navigationController)
+        coordinator.output = self
+        signUpViewControllerCoordinator = coordinator
+        add(coordinator: coordinator)
+        coordinator.start()
+    }
+}
+
+extension StartViewControllerCoordinator: SignUpViewControllerCoordinatorOuptut {
+    func coordinatorDidSignUp() {
+        output?.coordinatorDidLogin()
+    }
+
+    func coordinatorWantsToOpenLogin() {
+        signUpViewControllerCoordinator.map { remove(coordinator: $0) }
+        navigationController.popViewController(animated: true)
+    }
 }

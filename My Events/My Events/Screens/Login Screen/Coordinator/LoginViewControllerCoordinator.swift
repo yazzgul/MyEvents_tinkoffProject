@@ -1,33 +1,30 @@
 import UIKit
 
+protocol LoginViewControllerCoordinatorOutput: AnyObject {
+    func coordinatorDidLogin()
+    func coordinatorWantsToSignUp()
+}
+
 class LoginViewControllerCoordinator: BaseCoodinator {
     private var navigationController: UINavigationController
+    weak var output: LoginViewControllerCoordinatorOutput?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     override func start() {
-        let loginModel = LoginModel()
+        let loginModel = LoginViewModel()
         let loginVC = LoginViewController(viewModel: loginModel)
         loginVC.loginViewControllerCoordinator = self
         navigationController.pushViewController(loginVC, animated: true)
     }
 
     func goToSignUpScreen() {
-        let signUpViewControllerCoordinator = SignUpViewControllerCoordinator(navigationController: navigationController)
-        add(coordinator: signUpViewControllerCoordinator)
-        signUpViewControllerCoordinator.start()
-    }
-    
-    func backToLogin(coordinator: BaseCoodinator) {
-        remove(coordinator: coordinator)
-        navigationController.popViewController(animated: true)
+        output?.coordinatorWantsToSignUp()
     }
 
     func goToEventsTabBar() {
-        let eventsTabBarControllerCoordinator = EventsTabBarControllerCoordinator(navigationController: navigationController)
-        eventsTabBarControllerCoordinator.start()
+        output?.coordinatorDidLogin()
     }
-
 }

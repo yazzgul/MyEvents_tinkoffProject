@@ -3,11 +3,11 @@ import UIKit
 class ProfileViewController: UIViewController {
 
     private let contentView: ProfileView = .init()
-    private let viewModel: ProfileModel
+    private let viewModel: ProfileViewModel
 
     weak var profileViewControllerCoordinator: ProfileViewControllerCoordinator?
 
-    init(viewModel: ProfileModel) {
+    init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

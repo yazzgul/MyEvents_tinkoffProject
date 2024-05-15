@@ -1,28 +1,28 @@
 import UIKit
 
 class MainView: UIView {
-    private lazy var pageNameLabel: UILabel = UILabel()
+    private lazy var pageNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Main page"
+        label.numberOfLines = .zero
+        label.font = .systemFont(ofSize: 18, weight: .heavy, width: .condensed)
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupFunc()
+        configureView()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setupFunc() {
-        setupPageNameLabel()
-    }
-
-    func setupPageNameLabel() {
+}
+extension MainView {
+    func configureView() {
         addSubview(pageNameLabel)
-
-        pageNameLabel.text = "Main page"
-        pageNameLabel.numberOfLines = .zero
-        pageNameLabel.font = .systemFont(ofSize: 18, weight: .heavy, width: .condensed)
-        pageNameLabel.textColor = .black
-        pageNameLabel.textAlignment = .center
 
         pageNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(75)

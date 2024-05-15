@@ -3,9 +3,9 @@ import UIKit
 class CommentsViewController: UIViewController {
 
     private let contentView: CommentsView = .init()
-    private let viewModel: CommentsModel
+    private let viewModel: CommentsViewModel
 
-    init(viewModel: CommentsModel) {
+    init(viewModel: CommentsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

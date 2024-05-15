@@ -1,15 +1,20 @@
 import UIKit
 
+protocol ProfileViewControllerCoordinatorOutput: AnyObject {
+    func signOut()
+}
+
 class ProfileViewControllerCoordinator: BaseCoodinator {
 
-    private var navigationController: UINavigationController
+    var navigationController: UINavigationController
+    weak var output: ProfileViewControllerCoordinatorOutput?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     override func start() {
-        let profileModel = ProfileModel()
+        let profileModel = ProfileViewModel()
         let profileVC = ProfileViewController(viewModel: profileModel)
         profileVC.profileViewControllerCoordinator = self
         add(coordinator: self)
@@ -18,21 +23,6 @@ class ProfileViewControllerCoordinator: BaseCoodinator {
     }
 
     func signOut() {
-
-        print("profile coordinator 2")
-
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let sceneDelegate = windowScene.delegate as? SceneDelegate {
-
-            print("profile coordinator 3")
-
-            let appCoordinator = AppCoordinator(window: sceneDelegate.window ?? UIWindow(windowScene: windowScene))
-            print("profile coordinator 4")
-
-            appCoordinator.isLogged = false
-            appCoordinator.start()
-            
-        }
+        output?.signOut()
     }
-
 }
