@@ -50,7 +50,7 @@ extension StartViewControllerCoordinator: LoginViewControllerCoordinatorOutput {
     }
 }
 
-extension StartViewControllerCoordinator: SignUpViewControllerCoordinatorOuptut {
+extension StartViewControllerCoordinator: SignUpViewControllerCoordinatorOutput {
     func coordinatorDidSignUp() {
         output?.coordinatorDidLogin()
     }

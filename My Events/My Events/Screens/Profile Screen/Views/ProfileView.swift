@@ -128,10 +128,10 @@ extension ProfileView {
         addSubview(signOutButton)
 
         pageNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(75)
+            make.top.equalToSuperview().offset(72)
             make.centerX.equalToSuperview()
             make.width.equalTo(80)
-            make.height.equalTo(20)
+            make.height.equalTo(24)
         }
         avatarImageView.snp.makeConstraints { make in
             make.top.equalTo(pageNameLabel.snp.bottom).offset(40)

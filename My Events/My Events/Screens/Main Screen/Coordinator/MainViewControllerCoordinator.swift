@@ -11,10 +11,13 @@ class MainViewControllerCoordinator: BaseCoodinator {
     override func start() {
         let mainModel = MainViewModel()
         let mainVC = MainViewController(viewModel: mainModel)
-        mainVC.mainViewControllerCoordinator = self
+        mainVC.delegate = self
         add(coordinator: self)
         navigationController.pushViewController(mainVC, animated: true)
 
     }
 
+}
+extension MainViewControllerCoordinator: MainViewControllerDelegate {
+    
 }

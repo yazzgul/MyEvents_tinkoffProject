@@ -16,15 +16,17 @@ class LoginViewControllerCoordinator: BaseCoodinator {
     override func start() {
         let loginModel = LoginViewModel()
         let loginVC = LoginViewController(viewModel: loginModel)
-        loginVC.loginViewControllerCoordinator = self
+        loginVC.delegate = self
         navigationController.pushViewController(loginVC, animated: true)
     }
 
-    func goToSignUpScreen() {
+}
+extension LoginViewControllerCoordinator: LoginViewControllerDelegate {
+    func goToSignUp() {
         output?.coordinatorWantsToSignUp()
     }
-
-    func goToEventsTabBar() {
+    func loginUser() {
         output?.coordinatorDidLogin()
     }
+
 }

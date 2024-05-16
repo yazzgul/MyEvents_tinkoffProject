@@ -16,12 +16,14 @@ class ProfileViewControllerCoordinator: BaseCoodinator {
     override func start() {
         let profileModel = ProfileViewModel()
         let profileVC = ProfileViewController(viewModel: profileModel)
-        profileVC.profileViewControllerCoordinator = self
+        profileVC.delegate = self
         add(coordinator: self)
         navigationController.pushViewController(profileVC, animated: true)
 
     }
 
+}
+extension ProfileViewControllerCoordinator: ProfileViewControllerDelegate {
     func signOut() {
         output?.signOut()
     }

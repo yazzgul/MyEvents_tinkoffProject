@@ -1,13 +1,13 @@
 import UIKit
 
-protocol SignUpViewControllerCoordinatorOuptut: AnyObject {
+protocol SignUpViewControllerCoordinatorOutput: AnyObject {
     func coordinatorDidSignUp()
     func coordinatorWantsToOpenLogin()
 }
 
 class SignUpViewControllerCoordinator: BaseCoodinator {
     private var navigationController: UINavigationController
-    weak var output: SignUpViewControllerCoordinatorOuptut?
+    weak var output: SignUpViewControllerCoordinatorOutput?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -16,15 +16,17 @@ class SignUpViewControllerCoordinator: BaseCoodinator {
     override func start() {
         let signUpModel = SignUpViewModel()
         let signUpVC = SignUpViewController(viewModel: signUpModel)
-        signUpVC.signUpViewControllerCoordinator = self
+        signUpVC.delegate = self
         navigationController.pushViewController(signUpVC, animated: true)
     }
 
+}
+extension SignUpViewControllerCoordinator: SignUpViewControllerDelegate {
     func backToLoginScreen() {
         output?.coordinatorWantsToOpenLogin()
     }
-    
-    func goToEventsTabBar() {
+    func signUpUser() {
         output?.coordinatorDidSignUp()
     }
+
 }
