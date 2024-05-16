@@ -1,6 +1,11 @@
 import UIKit
 import Combine
 
+protocol SignUpViewControllerDelegate: AnyObject {
+    func backToLoginScreen()
+    func signUpUser()
+}
+
 class SignUpViewController: UIViewController {
 
     private let contentView: SignUpView = .init()
@@ -8,7 +13,7 @@ class SignUpViewController: UIViewController {
 
     private var cancellable: AnyCancellable?
 
-    weak var signUpViewControllerCoordinator: SignUpViewControllerCoordinator?
+    weak var delegate: SignUpViewControllerDelegate?
 
     init(viewModel: SignUpViewModel) {
         self.viewModel = viewModel
@@ -35,9 +40,9 @@ class SignUpViewController: UIViewController {
 
     func successfulySignUp() {
         cancellable = viewModel.$successfulySignUp
-            .sink { bool in
-                if bool {
-                    self.signUpViewControllerCoordinator?.goToEventsTabBar()
+            .sink { userSuccessfulySignUp in
+                if userSuccessfulySignUp {
+                    self.delegate?.signUpUser()
                 } else {
                     print("Что то пошло не так! Не удалось зарегистрироваться.")
                 }
@@ -46,9 +51,8 @@ class SignUpViewController: UIViewController {
 
 }
 extension SignUpViewController: BackLoginButtonSignUpViewDelegate, SignUpEnterButtonSignUpViewDelegate {
-
     func backLoginButtonDidPressed() {
-        signUpViewControllerCoordinator?.backToLoginScreen()
+        delegate?.backToLoginScreen()
     }
     func signUpEnterButtonDidPressed(email: String, password: String, passwordAgain: String, userName: String) {
         viewModel.signUpUser(email: email, password: password, passwordAgain: passwordAgain, userName: userName)

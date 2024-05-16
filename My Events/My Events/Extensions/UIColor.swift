@@ -19,9 +19,9 @@ extension UIColor {
     }
     static func pinkColor(alpha: Double = 1.0) -> UIColor {
         return UIColor(
-            red: CGFloat(213) / 255.0,
+            red: CGFloat(255) / 255.0,
             green: CGFloat(0) / 255.0,
-            blue: CGFloat(101) / 255.0,
+            blue: CGFloat(150) / 255.0,
             alpha: CGFloat(alpha)
         )
     }
@@ -31,6 +31,7 @@ extension UIColor {
             green: CGFloat(0) / 255.0,
             blue: CGFloat(101) / 255.0,
             alpha: CGFloat(alpha)
+
         )
     }
 }

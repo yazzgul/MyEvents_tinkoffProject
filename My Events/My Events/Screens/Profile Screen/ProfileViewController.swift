@@ -1,11 +1,15 @@
 import UIKit
 
+protocol ProfileViewControllerDelegate: AnyObject {
+    func signOut()
+}
+
 class ProfileViewController: UIViewController {
 
     private let contentView: ProfileView = .init()
     private let viewModel: ProfileViewModel
 
-    weak var profileViewControllerCoordinator: ProfileViewControllerCoordinator?
+    weak var delegate: ProfileViewControllerDelegate?
 
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
@@ -31,6 +35,6 @@ class ProfileViewController: UIViewController {
 }
 extension ProfileViewController: SignOutButtonProfileViewDelegate {
     func signOutButtonDidPressed() {
-        profileViewControllerCoordinator?.signOut()
+        delegate?.signOut()
     }
 }

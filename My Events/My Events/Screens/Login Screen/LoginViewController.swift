@@ -1,6 +1,11 @@
 import UIKit
 import Combine
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func goToSignUp()
+    func loginUser()
+}
+
 class LoginViewController: UIViewController {
 
     private let contentView: LoginView = .init()
@@ -8,7 +13,7 @@ class LoginViewController: UIViewController {
 
     private var cancellable: AnyCancellable?
 
-    weak var loginViewControllerCoordinator: LoginViewControllerCoordinator?
+    weak var delegate: LoginViewControllerDelegate?
 
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -33,12 +38,12 @@ class LoginViewController: UIViewController {
 
         succesfulyEnterLogin()
     }
-
+// из viewmodel узнаем успешно ли введены данные и авторизовываем пользователя
     func succesfulyEnterLogin() {
         cancellable = viewModel.$successfulyEnterLogin
-            .sink { bool in
-                if bool {
-                    self.loginViewControllerCoordinator?.goToEventsTabBar()
+            .sink { userSuccessfulyEnterLogin in
+                if userSuccessfulyEnterLogin {
+                    self.delegate?.loginUser()
                 } else {
                     print("Что то пошло не так! Не удалось войти.")
                 }
@@ -52,6 +57,6 @@ extension LoginViewController: SignUpButtonLoginViewDelegate, LoginButtonLoginVi
     }
 
     func signUpButtonDidPressed() {
-        loginViewControllerCoordinator?.goToSignUpScreen()
+        delegate?.goToSignUp()
     }
 }

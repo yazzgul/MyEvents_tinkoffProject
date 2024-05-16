@@ -1,11 +1,15 @@
 import UIKit
 
+protocol MainViewControllerDelegate: AnyObject {
+
+}
+
 class MainViewController: UIViewController {
 
     private let contentView: MainView = .init()
     private let viewModel: MainViewModel
 
-    weak var mainViewControllerCoordinator: MainViewControllerCoordinator?
+    weak var delegate: MainViewControllerDelegate?
 
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel

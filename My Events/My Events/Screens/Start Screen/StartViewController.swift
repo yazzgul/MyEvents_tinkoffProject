@@ -9,7 +9,6 @@ class StartViewController: UIViewController {
 
     private var contentView: StartView = .init()
 
-//    weak var startViewControllerCoordinator: StartViewControllerCoordinator?
     weak var delegate: StartViewControllerDelegate?
 
     override func loadView() {
