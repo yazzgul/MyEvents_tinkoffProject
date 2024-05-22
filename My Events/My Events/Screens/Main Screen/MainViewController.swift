@@ -1,4 +1,5 @@
 import UIKit
+import Combine
 
 protocol MainViewControllerDelegate: AnyObject {
 
@@ -8,6 +9,8 @@ class MainViewController: UIViewController {
 
     private let contentView: MainView = .init()
     private let viewModel: MainViewModel
+
+    private var cancellables = Set<AnyCancellable>()
 
     weak var delegate: MainViewControllerDelegate?
 
@@ -22,10 +25,55 @@ class MainViewController: UIViewController {
     override func loadView() {
         view = contentView
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        viewModel.getAllEvents()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
+
+        contentView.setupDataSource(self)
+        contentView.setupDelegate(self)
+
+        checkingEventsEmpty()
+        setupEvents()
+
     }
     
+}
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.numberOfRowsInSection()
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        viewModel.configureCell(tableView, cellForRowAt: indexPath)
+    }
+
+}
+extension MainViewController {
+    func setupEvents() {
+        viewModel.$events
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.contentView.reloadData()
+            }
+            .store(in: &cancellables)
+    }
+    func checkingEventsEmpty() {
+        viewModel.$eventsAreEmpty
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] areEmpty in
+                if areEmpty {
+                    self?.contentView.startAnimatingActivityIndicator()
+                } else {
+                    self?.contentView.stopAnimatingActivityIndicator()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
 }

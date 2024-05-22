@@ -107,8 +107,14 @@ class SignUpView: UIView {
         button.setTitleColor(.white, for: .normal)
 
         let action = UIAction { [weak self] _ in
-            if let email = self?.emailTextField.text, let password = self?.passwordTextField.text, let passwordCheck = self?.passwordCheckTextField.text, let userName = self?.userNameTextField.text {
-                self?.signUpEnterButtonDelegate?.signUpEnterButtonDidPressed(email: email, password: password, passwordAgain: passwordCheck, userName: userName)
+            if let email = self?.emailTextField.text,
+               let password = self?.passwordTextField.text,
+               let passwordCheck = self?.passwordCheckTextField.text,
+               let userName = self?.userNameTextField.text {
+                self?.signUpEnterButtonDelegate?.signUpEnterButtonDidPressed(email: email,
+                                                                             password: password,
+                                                                             passwordAgain: passwordCheck,
+                                                                             userName: userName)
             }
         }
         button.addAction(action, for: .touchUpInside)
