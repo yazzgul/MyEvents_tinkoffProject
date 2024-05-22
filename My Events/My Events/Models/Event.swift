@@ -1,72 +1,6 @@
 import UIKit
 
-//struct Event: Equatable {
-//    let id: Int
-////    let dates: [String]?
-//    let startDate: String?
-//    let endDate: String?
-//    let title: String
-//    let shortTitle: String?
-//    let slug: String?
-//    let place: String?
-//    let description: String?
-////    полное описание
-//    let bodyText: String?
-////    город проведения
-//    let location: String?
-//    let categories: [String]?
-//    let ageRestriction: String?
-//    let price: String?
-//    let isFree: Bool?
-//    let images: [UIImage]?
-////    агенты
-//    let participants: [String]?
-//
-//    static func == (lhs: Event, rhs: Event) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-//}
-//
-//struct EventInfo: Codable {
-//    let id: Int
-////    let dates: [String]?
-//    let startDate: String?
-//    let endDate: String?
-//    let title: String
-//    let shortTitle: String?
-//    let slug: String?
-//    let place: String?
-//    let description: String?
-////    полное описание
-//    let bodyText: String?
-////    город проведения
-//    let location: String?
-//    let categories: [String]?
-//    let ageRestriction: String?
-//    let price: String?
-//    let isFree: Bool?
-//    let imageLinks: [EventImageLinks]?
-////    агенты
-//    let participants: [String]?
-//}
-//
-//struct EventItem: Codable {
-//    let kind: String
-//    let id: String
-//    let volumeInfo: EventInfo
-//}
-//
-//struct EventsResponse: Codable {
-//    let kind: String
-//    let totalItems: Int
-//    let items: [EventItem]
-//}
-//
-//struct EventImageLinks: Codable {
-//    let smallThumbnail: String?
-//    let thumbnail: String?
-//}
-struct Event: Codable, Hashable {
+struct Event: Codable, Hashable, Equatable {
     let id: Int
     let dates: [DateElement]?
     let title: String
@@ -120,9 +54,9 @@ struct Location: Codable, Hashable {
 }
 struct EventsResponse: Codable, Hashable {
     let count: Int?
-//    next page response
+//    next page link response
     let next: String?
-//    previous page response
+//    previous page link response
     let previous: String?
     let results: [Event]?
 }

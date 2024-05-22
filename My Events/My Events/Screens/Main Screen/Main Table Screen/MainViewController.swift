@@ -2,7 +2,7 @@ import UIKit
 import Combine
 
 protocol MainViewControllerDelegate: AnyObject {
-
+    func goToTableDetailScreen() 
 }
 
 class MainViewController: UIViewController {
@@ -56,7 +56,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 }
 extension MainViewController {
     func setupEvents() {
-        viewModel.$events
+        EventService.shared.$events
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.contentView.reloadData()

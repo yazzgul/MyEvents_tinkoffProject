@@ -17,7 +17,7 @@ class MainView: UIView {
         let table = UITableView()
         table.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
         table.backgroundColor = .white
-        table.rowHeight = 100
+        table.rowHeight = 120
         table.showsVerticalScrollIndicator = false
 
         return table
