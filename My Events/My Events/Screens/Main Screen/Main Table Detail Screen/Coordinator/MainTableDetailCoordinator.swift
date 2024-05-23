@@ -7,7 +7,6 @@ protocol MainTableDetailCoordinatorOutput: AnyObject {
 class MainTableDetailCoordinator: BaseCoodinator {
 
     private var navigationController: UINavigationController
-
     weak var output: MainTableDetailCoordinatorOutput?
 
     init(navigationController: UINavigationController) {
@@ -18,8 +17,6 @@ class MainTableDetailCoordinator: BaseCoodinator {
         let mainTableDetailModel = MainTableDetailViewModel()
         let mainTableDetailVC = MainTableDetailViewController(viewModel: mainTableDetailModel)
         mainTableDetailVC.delegate = self
-
-        add(coordinator: self)
         navigationController.pushViewController(mainTableDetailVC, animated: true)
 
     }
@@ -28,6 +25,5 @@ extension MainTableDetailCoordinator: MainTableDetailViewControllerDelegate {
     func goToBackToTable() {
         output?.coordinatorWantsToBackToTable()
     }
-    
 
 }

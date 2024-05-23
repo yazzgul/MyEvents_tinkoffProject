@@ -30,6 +30,20 @@ class MainTableDetailViewController: UIViewController {
 
         view.backgroundColor = .white
 
+        contentView.delegate = self
+
+        setupNavigationBar()
+
     }
 
+}
+extension MainTableDetailViewController {
+    private func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = contentView.backBarButtonItem
+    }
+}
+extension MainTableDetailViewController: MainTableDetailViewDelegate {
+    func backBarButtonItemDidPressed() {
+        delegate?.goToBackToTable()
+    }
 }

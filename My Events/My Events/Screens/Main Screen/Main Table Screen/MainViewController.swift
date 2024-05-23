@@ -2,7 +2,7 @@ import UIKit
 import Combine
 
 protocol MainViewControllerDelegate: AnyObject {
-    func goToTableDetailScreen() 
+    func goToTableDetailScreen()
 }
 
 class MainViewController: UIViewController {
@@ -48,9 +48,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRowsInSection()
     }
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         viewModel.configureCell(tableView, cellForRowAt: indexPath)
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.goToTableDetailScreen()
     }
 
 }
