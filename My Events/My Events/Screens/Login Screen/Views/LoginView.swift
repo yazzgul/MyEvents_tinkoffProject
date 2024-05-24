@@ -57,7 +57,7 @@ class LoginView: UIView {
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Email"
-        textField.backgroundColor = .white
+        textField.backgroundColor = .systemGray5
         textField.textColor = .systemGray
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 13, weight: .medium)
@@ -67,7 +67,7 @@ class LoginView: UIView {
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Password"
-        textField.backgroundColor = .white
+        textField.backgroundColor = .systemGray5
         textField.textColor = .black
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 13, weight: .medium)
