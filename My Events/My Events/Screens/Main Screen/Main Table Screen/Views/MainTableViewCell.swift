@@ -46,16 +46,16 @@ class MainTableViewCell: UITableViewCell {
 }
 extension MainTableViewCell {
     func configureView() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .systemGray6
 
         contentView.addSubview(eventImageView)
         contentView.addSubview(eventNameLabel)
         contentView.addSubview(eventDescriptionLabel)
 
         eventImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(5)
+            make.leading.equalToSuperview().inset(12)
             make.centerY.equalToSuperview()
-            make.size.equalTo(CGSize(width: 120, height: 100))
+            make.size.equalTo(CGSize(width: 140, height: 100))
         }
         eventNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)

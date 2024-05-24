@@ -14,6 +14,9 @@ class NetworkService: NetworkServiceProtocol {
             switch result {
             case .success(let data):
                 do {
+//                    if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
+//                        print("JSON response: \(json)")
+//                    }
                     let eventsResponse = try JSONDecoder().decode(EventsResponse.self, from: data)
                     response(eventsResponse.results, nil)
                 } catch let jsonError {

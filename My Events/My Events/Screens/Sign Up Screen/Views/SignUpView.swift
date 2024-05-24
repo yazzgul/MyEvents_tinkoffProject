@@ -57,7 +57,7 @@ class SignUpView: UIView {
     private lazy var userNameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Your Name (e.g. Kendall Jenner)"
-        textField.backgroundColor = .white
+        textField.backgroundColor = .systemGray5
         textField.textColor = .systemGray
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 13, weight: .medium)
@@ -67,7 +67,7 @@ class SignUpView: UIView {
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Email"
-        textField.backgroundColor = .white
+        textField.backgroundColor = .systemGray5
         textField.textColor = .systemGray
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 13, weight: .medium)
@@ -77,7 +77,7 @@ class SignUpView: UIView {
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Password"
-        textField.backgroundColor = .white
+        textField.backgroundColor = .systemGray5
         textField.textColor = .black
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 13, weight: .medium)
@@ -89,7 +89,7 @@ class SignUpView: UIView {
     private lazy var passwordCheckTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Password Again"
-        textField.backgroundColor = .white
+        textField.backgroundColor = .systemGray5
         textField.textColor = .black
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 13, weight: .medium)

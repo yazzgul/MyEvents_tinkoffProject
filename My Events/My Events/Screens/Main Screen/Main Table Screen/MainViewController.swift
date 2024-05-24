@@ -29,11 +29,13 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
 
         viewModel.getAllEvents()
+//        viewModel.getEventDetailById(byId: 201777)
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
 
         contentView.setupDataSource(self)
         contentView.setupDelegate(self)
@@ -52,6 +54,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.configureCell(tableView, cellForRowAt: indexPath)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.saveCurrentMainTableSelectedEventInEventService(tableView, didSelectRowAt: indexPath)
         delegate?.goToTableDetailScreen()
     }
 

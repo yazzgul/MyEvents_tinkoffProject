@@ -28,11 +28,13 @@ class MainTableDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
 
         contentView.delegate = self
 
         setupNavigationBar()
+
+        setupEventInfo()
 
     }
 
@@ -40,6 +42,25 @@ class MainTableDetailViewController: UIViewController {
 extension MainTableDetailViewController {
     private func setupNavigationBar() {
         navigationItem.leftBarButtonItem = contentView.backBarButtonItem
+    }
+}
+extension MainTableDetailViewController {
+    func setupEventInfo() {
+
+        if let event = viewModel.fetchSelectedEvent() {
+            contentView.configureDetail(by: event)
+        }
+
+        viewModel.fetchSelectedEventImage { [weak self] image in
+            if let fetchImage = image {
+                self?.contentView.configureDetail(by: fetchImage)
+            } else {
+                if let noImage = UIImage(named: "no_photo") {
+                    self?.contentView.configureDetail(by: noImage)
+                }
+            }
+        }
+
     }
 }
 extension MainTableDetailViewController: MainTableDetailViewDelegate {

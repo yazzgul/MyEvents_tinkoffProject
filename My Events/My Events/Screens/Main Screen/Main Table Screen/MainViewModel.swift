@@ -14,26 +14,26 @@ class MainViewModel {
 //                add alert
                 print("error: ", error)
             } else if let events {
-                eventService.events = events
-//                self.events = events
-                print("events count: ", eventService.events.count, eventService.getCount())
+                eventService.saveEventsArray(with: events)
+//                print(events)
+//                print("events count: ", eventService.events.count, eventService.getCount())
             }
             checkEventsEmpty()
         }
     }
-//    перемещу метод в другой вьюмодел, проверила работает ли запрос
-    func getEventDetailById(byId: Int) {
-        let id = String(byId)
-        NetworkService.shared.fetchEventDetailById(byId: id) { [weak self] event, error in
-            guard let self else { return }
-            if error != nil {
-                print("error: ", error)
-            } else if let event {
-                eventService.events.append(event)
-                print("events count: ", eventService.getCount())
-            }
-        }
-    }
+////    перемещу метод в другой вьюмодел, проверила работает ли запрос
+//    func getEventDetailById(byId: Int) {
+//        let id = String(byId)
+//        NetworkService.shared.fetchEventDetailById(byId: id) { [weak self] event, error in
+//            guard let self else { return }
+//            if error != nil {
+//                print("error: ", error)
+//            } else if let event {
+//                eventService.saveEvent(with: event)
+//                print("events count: ", eventService.getCount())
+//            }
+//        }
+//    }
 
     func checkEventsEmpty() {
         eventsAreEmpty = eventService.eventsAreEmpty()
@@ -54,7 +54,7 @@ extension MainViewModel {
         if let imageLink = event.images?.first?.image {
             Task {
                 let image = try? await ImageNetworkManager.shared.downloadImage(by: imageLink)
-                print(ImageNetworkManager.shared.cashedImages.count)
+//                print(ImageNetworkManager.shared.cashedImages.count)
                 if let imageReady = image {
                     DispatchQueue.main.async {
                         cell.configureCell(with: imageReady)
@@ -72,4 +72,11 @@ extension MainViewModel {
 
         return cell
     }
+
+    func saveCurrentMainTableSelectedEventInEventService(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let event = eventService.events[indexPath.row]
+
+        eventService.mainTableSelectedEvent = event
+    }
+
 }

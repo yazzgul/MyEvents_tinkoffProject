@@ -9,10 +9,21 @@ class EventService {
     private let lock = NSLock()
 
     @Published var events: [Event] = []
+    
+    var mainTableSelectedEvent: Event?
+    var userFavouriteTableSelectedEvent: Event?
 
     func saveEvent(with event: Event) {
         lock.lock()
-        events.append(event)
+        if !events.contains(where: { $0.id == event.id }) {
+            events.append(event)
+        }
+        lock.unlock()
+    }
+    
+    func saveEventsArray(with newEvents: [Event]) {
+        lock.lock()
+        events = newEvents
         lock.unlock()
     }
 
@@ -35,7 +46,7 @@ class EventService {
     }
 
     func getEvent(by id: Int) -> Event? {
-        if let event =  events.first(where: { $0.id == id }) {
+        if let event = events.first(where: { $0.id == id }) {
             return event
         }
         return nil
@@ -52,4 +63,5 @@ class EventService {
     func eventsAreEmpty() -> Bool {
         return events.isEmpty
     }
+    
 }

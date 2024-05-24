@@ -30,10 +30,10 @@ struct Event: Codable, Hashable, Equatable {
     }
 }
 struct DateElement: Codable, Hashable {
-    let startDate: String
-    let startTime: String
-    let endDate: String
-    let endTime: String
+    let startDate: String?
+    let startTime: String?
+    let endDate: String?
+    let endTime: String?
 
     enum DateCodingKeys: String, CodingKey {
         case startDate = "start_date"
@@ -47,10 +47,10 @@ struct Image: Codable, Hashable {
     let image: String
 }
 struct Location: Codable, Hashable {
-    let slug: String
+    let slug: String?
 //    city
-    let name: String
-    let timezone: String
+    let name: String?
+    let timezone: String?
 }
 struct EventsResponse: Codable, Hashable {
     let count: Int?

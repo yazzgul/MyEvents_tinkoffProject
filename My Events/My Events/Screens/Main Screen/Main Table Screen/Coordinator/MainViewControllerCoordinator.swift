@@ -20,7 +20,7 @@ class MainViewControllerCoordinator: BaseCoodinator {
     }
 
 }
-extension MainViewControllerCoordinator: MainViewControllerDelegate {
+extension MainViewControllerCoordinator: MainViewControllerDelegate {    
     func goToTableDetailScreen() {
         let coordinator = MainTableDetailCoordinator(navigationController: navigationController)
         coordinator.output = self

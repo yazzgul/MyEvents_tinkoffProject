@@ -13,8 +13,9 @@ extension EndPoint {
         components.queryItems = [
             URLQueryItem(name: "lang", value: "en"),
             URLQueryItem(name: "page", value: path),
-            URLQueryItem(name: "page_size", value: "35"),
-            URLQueryItem(name: "fields", value: "id,title,description,images"),
+            URLQueryItem(name: "page_size", value: "50"),
+            URLQueryItem(name: "fields",
+                         value: "id,dates,title,short_title,description,body_text,location,categories,age_restriction,price,is_free,images"),
             URLQueryItem(name: "expand", value: "dates")
         ]
         guard let url = components.url else {
@@ -23,6 +24,7 @@ extension EndPoint {
         }
         return url
     }
+
 //    path = event id
     var detailEventUrl: URL {
         var components = URLComponents()

@@ -17,6 +17,7 @@ class MainTableDetailCoordinator: BaseCoodinator {
         let mainTableDetailModel = MainTableDetailViewModel()
         let mainTableDetailVC = MainTableDetailViewController(viewModel: mainTableDetailModel)
         mainTableDetailVC.delegate = self
+        mainTableDetailVC.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(mainTableDetailVC, animated: true)
 
     }

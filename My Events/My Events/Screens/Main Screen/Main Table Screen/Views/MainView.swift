@@ -16,7 +16,7 @@ class MainView: UIView {
     private lazy var eventsTableView: UITableView = {
         let table = UITableView()
         table.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
-        table.backgroundColor = .white
+        table.backgroundColor = .systemGray6
         table.rowHeight = 120
         table.showsVerticalScrollIndicator = false
 
