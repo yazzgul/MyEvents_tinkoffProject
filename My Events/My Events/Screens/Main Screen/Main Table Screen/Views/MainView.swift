@@ -1,12 +1,12 @@
 import UIKit
 
 protocol MainViewDelegate: AnyObject {
-
+    func refreshDataInTable()
 }
 class MainView: UIView {
     private lazy var pageNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Main page"
+        label.text = "Events"
         label.numberOfLines = .zero
         label.font = .systemFont(ofSize: 18, weight: .heavy, width: .condensed)
         label.textColor = .black
@@ -17,16 +17,31 @@ class MainView: UIView {
         let table = UITableView()
         table.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
         table.backgroundColor = .systemGray6
+        table.contentInsetAdjustmentBehavior = .never
         table.rowHeight = 120
         table.showsVerticalScrollIndicator = false
-
         return table
+    }()
+    lazy var tableSearchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Events..."
+        searchController.searchBar.showsBookmarkButton = true
+
+        return searchController
+    }()
+    private lazy var tableRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        return refreshControl
     }()
     private let activityIndicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.startAnimating()
         return activityIndicator
     }()
+
+    weak var delegate: MainViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,19 +54,24 @@ class MainView: UIView {
 }
 extension MainView {
     func configureView() {
-        addSubview(pageNameLabel)
+//        addSubview(pageNameLabel)
         addSubview(eventsTableView)
         addSubview(activityIndicatorView)
+        
+        eventsTableView.addSubview(tableRefreshControl)
 
-        pageNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(72)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(80)
-            make.height.equalTo(24)
-        }
+//        pageNameLabel.snp.makeConstraints { make in
+//            make.top.equalTo(safeAreaLayoutGuide)
+//            make.centerX.equalToSuperview()
+//            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(60)
+//            make.height.equalTo(24)
+//            make.width.equalTo(80)
+//            make.height.equalTo(24)
+//        }
         eventsTableView.snp.makeConstraints { make in
-            make.top.equalTo(pageNameLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(20)
+//            make.top.equalTo(pageNameLabel.snp.bottom).inset(5)
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(10)
             make.bottom.equalToSuperview().offset(-100)
         }
         activityIndicatorView.snp.makeConstraints { make in
@@ -61,7 +81,6 @@ extension MainView {
 
 }
 extension MainView {
-
     func setupDataSource(_ dataSource: UITableViewDataSource) {
         self.eventsTableView.dataSource = dataSource
     }
@@ -73,7 +92,7 @@ extension MainView {
     func reloadData() {
         eventsTableView.reloadData()
     }
-    
+
 }
 extension MainView {
     func startAnimatingActivityIndicator() {
@@ -82,4 +101,24 @@ extension MainView {
     func stopAnimatingActivityIndicator() {
         activityIndicatorView.stopAnimating()
     }
+}
+extension MainView {
+    func endRefreshing() {
+        tableRefreshControl.endRefreshing()
+    }
+    func isRefreshing() -> Bool {
+        return tableRefreshControl.isRefreshing
+    }
+}
+extension MainView {
+    func setupSearchResultsUpdater(_ searchResultsUpdater: UISearchResultsUpdating) {
+        tableSearchController.searchResultsUpdater = searchResultsUpdater
+    }
+    func setupDelegateForSearchController(_ delegate: UISearchControllerDelegate) {
+        tableSearchController.delegate = delegate
+    }
+    func setupDelegateForSearchBar(_ delegate: UISearchBarDelegate) {
+        tableSearchController.searchBar.delegate = delegate
+    }
+
 }

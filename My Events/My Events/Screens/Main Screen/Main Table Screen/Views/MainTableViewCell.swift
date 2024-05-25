@@ -53,9 +53,9 @@ extension MainTableViewCell {
         contentView.addSubview(eventDescriptionLabel)
 
         eventImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(12)
+            make.leading.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
-            make.size.equalTo(CGSize(width: 140, height: 100))
+            make.size.equalTo(CGSize(width: 145, height: 100))
         }
         eventNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
@@ -79,11 +79,12 @@ extension MainTableViewCell {
     }
     func configureCell(with event: Event) {
 
-        if let shortTitle = event.shortTitle {
-            eventNameLabel.text = shortTitle
-        } else {
-            eventNameLabel.text = event.title
-        }
+//        if let shortTitle = event.shortTitle {
+//            eventNameLabel.text = shortTitle
+//        } else {
+//            eventNameLabel.text = event.title
+//        }
+        eventNameLabel.text = event.title
 //        у API в обьектах Event у аттрибута decription остаются префиксы, суффиксы
         var decriptionEvent = event.description
         if decriptionEvent.hasPrefix("<p>") {
