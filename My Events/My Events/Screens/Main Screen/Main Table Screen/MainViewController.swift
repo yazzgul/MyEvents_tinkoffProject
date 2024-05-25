@@ -10,6 +10,8 @@ class MainViewController: UIViewController {
     private let contentView: MainView = .init()
     private let viewModel: MainViewModel
 
+    private var isFirstAppearance = true
+
     private var cancellables = Set<AnyCancellable>()
 
     weak var delegate: MainViewControllerDelegate?
@@ -28,9 +30,8 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        viewModel.getAllEvents()
+        firstAppearance()
 //        viewModel.getEventDetailById(byId: 201777)
-
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,28 +41,60 @@ class MainViewController: UIViewController {
         contentView.setupDataSource(self)
         contentView.setupDelegate(self)
 
+        contentView.setupSearchResultsUpdater(self)
+        contentView.setupDelegateForSearchController(self)
+        contentView.setupDelegateForSearchBar(self)
+
+        setupNavigationBar()
+
         checkingEventsEmpty()
         setupEvents()
+        setupSearchBarFilteredEvents()
 
     }
     
 }
+extension MainViewController {
+    private func setupNavigationBar() {
+        navigationItem.searchController = contentView.tableSearchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = false
+    }
+}
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRowsInSection()
+        viewModel.numberOfRowsInSection(searchController: contentView.tableSearchController)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        viewModel.configureCell(tableView, cellForRowAt: indexPath)
+        viewModel.configureCell(tableView, cellForRowAt: indexPath, searchController: contentView.tableSearchController)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.saveCurrentMainTableSelectedEventInEventService(tableView, didSelectRowAt: indexPath)
+        viewModel.saveCurrentMainTableSelectedEventInEventService(tableView, didSelectRowAt: indexPath, searchController: contentView.tableSearchController)
         delegate?.goToTableDetailScreen()
     }
-
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if viewModel.inSearchMode(contentView.tableSearchController) {
+            contentView.endRefreshing()
+            return
+        }
+        if scrollView.contentOffset.y <= (scrollView.contentSize.height - scrollView.frame.size.height) - 160 {
+            print((scrollView.contentSize.height - scrollView.frame.size.height))
+            viewModel.getAllEvents()
+            contentView.endRefreshing()
+        }
+    }
 }
 extension MainViewController {
     func setupEvents() {
         EventService.shared.$events
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.contentView.reloadData()
+            }
+            .store(in: &cancellables)
+    }
+    func setupSearchBarFilteredEvents() {
+        EventService.shared.$searchBarFilteredEvents
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.contentView.reloadData()
@@ -80,5 +113,18 @@ extension MainViewController {
             }
             .store(in: &cancellables)
     }
-
+    func firstAppearance() {
+        if isFirstAppearance {
+            viewModel.getAllEvents()
+            isFirstAppearance = false
+        }
+    }
+}
+extension MainViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        viewModel.updateSearchController(searchBarText: searchController.searchBar.text)
+    }
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        print("Search bar button called!")
+    }
 }

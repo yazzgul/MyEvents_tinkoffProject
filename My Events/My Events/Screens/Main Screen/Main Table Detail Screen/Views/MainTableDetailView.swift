@@ -131,7 +131,7 @@ extension MainTableDetailView {
             make.top.equalTo(pageNameLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+            make.height.equalTo(56)
         }
         ageRestrictionLabel.snp.makeConstraints { make in
             make.top.equalTo(eventNameLabel.snp.bottom).offset(8)

@@ -9,7 +9,8 @@ class EventService {
     private let lock = NSLock()
 
     @Published var events: [Event] = []
-    
+    @Published var searchBarFilteredEvents: [Event] = []
+
     var mainTableSelectedEvent: Event?
     var userFavouriteTableSelectedEvent: Event?
 
@@ -63,5 +64,16 @@ class EventService {
     func eventsAreEmpty() -> Bool {
         return events.isEmpty
     }
+
+    func saveSearchBarFilteredEvents(with eventsArray: [Event]) {
+        searchBarFilteredEvents = eventsArray
+    }
     
+    func getSearchBarFilteredEvents() -> [Event] {
+        return searchBarFilteredEvents
+    }
+    func getSearchBarFilteredEventsCount() -> Int {
+        return searchBarFilteredEvents.count
+    }
+
 }

@@ -62,6 +62,7 @@ extension MainTableDetailViewController {
         }
 
     }
+
 }
 extension MainTableDetailViewController: MainTableDetailViewDelegate {
     func backBarButtonItemDidPressed() {
