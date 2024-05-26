@@ -33,4 +33,21 @@ class MainTableDetailViewModel {
         }
     }
 
+//   пока тестила что все работает
+//    func saveFavoriteEvent() {
+//        var curUser = UserService.shared.getCurrentUser()
+//        curUser?.favoriteEventsId.append(176578)
+//        if let curUser = curUser {
+//            UserService.shared.updateUserInfo(with: curUser) { result in
+//                switch result {
+//                case .success(let user):
+//                    print("USER!!! WITH ARRAY: ", user.favoriteEventsId)
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//
+//            }
+//        }
+//    }
+
 }

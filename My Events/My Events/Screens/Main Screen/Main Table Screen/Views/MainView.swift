@@ -33,6 +33,7 @@ class MainView: UIView {
     }()
     private lazy var tableRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTableData), for: .valueChanged)
         return refreshControl
     }()
     private let activityIndicatorView: UIActivityIndicatorView = {
@@ -103,6 +104,10 @@ extension MainView {
     }
 }
 extension MainView {
+    @objc func refreshTableData() {
+        print("refreshing")
+        delegate?.refreshDataInTable()
+    }
     func endRefreshing() {
         tableRefreshControl.endRefreshing()
     }

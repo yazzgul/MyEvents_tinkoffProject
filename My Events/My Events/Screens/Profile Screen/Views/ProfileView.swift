@@ -17,7 +17,7 @@ class ProfileView: UIView {
     }()
     private lazy var userFirstnameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Cat"
+        label.text = ""
         label.numberOfLines = .zero
         label.font = .systemFont(ofSize: 21, weight: .heavy, width: .condensed)
         label.textColor = .black
@@ -26,7 +26,7 @@ class ProfileView: UIView {
     }()
     private lazy var userSurnameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Catov"
+        label.text = ""
         label.numberOfLines = .zero
         label.font = .systemFont(ofSize: 21, weight: .heavy, width: .condensed)
         label.textColor = .black
@@ -170,4 +170,10 @@ extension ProfileView {
         }
     }
 
+}
+extension ProfileView {
+    func configureProfileInfo(firstName: String, lastName: String) {
+        userFirstnameLabel.text = firstName
+        userSurnameLabel.text = lastName
+    }
 }

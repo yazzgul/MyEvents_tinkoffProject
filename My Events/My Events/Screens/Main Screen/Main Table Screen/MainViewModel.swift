@@ -14,12 +14,9 @@ class MainViewModel {
         NetworkService.shared.fetchAllEventsByPage(byPage: randomPageNumber) { [weak self] events, error in
             guard let self else { return }
             if error != nil {
-//                add alert
                 print("error: ", error)
             } else if let events {
                 eventService.saveEventsArray(with: events)
-//                print(events)
-//                print("events count: ", eventService.events.count, eventService.getCount())
             }
             checkEventsEmpty()
         }

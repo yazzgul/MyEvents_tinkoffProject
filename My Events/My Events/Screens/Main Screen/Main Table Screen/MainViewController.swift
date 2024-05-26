@@ -45,6 +45,8 @@ class MainViewController: UIViewController {
         contentView.setupDelegateForSearchController(self)
         contentView.setupDelegateForSearchBar(self)
 
+        contentView.delegate = self
+
         setupNavigationBar()
 
         checkingEventsEmpty()
@@ -71,17 +73,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.saveCurrentMainTableSelectedEventInEventService(tableView, didSelectRowAt: indexPath, searchController: contentView.tableSearchController)
         delegate?.goToTableDetailScreen()
-    }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if viewModel.inSearchMode(contentView.tableSearchController) {
-            contentView.endRefreshing()
-            return
-        }
-        if scrollView.contentOffset.y <= (scrollView.contentSize.height - scrollView.frame.size.height) - 160 {
-            print((scrollView.contentSize.height - scrollView.frame.size.height))
-            viewModel.getAllEvents()
-            contentView.endRefreshing()
-        }
     }
 }
 extension MainViewController {
@@ -126,5 +117,11 @@ extension MainViewController: UISearchControllerDelegate, UISearchResultsUpdatin
     }
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         print("Search bar button called!")
+    }
+}
+extension MainViewController: MainViewDelegate {
+    func refreshDataInTable() {
+        viewModel.getAllEvents()
+        contentView.endRefreshing()
     }
 }
