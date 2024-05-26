@@ -1,4 +1,5 @@
 import UIKit
+import Combine
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func signOut()
@@ -9,7 +10,10 @@ class ProfileViewController: UIViewController {
     private let contentView: ProfileView = .init()
     private let viewModel: ProfileViewModel
 
+    private var cancellables = Set<AnyCancellable>()
+
     weak var delegate: ProfileViewControllerDelegate?
+
 
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
@@ -22,7 +26,11 @@ class ProfileViewController: UIViewController {
     override func loadView() {
         view = contentView
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.getProfile()
 
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,11 +38,25 @@ class ProfileViewController: UIViewController {
 
         contentView.signOutButtonDelegate = self
 
+        setupUserProfile()
     }
     
+}
+extension ProfileViewController {
+    func setupUserProfile() {
+        viewModel.$currentUser
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] currentUser in
+                if let firstName = currentUser?.firstName, let lastName = currentUser?.lastName {
+                    self?.contentView.configureProfileInfo(firstName: firstName, lastName: lastName)
+                }
+            }
+            .store(in: &cancellables)
+    }
 }
 extension ProfileViewController: SignOutButtonProfileViewDelegate {
     func signOutButtonDidPressed() {
         delegate?.signOut()
+        viewModel.signOutFromProfile()
     }
 }

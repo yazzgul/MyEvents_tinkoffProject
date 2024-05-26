@@ -8,8 +8,14 @@ class SignUpViewModel {
     @Published var successfulySignUp = false
 
     func signUpUser(email: String, password: String, passwordAgain: String, userName: String) {
-        if password == passwordAgain {
-            AuthService.shared.signUp(email: email, password: password) { result in
+        let parts = userName.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
+
+        if parts.count == 2 && password == passwordAgain {
+            print("you entered your name correctly")
+            let userFirstName = String(parts[0])
+            let userLastName = String(parts[1])
+
+            AuthService.shared.signUp(email: email, password: password, firstName: userFirstName, lastName: userLastName) { result in
                 switch result {
                 case .success(let user):
                     self.successfulySignUp = true
@@ -19,6 +25,9 @@ class SignUpViewModel {
                 }
             }
         }
+        else {
+            print("enter your name correctly")
+        }
     }
-    
+
 }

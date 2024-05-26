@@ -27,6 +27,9 @@
 		284108A32BC6AF4D00419447 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284108A22BC6AF4D00419447 /* MainView.swift */; };
 		284108A52BC6AF6200419447 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284108A42BC6AF6200419447 /* MainViewController.swift */; };
 		284108A72BC6AF8500419447 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284108A62BC6AF8500419447 /* MainViewModel.swift */; };
+		284F36E02C027FE200BB429E /* UserInEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F36DF2C027FE200BB429E /* UserInEvent.swift */; };
+		284F36E22C02809C00BB429E /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F36E12C02809C00BB429E /* DatabaseService.swift */; };
+		284F36E42C02A78E00BB429E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F36E32C02A78E00BB429E /* UserService.swift */; };
 		2877E4F32BCEC791002B160D /* EventsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2877E4F22BCEC791002B160D /* EventsTabBarController.swift */; };
 		2877E4F62BCEC928002B160D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2877E4F52BCEC928002B160D /* ProfileViewController.swift */; };
 		2877E4F82BCEC93F002B160D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2877E4F72BCEC93F002B160D /* ProfileView.swift */; };
@@ -110,6 +113,9 @@
 		284108A22BC6AF4D00419447 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		284108A42BC6AF6200419447 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		284108A62BC6AF8500419447 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		284F36DF2C027FE200BB429E /* UserInEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInEvent.swift; sourceTree = "<group>"; };
+		284F36E12C02809C00BB429E /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		284F36E32C02A78E00BB429E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		2877E4F22BCEC791002B160D /* EventsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabBarController.swift; sourceTree = "<group>"; };
 		2877E4F52BCEC928002B160D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2877E4F72BCEC93F002B160D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 			children = (
 				283468862BFB908E009230CF /* Event.swift */,
 				2834688A2BFB9151009230CF /* EventBuilder.swift */,
+				284F36DF2C027FE200BB429E /* UserInEvent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -347,6 +354,8 @@
 				28A706432BD5229500298FEC /* GoogleService-Info.plist */,
 				28A706682BD58F2800298FEC /* AuthService.swift */,
 				28CCEBCF2BFE63650043A916 /* EventService.swift */,
+				284F36E12C02809C00BB429E /* DatabaseService.swift */,
+				284F36E32C02A78E00BB429E /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -710,6 +719,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				284F36E22C02809C00BB429E /* DatabaseService.swift in Sources */,
 				289ED8BF2BFCE8BB0069C712 /* URLSession.swift in Sources */,
 				283C1A8C2BC5907C008672F8 /* SignUpViewController.swift in Sources */,
 				284108A52BC6AF6200419447 /* MainViewController.swift in Sources */,
@@ -738,8 +748,10 @@
 				288FA6552BA9D49300BE9195 /* AppDelegate.swift in Sources */,
 				28CCEBD82BFE86AF0043A916 /* MainTableDetailViewController.swift in Sources */,
 				288FA6572BA9D49300BE9195 /* SceneDelegate.swift in Sources */,
+				284F36E02C027FE200BB429E /* UserInEvent.swift in Sources */,
 				28CCEBDC2BFE86D00043A916 /* MainTableDetailCoordinator.swift in Sources */,
 				28A706632BD5440500298FEC /* ProfileViewControllerCoordinator.swift in Sources */,
+				284F36E42C02A78E00BB429E /* UserService.swift in Sources */,
 				283468872BFB908E009230CF /* Event.swift in Sources */,
 				28ADD6EE2BC565FC004C6837 /* LoginViewModel.swift in Sources */,
 				28B826552BF91FED00B42C8B /* MainTableViewCell.swift in Sources */,
