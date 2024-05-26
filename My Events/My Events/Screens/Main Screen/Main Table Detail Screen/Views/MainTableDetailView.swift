@@ -2,6 +2,7 @@ import UIKit
 
 protocol MainTableDetailViewDelegate: AnyObject {
     func backBarButtonItemDidPressed()
+    func bookmarkDidPressed()
 }
 
 class MainTableDetailView: UIView {
@@ -21,6 +22,15 @@ class MainTableDetailView: UIView {
     }
     lazy var backBarButtonItem = UIBarButtonItem(title: "Back", primaryAction: self.backBarButtonItemAction)
 
+    lazy var bookmarkImageView: UIImageView = {
+        let image = UIImageView()
+//        image.image = UIImage(named: "bookmark")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.isUserInteractionEnabled = true
+        image.addGestureRecognizer(bookmarkTapGestureRecognizer)
+        return image
+    }()
     private lazy var eventImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -30,11 +40,11 @@ class MainTableDetailView: UIView {
     private lazy var eventNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 20, weight: .bold, width: .condensed)
+        label.font = .systemFont(ofSize: 18, weight: .heavy, width: .condensed)
         label.textColor = .black
         label.backgroundColor = .systemGray6
         label.textAlignment = .center
-        label.numberOfLines = 3
+        label.numberOfLines = 4
         return label
     }()
     private lazy var ageRestrictionLabel: UILabel = {
@@ -69,7 +79,7 @@ class MainTableDetailView: UIView {
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16, weight: .bold, width: .condensed)
+        label.font = .systemFont(ofSize: 14, weight: .bold, width: .condensed)
         label.textColor = .systemGray2
         label.backgroundColor = .systemGray6
         label.textAlignment = .left
@@ -78,7 +88,7 @@ class MainTableDetailView: UIView {
     private lazy var cityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16, weight: .bold, width: .condensed)
+        label.font = .systemFont(ofSize: 14, weight: .bold, width: .condensed)
         label.textColor = .systemGray2
         label.backgroundColor = .systemGray6
         label.textAlignment = .left
@@ -87,7 +97,7 @@ class MainTableDetailView: UIView {
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16, weight: .bold, width: .condensed)
+        label.font = .systemFont(ofSize: 14, weight: .semibold, width: .condensed)
         label.textColor = .systemGray2
         label.text = "Date: "
         label.backgroundColor = .systemGray6
@@ -95,6 +105,8 @@ class MainTableDetailView: UIView {
         label.textAlignment = .left
         return label
     }()
+
+    private lazy var bookmarkTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped))
 
     weak var delegate: MainTableDetailViewDelegate?
 
@@ -119,6 +131,7 @@ extension MainTableDetailView {
         addSubview(cityLabel)
         addSubview(priceLabel)
         addSubview(dateLabel)
+        addSubview(bookmarkImageView)
 
         pageNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(72)
@@ -126,12 +139,16 @@ extension MainTableDetailView {
             make.width.equalTo(80)
             make.height.equalTo(24)
         }
-
+        bookmarkImageView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).inset(16)
+            make.trailing.equalTo(safeAreaLayoutGuide).inset(8)
+            make.size.equalTo(CGSize(width: 20, height: 20))
+        }
         eventNameLabel.snp.makeConstraints { make in
             make.top.equalTo(pageNameLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(56)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(32)
+            make.height.equalTo(64)
         }
         ageRestrictionLabel.snp.makeConstraints { make in
             make.top.equalTo(eventNameLabel.snp.bottom).offset(8)
@@ -245,5 +262,28 @@ extension MainTableDetailView {
 
     func configureDetail(by image: UIImage) {
         eventImageView.image = image
+    }
+    func configureBookmarkImage(with imageName: String) {
+        bookmarkImageView.image = UIImage(named: imageName)
+    }
+}
+extension MainTableDetailView {
+    func animateBookmarkChange(imageName: String, completion: @escaping () -> Void) {
+        let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
+            self.bookmarkImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }
+
+        animator.addCompletion { [weak self] _ in
+            self?.bookmarkImageView.image = UIImage(named: imageName)
+            UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
+                self?.bookmarkImageView.transform = CGAffineTransform.identity
+            }.startAnimation()
+            completion()
+        }
+
+        animator.startAnimation()
+    }
+    @objc func bookmarkTapped() {
+        delegate?.bookmarkDidPressed()
     }
 }

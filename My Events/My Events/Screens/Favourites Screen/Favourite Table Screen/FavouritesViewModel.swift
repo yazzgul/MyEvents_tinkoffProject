@@ -3,43 +3,37 @@ import Combine
 
 class FavouritesViewModel {
 
-    private var cancellables = Set<AnyCancellable>()
     private var eventService = EventService.shared
-
-    let dispatchGroup = DispatchGroup()
 
     @Published var userFavouriteEventsAreEmpty = true
 
-    func getUserFavouriteEventById(byId: Int) {
-        let id = String(byId)
-        NetworkService.shared.fetchEventDetailById(byId: id) { [weak self] event, error in
-            guard let self else { return }
-            if error != nil {
-                print("error: ", error?.localizedDescription)
-            } else if let event {
-                eventService.saveEventInUserFavouriteEvents(with: event)
-                print("events count: ", eventService.getUserFavouriteEventsCount())
-            }
-        }
+    var favouriteEventsPublisher: AnyPublisher<[Event], Never> {
+        return eventService.$userFavouriteEvents
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
 
     func getAllUserFavouriteEventsByIdArray() {
         let user = UserService.shared.getCurrentUser()
+
         if let favoriteEventsId = user?.favoriteEventsId {
-            eventService.fetchFavouriteEvents(byIds: favoriteEventsId) { [weak self] events, error in
-                guard let self else { return }
-                if let events = events {
-                    self.eventService.saveUserFavouriteEvents(with: events)
-                    checkUserFavouriteEventsChanging()
-                } else if let error = error {
-                    print("Error fetching events: \(error)")
+            checkUserFavouriteEventsChanging()
+            if !favoriteEventsId.elementsEqual(eventService.getUserFavouriteEventsIdArray()) {
+                eventService.fetchFavouriteEvents(byIds: favoriteEventsId) { [weak self] events, error in
+                    guard let self else { return }
+                    if let events = events {
+                        self.eventService.saveUserFavouriteEvents(with: events)
+                        checkUserFavouriteEventsChanging()
+                    } else if let error = error {
+                        print("Error fetching events: \(error)")
+                    }
                 }
             }
         }
     }
 
     func checkUserFavouriteEventsChanging() {
-        userFavouriteEventsAreEmpty = eventService.eventsAreEmpty()
+        userFavouriteEventsAreEmpty = eventService.userFavouriteEventsAreEmpty()
     }
 
 }
@@ -57,7 +51,6 @@ extension FavouritesViewModel {
         if let imageLink = event.images?.first?.image {
             Task {
                 let image = try? await ImageNetworkManager.shared.downloadImage(by: imageLink)
-//                print(ImageNetworkManager.shared.cashedImages.count)
                 if let imageReady = image {
                     DispatchQueue.main.async {
                         cell.configureCell(with: imageReady)
@@ -67,8 +60,8 @@ extension FavouritesViewModel {
                         await cell.configureCell(with: noPicture)
                     }
                 }
-
             }
+            
         }
 
         cell.configureCell(with: event)

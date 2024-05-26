@@ -1,6 +1,8 @@
 import Foundation
 import Firebase
 
+// MARK: - сервис для работы с авторизацией в Firebase
+
 class AuthService {
 
     static let shared = AuthService()

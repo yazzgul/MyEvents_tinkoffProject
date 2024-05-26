@@ -2,15 +2,18 @@ import Foundation
 
 class ProfileViewModel {
 
-    @Published var currentUser: UserInEvent?
-
-    init(currentUser: UserInEvent? = nil) {
-        self.currentUser = currentUser
+    init() {
         UserService.shared.getUserFromDatabase()
     }
 
-    func getProfile() {
-        currentUser = UserService.shared.getCurrentUser()
+    func getUserFirstName() -> String? {
+        UserService.shared.getCurrentUserFirstName()
+    }
+    func getUserLastName() -> String? {
+        UserService.shared.getCurrentUserLastName()
+    }
+    func getUserEmail() -> String? {
+        UserService.shared.getCurrentUserEmail()
     }
 
     func signOutFromProfile() {

@@ -1,6 +1,8 @@
 import Foundation
 import FirebaseFirestore
 
+// MARK: - сервис для работы с Firestore  (датабаза Firebase)
+
 class DatabaseService {
 
     static let shared = DatabaseService()
@@ -40,8 +42,7 @@ class DatabaseService {
                                              favoriteEventsId: userFavoriteEventsId)
 
                 completion(.success(parsedUser))
-            }
-            else {
+            } else {
                 if let error = error {
                     completion(.failure(error))
                 }

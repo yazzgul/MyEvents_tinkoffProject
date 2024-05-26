@@ -1,13 +1,15 @@
 import Foundation
 import Combine
 
-//  MARK: сервис, где хранится текущий пользователь с типом UserInEvent
+// MARK: - сервис, где хранится текущий пользователь с типом UserInEvent
 
 class UserService {
 
     static let shared = UserService()
 
-    private init() {}
+    private init() {
+        getUserFromDatabase()
+    }
 
     private var currentUser: UserInEvent?
 
@@ -17,7 +19,7 @@ class UserService {
             switch result {
             case .success(let user):
                 self.currentUser = user
-                print(")()()()(*(**!(!&*(@",user.firstName, user.email)
+                print(")()()()(*(**!(!&*(@", user.firstName, user.email)
             case .failure(let error):
                 print("error in getting user profile: ", error.localizedDescription)
             }
@@ -54,6 +56,9 @@ class UserService {
             }
 
         }
+    }
+    func setUpdatedUser(user: UserInEvent) {
+        currentUser = user
     }
 
 }

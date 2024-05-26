@@ -29,7 +29,6 @@ class ProfileViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.getProfile()
 
     }
     override func viewDidLoad() {
@@ -45,14 +44,9 @@ class ProfileViewController: UIViewController {
 }
 extension ProfileViewController {
     func setupUserProfile() {
-        viewModel.$currentUser
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] currentUser in
-                if let firstName = currentUser?.firstName, let lastName = currentUser?.lastName {
-                    self?.contentView.configureProfileInfo(firstName: firstName, lastName: lastName)
-                }
-            }
-            .store(in: &cancellables)
+        if let firstName = viewModel.getUserFirstName(), let lastName = viewModel.getUserLastName() {
+            contentView.configureProfileInfo(firstName: firstName, lastName: lastName)
+        }
     }
 }
 extension ProfileViewController: ProfileViewDelegate {

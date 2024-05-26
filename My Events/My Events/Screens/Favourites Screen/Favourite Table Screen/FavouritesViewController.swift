@@ -29,11 +29,8 @@ class FavouritesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-//        viewModel.getCurrentUserFavouriteEvents()
         viewModel.getAllUserFavouriteEventsByIdArray()
         checkingEventsEmpty()
-
-//        viewModel.getEventDetailById(byId: 201777)
     }
 
     override func viewDidLoad() {
@@ -60,8 +57,7 @@ extension FavouritesViewController {
 }
 extension FavouritesViewController {
     func setupEvents() {
-        EventService.shared.$userFavouriteEvents
-            .receive(on: DispatchQueue.main)
+        viewModel.favouriteEventsPublisher
             .sink { [weak self] _ in
                 self?.contentView.reloadData()
             }

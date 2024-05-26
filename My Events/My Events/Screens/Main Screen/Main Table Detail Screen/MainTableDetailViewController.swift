@@ -49,6 +49,9 @@ extension MainTableDetailViewController {
 
         if let event = viewModel.fetchSelectedEvent() {
             contentView.configureDetail(by: event)
+
+            let bookmarkImageName = viewModel.getBookmarkImageName(selectedEvent: event)
+            contentView.configureBookmarkImage(with: bookmarkImageName)
         }
 
         viewModel.fetchSelectedEventImage { [weak self] image in
@@ -68,4 +71,21 @@ extension MainTableDetailViewController: MainTableDetailViewDelegate {
     func backBarButtonItemDidPressed() {
         delegate?.goToBackToTable()
     }
+    func bookmarkDidPressed() {
+
+        if let event = viewModel.fetchSelectedEvent() {
+
+            if viewModel.equelEventsForBookmark(selectedEvent: event) {
+                contentView.animateBookmarkChange(imageName: "bookmark-black") { [weak self] in
+                    self?.viewModel.saveFavoriteEvent(with: event)
+                }
+            } else {
+                contentView.animateBookmarkChange(imageName: "bookmark") { [weak self] in
+                    self?.viewModel.deleteFavouriteEvent(with: event)
+                }
+                print("ANIMATED!!!!")
+            }
+        }
+    }
+
 }

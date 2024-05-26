@@ -1,6 +1,8 @@
 import Foundation
 import Combine
 
+// MARK: - класс для работы с массивами event`ов. Предназначен для получения и кэширования обьектов с сети и для хранения выбранных обьектов для detail screens
+
 class EventService {
     public static let shared = EventService()
 
@@ -12,7 +14,6 @@ class EventService {
     @Published var searchBarFilteredEvents: [Event] = []
     @Published var userFavouriteEvents: [Event] = []
     private var userFavouriteEventsId: [Int] = []
-
     private let dispatchGroup = DispatchGroup()
 
 
@@ -42,6 +43,7 @@ class EventService {
             dispatchGroup.notify(queue: .main) {
                 if errors.isEmpty {
                     completion(gotEvents, nil)
+                    print("GOTEVENTS")
                 } else {
                     completion(nil, errors.first)
                 }
@@ -51,7 +53,7 @@ class EventService {
 
     }
 
-//    MARK: методы для всех event в главной main table screen
+// MARK: - методы для всех event в главной main table screen
     func saveEvent(with event: Event) {
         lock.lock()
         if !events.contains(where: { $0.id == event.id }) {
@@ -103,7 +105,7 @@ class EventService {
         return events.isEmpty
     }
 
-//MARK: методы для всех отфильтрованных search bar`ом event в главной main table screen
+// MARK: - методы для всех отфильтрованных search bar`ом event в главной main table screen
     func saveSearchBarFilteredEvents(with eventsArray: [Event]) {
         searchBarFilteredEvents = eventsArray
     }
@@ -115,7 +117,7 @@ class EventService {
         return searchBarFilteredEvents.count
     }
 
-//MARK: методы для избранных event текущего пользователя в favourite table screen (тип Event)
+// MARK: - методы для избранных event текущего пользователя в favourite table screen (тип Event)
     func saveUserFavouriteEvents(with eventsArray: [Event]) {
         lock.lock()
         userFavouriteEvents = eventsArray
@@ -167,7 +169,7 @@ class EventService {
         return nil
     }
 
-//MARK: методы для избранных event текущего пользователя в favourite table screen (тип Int для Id event`ов)
+// MARK: - методы для избранных event текущего пользователя в favourite table screen (тип Int для Id event`ов)
     func saveUserFavouriteEventsIdArray(with eventsIdArray: [Int]) {
         lock.lock()
         userFavouriteEventsId = eventsIdArray
