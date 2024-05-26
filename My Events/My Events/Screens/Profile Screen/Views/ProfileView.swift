@@ -1,8 +1,9 @@
 import UIKit
 import SnapKit
 
-protocol SignOutButtonProfileViewDelegate: AnyObject {
+protocol ProfileViewDelegate: AnyObject {
     func signOutButtonDidPressed()
+    func favouriteButtonDidPressed()
 }
 
 class ProfileView: UIView {
@@ -52,6 +53,7 @@ class ProfileView: UIView {
         button.setTitleColor(.white, for: .normal)
 
         let action = UIAction { [weak self] _ in
+            self?.delegate?.favouriteButtonDidPressed()
         }
         button.addAction(action, for: .touchUpInside)
 
@@ -94,14 +96,14 @@ class ProfileView: UIView {
         button.setTitleColor(.white, for: .normal)
 
         let action = UIAction { [weak self] _ in
-            self?.signOutButtonDelegate?.signOutButtonDidPressed()
+            self?.delegate?.signOutButtonDidPressed()
         }
         button.addAction(action, for: .touchUpInside)
 
         return button
     }()
 
-    weak var signOutButtonDelegate: SignOutButtonProfileViewDelegate?
+    weak var delegate: ProfileViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)

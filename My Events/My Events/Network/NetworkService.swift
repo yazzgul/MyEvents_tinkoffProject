@@ -36,6 +36,7 @@ class NetworkService: NetworkServiceProtocol {
                 do {
                     let event = try JSONDecoder().decode(Event.self, from: data)
                     response(event, nil)
+                    print("event from netReq: ", event)
                 } catch let jsonError {
                     print("Failed to decode JSON: ", jsonError)
                 }

@@ -10,10 +10,48 @@ class EventService {
 
     @Published var events: [Event] = []
     @Published var searchBarFilteredEvents: [Event] = []
+    @Published var userFavouriteEvents: [Event] = []
+    private var userFavouriteEventsId: [Int] = []
+
+    private let dispatchGroup = DispatchGroup()
+
 
     var mainTableSelectedEvent: Event?
     var userFavouriteTableSelectedEvent: Event?
 
+    func fetchFavouriteEvents(byIds: [Int], completion: @escaping ([Event]?, NetworkError?) -> Void) {
+        var gotEvents: [Event] = []
+        var errors: [NetworkError] = []
+
+        saveUserFavouriteEventsIdArray(with: byIds)
+
+        if !byIds.isEmpty {
+            for id in byIds {
+                let idString = String(id)
+                dispatchGroup.enter()
+                NetworkService.shared.fetchEventDetailById(byId: idString) { [weak self] event, error in
+                    guard let self else { return }
+                    if let event = event {
+                        gotEvents.append(event)
+                    } else if let error = error {
+                        print("error in getting favourite events", error.localizedDescription)
+                    }
+                    self.dispatchGroup.leave()
+                }
+            }
+            dispatchGroup.notify(queue: .main) {
+                if errors.isEmpty {
+                    completion(gotEvents, nil)
+                } else {
+                    completion(nil, errors.first)
+                }
+            }
+
+        }
+
+    }
+
+//    MARK: методы для всех event в главной main table screen
     func saveEvent(with event: Event) {
         lock.lock()
         if !events.contains(where: { $0.id == event.id }) {
@@ -65,6 +103,7 @@ class EventService {
         return events.isEmpty
     }
 
+//MARK: методы для всех отфильтрованных search bar`ом event в главной main table screen
     func saveSearchBarFilteredEvents(with eventsArray: [Event]) {
         searchBarFilteredEvents = eventsArray
     }
@@ -74,6 +113,103 @@ class EventService {
     }
     func getSearchBarFilteredEventsCount() -> Int {
         return searchBarFilteredEvents.count
+    }
+
+//MARK: методы для избранных event текущего пользователя в favourite table screen (тип Event)
+    func saveUserFavouriteEvents(with eventsArray: [Event]) {
+        lock.lock()
+        userFavouriteEvents = eventsArray
+        lock.unlock()
+    }
+
+    func getUserFavouriteEvents() -> [Event] {
+        return userFavouriteEvents
+    }
+
+    func getUserFavouriteEventsCount() -> Int {
+        return userFavouriteEvents.count
+    }
+
+    func userFavouriteEventsAreEmpty() -> Bool {
+        return userFavouriteEvents.isEmpty
+    }
+
+    func saveEventInUserFavouriteEvents(with event: Event) {
+        lock.lock()
+        if !events.contains(where: { $0.id == event.id }) {
+            events.append(event)
+        }
+        lock.unlock()
+    }
+
+    func removeEventFromUserFavouriteEvents(at index: Int) {
+        lock.lock()
+        userFavouriteEvents.remove(at: index)
+        lock.unlock()
+    }
+
+    func removeEventFromUserFavouriteEvents(with event: Event) {
+        lock.lock()
+        if let index = userFavouriteEvents.firstIndex(of: event) {
+            userFavouriteEvents.remove(at: index)
+        }
+        lock.unlock()
+    }
+
+    func getEventFromUserFavouriteEvents(at index: Int) -> Event {
+        return userFavouriteEvents[index]
+    }
+
+    func getEventFromUserFavouriteEvents(by id: Int) -> Event? {
+        if let event = userFavouriteEvents.first(where: { $0.id == id }) {
+            return event
+        }
+        return nil
+    }
+
+//MARK: методы для избранных event текущего пользователя в favourite table screen (тип Int для Id event`ов)
+    func saveUserFavouriteEventsIdArray(with eventsIdArray: [Int]) {
+        lock.lock()
+        userFavouriteEventsId = eventsIdArray
+        lock.unlock()
+    }
+
+    func getUserFavouriteEventsIdArray() -> [Int] {
+        return userFavouriteEventsId
+    }
+
+    func getUserFavouriteEventsIdArrayCount() -> Int {
+        return userFavouriteEventsId.count
+    }
+
+    func userFavouriteEventsIdArrayAreEmpty() -> Bool {
+        return userFavouriteEventsId.isEmpty
+    }
+
+    func saveIdInUserFavouriteEventsIdArray(with id: Int) {
+        lock.lock()
+        if !userFavouriteEventsId.contains(where: { $0 == id }) {
+            userFavouriteEventsId.append(id)
+        }
+        lock.unlock()
+    }
+
+    func removeIdFromUserFavouriteEventsIdArray(at index: Int) {
+        lock.lock()
+        userFavouriteEventsId.remove(at: index)
+        lock.unlock()
+    }
+
+    func removeIdFromUserFavouriteEventsIdArray(with id: Int) {
+        lock.lock()
+        if let index = userFavouriteEventsId.firstIndex(of: id) {
+            userFavouriteEventsId.remove(at: index)
+        }
+        lock.unlock()
+    }
+
+    func getIdFromUserFavouriteEventsIdArray(at index: Int) -> Int {
+        return userFavouriteEventsId[index]
     }
 
 }

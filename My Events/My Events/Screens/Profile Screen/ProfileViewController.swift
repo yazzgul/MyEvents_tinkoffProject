@@ -3,6 +3,7 @@ import Combine
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func signOut()
+    func goToFavouriteTableScreen()
 }
 
 class ProfileViewController: UIViewController {
@@ -36,7 +37,7 @@ class ProfileViewController: UIViewController {
 
         view.backgroundColor = .systemGray6
 
-        contentView.signOutButtonDelegate = self
+        contentView.delegate = self
 
         setupUserProfile()
     }
@@ -54,7 +55,11 @@ extension ProfileViewController {
             .store(in: &cancellables)
     }
 }
-extension ProfileViewController: SignOutButtonProfileViewDelegate {
+extension ProfileViewController: ProfileViewDelegate {
+    func favouriteButtonDidPressed() {
+        delegate?.goToFavouriteTableScreen()
+    }
+    
     func signOutButtonDidPressed() {
         delegate?.signOut()
         viewModel.signOutFromProfile()

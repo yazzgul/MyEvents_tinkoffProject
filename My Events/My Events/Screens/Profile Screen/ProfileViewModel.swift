@@ -17,5 +17,4 @@ class ProfileViewModel {
         AuthService.shared.signOut()
     }
 
-
 }

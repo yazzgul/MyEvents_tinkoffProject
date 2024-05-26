@@ -84,6 +84,11 @@
 		28ADD6EA2BC565E4004C6837 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6E92BC565E4004C6837 /* LoginView.swift */; };
 		28ADD6EC2BC565F0004C6837 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6EB2BC565F0004C6837 /* LoginViewController.swift */; };
 		28ADD6EE2BC565FC004C6837 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADD6ED2BC565FC004C6837 /* LoginViewModel.swift */; };
+		28B228D32C034C0000A1F804 /* FavouriteViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228D22C034C0000A1F804 /* FavouriteViewControllerCoordinator.swift */; };
+		28B228D52C034CEE00A1F804 /* FavouritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228D42C034CEE00A1F804 /* FavouritesTableViewCell.swift */; };
+		28B228D92C0389D100A1F804 /* FavouritesTableDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228D82C0389D100A1F804 /* FavouritesTableDetailView.swift */; };
+		28B228DB2C0389E000A1F804 /* FavouritesTableDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228DA2C0389E000A1F804 /* FavouritesTableDetailViewController.swift */; };
+		28B228DD2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228DC2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift */; };
 		28B826552BF91FED00B42C8B /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B826542BF91FED00B42C8B /* MainTableViewCell.swift */; };
 		28CCEBCE2BFE56210043A916 /* ImageNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCEBCD2BFE56210043A916 /* ImageNetworkManager.swift */; };
 		28CCEBD02BFE63650043A916 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCEBCF2BFE63650043A916 /* EventService.swift */; };
@@ -145,6 +150,11 @@
 		28ADD6E92BC565E4004C6837 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		28ADD6EB2BC565F0004C6837 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		28ADD6ED2BC565FC004C6837 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		28B228D22C034C0000A1F804 /* FavouriteViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		28B228D42C034CEE00A1F804 /* FavouritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableViewCell.swift; sourceTree = "<group>"; };
+		28B228D82C0389D100A1F804 /* FavouritesTableDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableDetailView.swift; sourceTree = "<group>"; };
+		28B228DA2C0389E000A1F804 /* FavouritesTableDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableDetailViewController.swift; sourceTree = "<group>"; };
+		28B228DC2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableDetailViewModel.swift; sourceTree = "<group>"; };
 		28B826542BF91FED00B42C8B /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		28CCEBCD2BFE56210043A916 /* ImageNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkManager.swift; sourceTree = "<group>"; };
 		28CCEBCF2BFE63650043A916 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
@@ -215,9 +225,8 @@
 		282645882BD41BC200DF7495 /* Favourites Screen */ = {
 			isa = PBXGroup;
 			children = (
-				28A7064B2BD5246C00298FEC /* Views */,
-				2826458A2BD41C0100DF7495 /* FavouritesViewController.swift */,
-				2826458E2BD41C3A00DF7495 /* FavouritesViewModel.swift */,
+				28B228D72C03899100A1F804 /* Favourite Table Detail Screen */,
+				28B228D62C03896000A1F804 /* Favourite Table Screen */,
 			);
 			path = "Favourites Screen";
 			sourceTree = "<group>";
@@ -415,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				2826458C2BD41C2200DF7495 /* FavouritesView.swift */,
+				28B228D42C034CEE00A1F804 /* FavouritesTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -511,6 +521,43 @@
 				28ADD6ED2BC565FC004C6837 /* LoginViewModel.swift */,
 			);
 			path = "Login Screen";
+			sourceTree = "<group>";
+		};
+		28B228D12C034BCF00A1F804 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				28B228D22C034C0000A1F804 /* FavouriteViewControllerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		28B228D62C03896000A1F804 /* Favourite Table Screen */ = {
+			isa = PBXGroup;
+			children = (
+				28B228D12C034BCF00A1F804 /* Coordinator */,
+				28A7064B2BD5246C00298FEC /* Views */,
+				2826458A2BD41C0100DF7495 /* FavouritesViewController.swift */,
+				2826458E2BD41C3A00DF7495 /* FavouritesViewModel.swift */,
+			);
+			path = "Favourite Table Screen";
+			sourceTree = "<group>";
+		};
+		28B228D72C03899100A1F804 /* Favourite Table Detail Screen */ = {
+			isa = PBXGroup;
+			children = (
+				28B228DE2C038A0900A1F804 /* Views */,
+				28B228DA2C0389E000A1F804 /* FavouritesTableDetailViewController.swift */,
+				28B228DC2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift */,
+			);
+			path = "Favourite Table Detail Screen";
+			sourceTree = "<group>";
+		};
+		28B228DE2C038A0900A1F804 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28B228D82C0389D100A1F804 /* FavouritesTableDetailView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		28CCEBD12BFE86050043A916 /* Main Table Detail Screen */ = {
@@ -730,6 +777,7 @@
 				28A7065A2BD5436A00298FEC /* LoginViewControllerCoordinator.swift in Sources */,
 				28A706652BD54E4200298FEC /* EventsTabBarControllerCoordinator.swift in Sources */,
 				28ADD6EC2BC565F0004C6837 /* LoginViewController.swift in Sources */,
+				28B228D32C034C0000A1F804 /* FavouriteViewControllerCoordinator.swift in Sources */,
 				28A7065D2BD543B400298FEC /* SignUpViewControllerCoordinator.swift in Sources */,
 				2826458B2BD41C0100DF7495 /* FavouritesViewController.swift in Sources */,
 				28ADD6EA2BC565E4004C6837 /* LoginView.swift in Sources */,
@@ -737,11 +785,13 @@
 				28CCEBCE2BFE56210043A916 /* ImageNetworkManager.swift in Sources */,
 				288FA6592BA9D49300BE9195 /* StartViewController.swift in Sources */,
 				282645912BD41CB500DF7495 /* CommentsViewModel.swift in Sources */,
+				28B228D52C034CEE00A1F804 /* FavouritesTableViewCell.swift in Sources */,
 				283C1A8E2BC5908E008672F8 /* SignUpView.swift in Sources */,
 				283468822BFB8FC4009230CF /* NetworkError.swift in Sources */,
 				2826458F2BD41C3A00DF7495 /* FavouritesViewModel.swift in Sources */,
 				282645932BD41CC400DF7495 /* CommentsView.swift in Sources */,
 				28CCEBD62BFE86880043A916 /* MainTableDetailViewModel.swift in Sources */,
+				28B228DD2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift in Sources */,
 				2877E4FA2BCEC94A002B160D /* ProfileViewModel.swift in Sources */,
 				2877E4F82BCEC93F002B160D /* ProfileView.swift in Sources */,
 				28A706602BD543DF00298FEC /* MainViewControllerCoordinator.swift in Sources */,
@@ -763,6 +813,7 @@
 				283468842BFB8FF5009230CF /* EndPoint.swift in Sources */,
 				287809C42BC473F000FA737B /* StartView.swift in Sources */,
 				28A706502BD52A9400298FEC /* Coordinator.swift in Sources */,
+				28B228DB2C0389E000A1F804 /* FavouritesTableDetailViewController.swift in Sources */,
 				28A706562BD53D7E00298FEC /* StartViewControllerCoordinator.swift in Sources */,
 				2826458D2BD41C2200DF7495 /* FavouritesView.swift in Sources */,
 				28A706692BD58F2800298FEC /* AuthService.swift in Sources */,
@@ -770,6 +821,7 @@
 				28A706542BD53BDA00298FEC /* BaseCoodinator.swift in Sources */,
 				287809C92BC4899600FA737B /* UIColor.swift in Sources */,
 				2834688B2BFB9151009230CF /* EventBuilder.swift in Sources */,
+				28B228D92C0389D100A1F804 /* FavouritesTableDetailView.swift in Sources */,
 				28CCEBDA2BFE86BE0043A916 /* MainTableDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
