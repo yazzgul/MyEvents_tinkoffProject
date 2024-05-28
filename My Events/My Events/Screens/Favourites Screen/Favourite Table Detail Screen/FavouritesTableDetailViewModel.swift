@@ -1,11 +1,12 @@
 import UIKit
+import Combine
 
-class MainTableDetailViewModel {
-
+class FavouritesTableDetailViewModel {
+    private var cancellables = Set<AnyCancellable>()
     private var eventService = EventService.shared
 
     func fetchSelectedEvent() -> Event? {
-        if let event = eventService.mainTableSelectedEvent {
+        if let event = eventService.userFavouriteTableSelectedEvent {
             return event
         }
         return nil
@@ -13,7 +14,7 @@ class MainTableDetailViewModel {
 
     func fetchSelectedEventImage(completion: @escaping (UIImage?) -> Void) {
         let noImage = UIImage(named: "no_photo")
-        if let event = eventService.mainTableSelectedEvent, let imageLink = event.images?.first?.image {
+        if let event = eventService.userFavouriteTableSelectedEvent, let imageLink = event.images?.first?.image {
             Task {
                 do {
                     let image = try await ImageNetworkManager.shared.downloadImage(by: imageLink)
@@ -30,7 +31,7 @@ class MainTableDetailViewModel {
             completion(noImage)
         }
     }
-
+    
     func saveFavoriteEvent(with event: Event) {
         let curUser = UserService.shared.getCurrentUser()
 
@@ -62,7 +63,7 @@ class MainTableDetailViewModel {
         let curUser = UserService.shared.getCurrentUser()
 
         let id = event.id
-        
+
         if var curUser = curUser {
             if let index = curUser.favoriteEventsId.firstIndex(of: id) {
                 curUser.favoriteEventsId.remove(at: index)
@@ -87,7 +88,6 @@ class MainTableDetailViewModel {
         }
 
     }
-    
     func isEventFavourite(selectedEvent: Event) -> Bool {
         let curUser = UserService.shared.getCurrentUser()
         let selectedId = selectedEvent.id

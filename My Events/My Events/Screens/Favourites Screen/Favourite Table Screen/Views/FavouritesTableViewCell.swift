@@ -1,6 +1,7 @@
 import UIKit
+import SnapKit
 
-class MainTableViewCell: UITableViewCell {
+class FavouritesTableViewCell: UITableViewCell {
     private lazy var eventImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +45,7 @@ class MainTableViewCell: UITableViewCell {
     }
 
 }
-extension MainTableViewCell {
+extension FavouritesTableViewCell {
     func configureView() {
         contentView.backgroundColor = .systemGray6
 
@@ -69,15 +70,21 @@ extension MainTableViewCell {
         }
     }
 }
-extension MainTableViewCell {
+extension FavouritesTableViewCell {
     static var reuseIdentifier: String {
-        return String(describing: self) + "_main"
+        return String(describing: self) + "_favourite"
     }
 
     func configureCell(with image: UIImage) {
         eventImageView.image = image
     }
     func configureCell(with event: Event) {
+
+//        if let shortTitle = event.shortTitle {
+//            eventNameLabel.text = shortTitle
+//        } else {
+//            eventNameLabel.text = event.title
+//        }
         eventNameLabel.text = event.title
 //        у API в обьектах Event у аттрибута decription остаются префиксы, суффиксы
         var decriptionEvent = event.description

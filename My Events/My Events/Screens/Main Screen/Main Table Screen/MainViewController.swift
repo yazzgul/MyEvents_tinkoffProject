@@ -31,7 +31,6 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
 
         firstAppearance()
-//        viewModel.getEventDetailById(byId: 201777)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,16 +76,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 }
 extension MainViewController {
     func setupEvents() {
-        EventService.shared.$events
-            .receive(on: DispatchQueue.main)
+        viewModel.eventsPublisher
             .sink { [weak self] _ in
                 self?.contentView.reloadData()
             }
             .store(in: &cancellables)
     }
     func setupSearchBarFilteredEvents() {
-        EventService.shared.$searchBarFilteredEvents
-            .receive(on: DispatchQueue.main)
+        viewModel.searchBarFilteredEventsPublisher
             .sink { [weak self] _ in
                 self?.contentView.reloadData()
             }

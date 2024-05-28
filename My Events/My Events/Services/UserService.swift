@@ -1,23 +1,23 @@
 import Foundation
-import Combine
 
-//  MARK: сервис, где хранится текущий пользователь с типом UserInEvent
+// MARK: - сервис, где хранится текущий пользователь с типом UserInEvent
 
 class UserService {
 
     static let shared = UserService()
 
-    private init() {}
+    private init() {
+        getUserFromDatabase()
+    }
 
     private var currentUser: UserInEvent?
 
     func getUserFromDatabase() {
-        DatabaseService.shared.getUser { [weak self] result in
+        FirestoreDatabaseService.shared.getUser { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let user):
                 self.currentUser = user
-                print(")()()()(*(**!(!&*(@",user.firstName, user.email)
             case .failure(let error):
                 print("error in getting user profile: ", error.localizedDescription)
             }
@@ -40,12 +40,7 @@ class UserService {
         return currentUser
     }
     func updateUserInfo(with userInEvent: UserInEvent, completion: @escaping (Result<UserInEvent, Error>) -> Void) {
-//        let newUser = UserInEvent(id: result.user.uid,
-//                                  firstName: firstName,
-//                                  lastName: lastName,
-//                                  email: email,
-//                                  favoriteEventsId: [])
-        DatabaseService.shared.createUser(user: userInEvent) { resultDB in
+        FirestoreDatabaseService.shared.createUser(user: userInEvent) { resultDB in
             switch resultDB {
             case .success(_):
                 completion(.success(userInEvent))
@@ -54,6 +49,9 @@ class UserService {
             }
 
         }
+    }
+    func setUpdatedUser(user: UserInEvent) {
+        currentUser = user
     }
 
 }

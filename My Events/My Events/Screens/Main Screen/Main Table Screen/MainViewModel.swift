@@ -2,11 +2,21 @@ import UIKit
 import Combine
 
 class MainViewModel {
-    private var cancellables = Set<AnyCancellable>()
     private var eventService = EventService.shared
-//    private var randomPageNumber = 1
 
     @Published var eventsAreEmpty = true
+
+    var eventsPublisher: AnyPublisher<[Event], Never> {
+        return eventService.$events
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+
+    var searchBarFilteredEventsPublisher: AnyPublisher<[Event], Never> {
+        return eventService.$searchBarFilteredEvents
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
 
     func getAllEvents() {
         let randomPageNumber = String(getRandomNumber())
@@ -25,19 +35,6 @@ class MainViewModel {
         let randomInt = Int.random(in: 1...100)
         return randomInt
     }
-////    перемещу метод в другой вьюмодел, проверила работает ли запрос
-//    func getEventDetailById(byId: Int) {
-//        let id = String(byId)
-//        NetworkService.shared.fetchEventDetailById(byId: id) { [weak self] event, error in
-//            guard let self else { return }
-//            if error != nil {
-//                print("error: ", error)
-//            } else if let event {
-//                eventService.saveEvent(with: event)
-//                print("events count: ", eventService.getCount())
-//            }
-//        }
-//    }
 
     func checkEventsEmpty() {
         eventsAreEmpty = eventService.eventsAreEmpty()
@@ -56,8 +53,6 @@ extension MainViewModel {
         let inSearchMode = inSearchMode(searchController)
 
         let event = inSearchMode ? eventService.searchBarFilteredEvents[indexPath.row] : eventService.events[indexPath.row]
-
-//        let event = eventService.events[indexPath.row]
 
         if let imageLink = event.images?.first?.image {
             Task {
@@ -89,7 +84,6 @@ extension MainViewModel {
 
         let event = inSearchMode ? eventService.searchBarFilteredEvents[indexPath.row] : eventService.events[indexPath.row]
 
-//        let event = eventService.events[indexPath.row]
         eventService.mainTableSelectedEvent = event
     }
 

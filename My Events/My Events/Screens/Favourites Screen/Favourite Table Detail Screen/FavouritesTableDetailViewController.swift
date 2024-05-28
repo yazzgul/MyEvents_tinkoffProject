@@ -1,19 +1,20 @@
 import UIKit
 import Combine
 
-protocol MainTableDetailViewControllerDelegate: AnyObject {
-    func goToBackToTable()
+protocol FavouritesTableDetailViewControllerDelegate: AnyObject {
+    func goBackToTableScreen()
 }
 
-class MainTableDetailViewController: UIViewController {
-    private let contentView: MainTableDetailView = .init()
-    private let viewModel: MainTableDetailViewModel
+class FavouritesTableDetailViewController: UIViewController {
+
+    private let contentView: FavouritesTableDetailView = .init()
+    private let viewModel: FavouritesTableDetailViewModel
 
     private var cancellables = Set<AnyCancellable>()
 
-    weak var delegate: MainTableDetailViewControllerDelegate?
+    weak var delegate: FavouritesTableDetailViewControllerDelegate?
 
-    init(viewModel: MainTableDetailViewModel) {
+    init(viewModel: FavouritesTableDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,6 +26,11 @@ class MainTableDetailViewController: UIViewController {
         view = contentView
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,18 +39,16 @@ class MainTableDetailViewController: UIViewController {
         contentView.delegate = self
 
         setupNavigationBar()
-
         setupEventInfo()
-
     }
-
+    
 }
-extension MainTableDetailViewController {
-    private func setupNavigationBar() {
+extension FavouritesTableDetailViewController {
+    func setupNavigationBar() {
         navigationItem.leftBarButtonItem = contentView.backBarButtonItem
     }
 }
-extension MainTableDetailViewController {
+extension FavouritesTableDetailViewController {
     func setupEventInfo() {
 
         if let event = viewModel.fetchSelectedEvent() {
@@ -67,12 +71,12 @@ extension MainTableDetailViewController {
     }
 
 }
-extension MainTableDetailViewController: MainTableDetailViewDelegate {
+extension FavouritesTableDetailViewController: FavouritesTableDetailViewDelegate {
     func backBarButtonItemDidPressed() {
-        delegate?.goToBackToTable()
+        delegate?.goBackToTableScreen()
     }
+    
     func bookmarkDidPressed() {
-
         if let event = viewModel.fetchSelectedEvent() {
 
             if viewModel.isEventFavourite(selectedEvent: event) {

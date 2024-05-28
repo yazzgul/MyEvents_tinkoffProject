@@ -1,6 +1,8 @@
 import Foundation
 import Firebase
 
+// MARK: - сервис для работы с авторизацией в Firebase
+
 class AuthService {
 
     static let shared = AuthService()
@@ -22,7 +24,7 @@ class AuthService {
                                           email: email,
                                           favoriteEventsId: [])
 
-                DatabaseService.shared.createUser(user: newUser) { resultDB in
+                FirestoreDatabaseService.shared.createUser(user: newUser) { resultDB in
                     switch resultDB {
                     case .success(_):
                         completion(.success(result.user))
