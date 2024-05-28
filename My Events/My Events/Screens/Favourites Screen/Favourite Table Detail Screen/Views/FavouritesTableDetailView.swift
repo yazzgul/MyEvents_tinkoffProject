@@ -205,7 +205,7 @@ extension FavouritesTableDetailView {
             priceLabel.text = "Price: No info about price"
         }
 
-        if let cityEvent = event.location?.name {
+        if let cityEvent = event.location?.slug {
             cityLabel.text = "City: " + cityEvent
         } else {
             cityLabel.text = "City: No info about city"

@@ -35,6 +35,7 @@ class EventService {
                     if let event = event {
                         gotEvents.append(event)
                     } else if let error = error {
+                        errors.append(error)
                         print("error in getting favourite events", error.localizedDescription)
                     }
                     self.dispatchGroup.leave()

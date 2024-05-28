@@ -32,10 +32,14 @@ class MainTableDetailViewModel {
     }
 
     func saveFavoriteEvent(with event: Event) {
-        var curUser = UserService.shared.getCurrentUser()
+        let curUser = UserService.shared.getCurrentUser()
 
-        curUser?.favoriteEventsId.append(event.id)
-        if let curUser = curUser {
+        if var curUser = curUser {
+            if curUser.favoriteEventsId.contains(where:{ $0 == event.id }) {
+                print("event уже есть в избранных")
+                return
+            }
+            curUser.favoriteEventsId.append(event.id)
             UserService.shared.setUpdatedUser(user: curUser)
 
             UserService.shared.updateUserInfo(with: curUser) { result in
@@ -52,7 +56,7 @@ class MainTableDetailViewModel {
     }
 
     func deleteFavouriteEvent(with event: Event) {
-        var curUser = UserService.shared.getCurrentUser()
+        let curUser = UserService.shared.getCurrentUser()
 
         let id = event.id
         
@@ -78,19 +82,17 @@ class MainTableDetailViewModel {
 
     }
 
-    func equelEventsForBookmark(selectedEvent: Event) -> Bool {
+    func isEventFavourite(selectedEvent: Event) -> Bool {
         let curUser = UserService.shared.getCurrentUser()
         let selectedId = selectedEvent.id
 
         if let curUser = curUser {
-            if let index = curUser.favoriteEventsId.firstIndex(of: selectedId) {
-                return true
-            }
+            return curUser.favoriteEventsId.contains(where:{ $0 == selectedId } )
         }
         return false
     }
-    func getBookmarkImageName(selectedEvent: Event) -> String {
-        if equelEventsForBookmark(selectedEvent: selectedEvent) {
+    func getBookmarkImageNameBySelectedEvent(selectedEvent: Event) -> String {
+        if isEventFavourite(selectedEvent: selectedEvent) {
             return "bookmark-black"
         } else {
             return "bookmark"

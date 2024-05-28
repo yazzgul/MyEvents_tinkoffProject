@@ -18,6 +18,7 @@ class NetworkService: NetworkServiceProtocol {
 //                        print("JSON response: \(json)")
 //                    }
                     let eventsResponse = try JSONDecoder().decode(EventsResponse.self, from: data)
+                    print("@@@@data: ", data)
                     response(eventsResponse.results, nil)
                 } catch let jsonError {
                     print("Failed to decode JSON: ", jsonError)

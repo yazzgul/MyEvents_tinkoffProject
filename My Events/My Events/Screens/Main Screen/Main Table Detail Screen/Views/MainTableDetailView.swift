@@ -223,8 +223,9 @@ extension MainTableDetailView {
             priceLabel.text = "Price: No info about price"
         }
 
-        if let cityEvent = event.location?.name {
-            cityLabel.text = "City: " + cityEvent
+        if let cityEvent = event.location?.slug {
+            cityLabel.text = "City: " + CitySlug.getFullCityNameFromSlug(slug: cityEvent)
+            print("!!!!!!!!(((())))))", CitySlug.getFullCityNameFromSlug(slug: cityEvent))
         } else {
             cityLabel.text = "City: No info about city"
         }

@@ -16,7 +16,6 @@
 		283468822BFB8FC4009230CF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283468812BFB8FC4009230CF /* NetworkError.swift */; };
 		283468842BFB8FF5009230CF /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283468832BFB8FF5009230CF /* EndPoint.swift */; };
 		283468872BFB908E009230CF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283468862BFB908E009230CF /* Event.swift */; };
-		2834688B2BFB9151009230CF /* EventBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834688A2BFB9151009230CF /* EventBuilder.swift */; };
 		2834688D2BFBC482009230CF /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834688C2BFBC482009230CF /* NetworkServiceProtocol.swift */; };
 		283C1A8A2BC5905F008672F8 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283C1A892BC5905F008672F8 /* SignUpViewModel.swift */; };
 		283C1A8C2BC5907C008672F8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283C1A8B2BC5907C008672F8 /* SignUpViewController.swift */; };
@@ -87,6 +86,7 @@
 		28B228DB2C0389E000A1F804 /* FavouritesTableDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228DA2C0389E000A1F804 /* FavouritesTableDetailViewController.swift */; };
 		28B228DD2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228DC2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift */; };
 		28B826552BF91FED00B42C8B /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B826542BF91FED00B42C8B /* MainTableViewCell.swift */; };
+		28C65E472C04CF920035A68C /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C65E462C04CF920035A68C /* Bookmark.swift */; };
 		28CCEBCE2BFE56210043A916 /* ImageNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCEBCD2BFE56210043A916 /* ImageNetworkManager.swift */; };
 		28CCEBD02BFE63650043A916 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCEBCF2BFE63650043A916 /* EventService.swift */; };
 		28CCEBD62BFE86880043A916 /* MainTableDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCEBD52BFE86880043A916 /* MainTableDetailViewModel.swift */; };
@@ -104,7 +104,6 @@
 		283468812BFB8FC4009230CF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		283468832BFB8FF5009230CF /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		283468862BFB908E009230CF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		2834688A2BFB9151009230CF /* EventBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBuilder.swift; sourceTree = "<group>"; };
 		2834688C2BFBC482009230CF /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		283C1A892BC5905F008672F8 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		283C1A8B2BC5907C008672F8 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +149,7 @@
 		28B228DA2C0389E000A1F804 /* FavouritesTableDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableDetailViewController.swift; sourceTree = "<group>"; };
 		28B228DC2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableDetailViewModel.swift; sourceTree = "<group>"; };
 		28B826542BF91FED00B42C8B /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		28C65E462C04CF920035A68C /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		28CCEBCD2BFE56210043A916 /* ImageNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkManager.swift; sourceTree = "<group>"; };
 		28CCEBCF2BFE63650043A916 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		28CCEBD52BFE86880043A916 /* MainTableDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableDetailViewModel.swift; sourceTree = "<group>"; };
@@ -241,8 +241,8 @@
 			isa = PBXGroup;
 			children = (
 				283468862BFB908E009230CF /* Event.swift */,
-				2834688A2BFB9151009230CF /* EventBuilder.swift */,
 				284F36DF2C027FE200BB429E /* UserInEvent.swift */,
+				28C65E462C04CF920035A68C /* Bookmark.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -786,13 +786,13 @@
 				287809C42BC473F000FA737B /* StartView.swift in Sources */,
 				28A706502BD52A9400298FEC /* Coordinator.swift in Sources */,
 				28B228DB2C0389E000A1F804 /* FavouritesTableDetailViewController.swift in Sources */,
+				28C65E472C04CF920035A68C /* Bookmark.swift in Sources */,
 				28A706562BD53D7E00298FEC /* StartViewControllerCoordinator.swift in Sources */,
 				2826458D2BD41C2200DF7495 /* FavouritesView.swift in Sources */,
 				28A706692BD58F2800298FEC /* AuthService.swift in Sources */,
 				2834688D2BFBC482009230CF /* NetworkServiceProtocol.swift in Sources */,
 				28A706542BD53BDA00298FEC /* BaseCoodinator.swift in Sources */,
 				287809C92BC4899600FA737B /* UIColor.swift in Sources */,
-				2834688B2BFB9151009230CF /* EventBuilder.swift in Sources */,
 				28B228D92C0389D100A1F804 /* FavouritesTableDetailView.swift in Sources */,
 				28CCEBDA2BFE86BE0043A916 /* MainTableDetailView.swift in Sources */,
 			);

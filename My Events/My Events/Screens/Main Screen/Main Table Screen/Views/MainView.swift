@@ -55,20 +55,11 @@ class MainView: UIView {
 }
 extension MainView {
     func configureView() {
-//        addSubview(pageNameLabel)
         addSubview(eventsTableView)
         addSubview(activityIndicatorView)
         
         eventsTableView.addSubview(tableRefreshControl)
 
-//        pageNameLabel.snp.makeConstraints { make in
-//            make.top.equalTo(safeAreaLayoutGuide)
-//            make.centerX.equalToSuperview()
-//            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(60)
-//            make.height.equalTo(24)
-//            make.width.equalTo(80)
-//            make.height.equalTo(24)
-//        }
         eventsTableView.snp.makeConstraints { make in
 //            make.top.equalTo(pageNameLabel.snp.bottom).inset(5)
             make.top.equalTo(safeAreaLayoutGuide)

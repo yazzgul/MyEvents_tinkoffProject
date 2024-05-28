@@ -78,12 +78,6 @@ extension MainTableViewCell {
         eventImageView.image = image
     }
     func configureCell(with event: Event) {
-
-//        if let shortTitle = event.shortTitle {
-//            eventNameLabel.text = shortTitle
-//        } else {
-//            eventNameLabel.text = event.title
-//        }
         eventNameLabel.text = event.title
 //        у API в обьектах Event у аттрибута decription остаются префиксы, суффиксы
         var decriptionEvent = event.description

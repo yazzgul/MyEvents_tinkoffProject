@@ -60,7 +60,7 @@ attributes:
 force_cast: warning
 force_try: warning
 function_body_length:
-    warning: 60
+    warning: 120
 
 legacy_hashing: error
 

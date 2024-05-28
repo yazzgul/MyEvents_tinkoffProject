@@ -24,13 +24,13 @@ class EventsTabBarControllerCoordinator: BaseCoodinator {
         }
 
         let mainNavigationController = UINavigationController()
-        mainNavigationController.tabBarItem = UITabBarItem(title: "Main", image: nil, tag: 1)
+        mainNavigationController.tabBarItem = UITabBarItem(title: "Main", image: UIImage(systemName: "house"), tag: 1)
         mainViewControllerCoordinator.navigationController = mainNavigationController
         mainViewControllerCoordinator.start()
 
         let profileNavigationController = UINavigationController()
         profileViewControllerCoordinator.output = self
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: nil, tag: 2)
+        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 2)
         profileViewControllerCoordinator.navigationController = profileNavigationController
         profileViewControllerCoordinator.start()
 

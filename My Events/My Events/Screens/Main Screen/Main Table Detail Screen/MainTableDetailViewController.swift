@@ -50,7 +50,7 @@ extension MainTableDetailViewController {
         if let event = viewModel.fetchSelectedEvent() {
             contentView.configureDetail(by: event)
 
-            let bookmarkImageName = viewModel.getBookmarkImageName(selectedEvent: event)
+            let bookmarkImageName = viewModel.getBookmarkImageNameBySelectedEvent(selectedEvent: event)
             contentView.configureBookmarkImage(with: bookmarkImageName)
         }
 
@@ -75,13 +75,13 @@ extension MainTableDetailViewController: MainTableDetailViewDelegate {
 
         if let event = viewModel.fetchSelectedEvent() {
 
-            if viewModel.equelEventsForBookmark(selectedEvent: event) {
-                contentView.animateBookmarkChange(imageName: "bookmark-black") { [weak self] in
-                    self?.viewModel.saveFavoriteEvent(with: event)
-                }
-            } else {
+            if viewModel.isEventFavourite(selectedEvent: event) {
                 contentView.animateBookmarkChange(imageName: "bookmark") { [weak self] in
                     self?.viewModel.deleteFavouriteEvent(with: event)
+                }
+            } else {
+                contentView.animateBookmarkChange(imageName: "bookmark-black") { [weak self] in
+                    self?.viewModel.saveFavoriteEvent(with: event)
                 }
                 print("ANIMATED!!!!")
             }
