@@ -30,7 +30,6 @@ class FavouritesViewController: UIViewController {
         super.viewDidAppear(animated)
 
         viewModel.getAllUserFavouriteEventsByIdArray()
-        checkingEventsEmpty()
     }
 
     override func viewDidLoad() {
@@ -56,13 +55,6 @@ extension FavouritesViewController {
     }
 }
 extension FavouritesViewController {
-    func setupEvents() {
-        viewModel.favouriteEventsPublisher
-            .sink { [weak self] _ in
-                self?.contentView.reloadData()
-            }
-            .store(in: &cancellables)
-    }
     func checkingEventsEmpty() {
         viewModel.$userFavouriteEventsAreEmpty
             .receive(on: DispatchQueue.main)
@@ -75,6 +67,14 @@ extension FavouritesViewController {
             }
             .store(in: &cancellables)
     }
+    func setupEvents() {
+        viewModel.favouriteEventsPublisher
+            .sink { [weak self] _ in
+                self?.contentView.reloadData()
+            }
+            .store(in: &cancellables)
+    }
+
 }
 extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,8 +84,11 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.configureCell(tableView, cellForRowAt: indexPath)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.saveCurrentFavouriteTableSelectedEventInEventService(tableView, didSelectRowAt: indexPath)
+        viewModel.saveCurrentFavouriteTableSelectedEventInEventService(didSelectRowAt: indexPath)
         delegate?.goToTableDetailScreen()
+    }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        viewModel.deleteByLeftSwipe(tableView, trailingSwipeActionsConfigurationForRowAt: indexPath)
     }
 }
 extension FavouritesViewController: FavouritesViewDelegate {

@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-// MARK: - класс для работы с массивами event`ов. Предназначен для получения и кэширования обьектов с сети и для хранения выбранных обьектов для detail screens
+// MARK: - класс для работы с массивами event`ов. Предназначен для кэширования обьектов с сети и для хранения выбранных обьектов для detail screens
 
 class EventService {
     public static let shared = EventService()
@@ -13,46 +13,10 @@ class EventService {
     @Published var events: [Event] = []
     @Published var searchBarFilteredEvents: [Event] = []
     @Published var userFavouriteEvents: [Event] = []
-    private var userFavouriteEventsId: [Int] = []
-    private let dispatchGroup = DispatchGroup()
-
 
     var mainTableSelectedEvent: Event?
     var userFavouriteTableSelectedEvent: Event?
-
-    func fetchFavouriteEvents(byIds: [Int], completion: @escaping ([Event]?, NetworkError?) -> Void) {
-        var gotEvents: [Event] = []
-        var errors: [NetworkError] = []
-
-        saveUserFavouriteEventsIdArray(with: byIds)
-
-        if !byIds.isEmpty {
-            for id in byIds {
-                let idString = String(id)
-                dispatchGroup.enter()
-                NetworkService.shared.fetchEventDetailById(byId: idString) { [weak self] event, error in
-                    guard let self else { return }
-                    if let event = event {
-                        gotEvents.append(event)
-                    } else if let error = error {
-                        errors.append(error)
-                        print("error in getting favourite events", error.localizedDescription)
-                    }
-                    self.dispatchGroup.leave()
-                }
-            }
-            dispatchGroup.notify(queue: .main) {
-                if errors.isEmpty {
-                    completion(gotEvents, nil)
-                    print("GOTEVENTS")
-                } else {
-                    completion(nil, errors.first)
-                }
-            }
-
-        }
-
-    }
+    var areUserFavouriteEventsLoaded = false
 
 // MARK: - методы для всех event в главной main table screen
     func saveEvent(with event: Event) {
@@ -139,8 +103,8 @@ class EventService {
 
     func saveEventInUserFavouriteEvents(with event: Event) {
         lock.lock()
-        if !events.contains(where: { $0.id == event.id }) {
-            events.append(event)
+        if !userFavouriteEvents.contains(where: { $0.id == event.id }) {
+            userFavouriteEvents.append(event)
         }
         lock.unlock()
     }
@@ -168,51 +132,6 @@ class EventService {
             return event
         }
         return nil
-    }
-
-// MARK: - методы для избранных event текущего пользователя в favourite table screen (тип Int для Id event`ов)
-    func saveUserFavouriteEventsIdArray(with eventsIdArray: [Int]) {
-        lock.lock()
-        userFavouriteEventsId = eventsIdArray
-        lock.unlock()
-    }
-
-    func getUserFavouriteEventsIdArray() -> [Int] {
-        return userFavouriteEventsId
-    }
-
-    func getUserFavouriteEventsIdArrayCount() -> Int {
-        return userFavouriteEventsId.count
-    }
-
-    func userFavouriteEventsIdArrayAreEmpty() -> Bool {
-        return userFavouriteEventsId.isEmpty
-    }
-
-    func saveIdInUserFavouriteEventsIdArray(with id: Int) {
-        lock.lock()
-        if !userFavouriteEventsId.contains(where: { $0 == id }) {
-            userFavouriteEventsId.append(id)
-        }
-        lock.unlock()
-    }
-
-    func removeIdFromUserFavouriteEventsIdArray(at index: Int) {
-        lock.lock()
-        userFavouriteEventsId.remove(at: index)
-        lock.unlock()
-    }
-
-    func removeIdFromUserFavouriteEventsIdArray(with id: Int) {
-        lock.lock()
-        if let index = userFavouriteEventsId.firstIndex(of: id) {
-            userFavouriteEventsId.remove(at: index)
-        }
-        lock.unlock()
-    }
-
-    func getIdFromUserFavouriteEventsIdArray(at index: Int) -> Int {
-        return userFavouriteEventsId[index]
     }
 
 }

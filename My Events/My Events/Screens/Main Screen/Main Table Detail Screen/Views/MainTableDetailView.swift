@@ -24,7 +24,6 @@ class MainTableDetailView: UIView {
 
     lazy var bookmarkImageView: UIImageView = {
         let image = UIImageView()
-//        image.image = UIImage(named: "bookmark")
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
         image.isUserInteractionEnabled = true
@@ -225,7 +224,6 @@ extension MainTableDetailView {
 
         if let cityEvent = event.location?.slug {
             cityLabel.text = "City: " + CitySlug.getFullCityNameFromSlug(slug: cityEvent)
-            print("!!!!!!!!(((())))))", CitySlug.getFullCityNameFromSlug(slug: cityEvent))
         } else {
             cityLabel.text = "City: No info about city"
         }

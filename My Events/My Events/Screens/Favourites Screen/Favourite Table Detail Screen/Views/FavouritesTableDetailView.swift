@@ -2,6 +2,7 @@ import UIKit
 
 protocol FavouritesTableDetailViewDelegate: AnyObject {
     func backBarButtonItemDidPressed()
+    func bookmarkDidPressed()
 }
 class FavouritesTableDetailView: UIView {
     private lazy var pageNameLabel: UILabel = {
@@ -20,6 +21,14 @@ class FavouritesTableDetailView: UIView {
     }
     lazy var backBarButtonItem = UIBarButtonItem(title: "Back", primaryAction: self.backBarButtonItemAction)
 
+    lazy var bookmarkImageView: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.isUserInteractionEnabled = true
+        image.addGestureRecognizer(bookmarkTapGestureRecognizer)
+        return image
+    }()
     private lazy var eventImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -94,6 +103,7 @@ class FavouritesTableDetailView: UIView {
         label.textAlignment = .left
         return label
     }()
+    private lazy var bookmarkTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bookmarkTapped))
 
     weak var delegate: FavouritesTableDetailViewDelegate?
 
@@ -118,6 +128,7 @@ extension FavouritesTableDetailView {
         addSubview(cityLabel)
         addSubview(priceLabel)
         addSubview(dateLabel)
+        addSubview(bookmarkImageView)
 
         pageNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(72)
@@ -125,7 +136,11 @@ extension FavouritesTableDetailView {
             make.width.equalTo(80)
             make.height.equalTo(24)
         }
-
+        bookmarkImageView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).inset(16)
+            make.trailing.equalTo(safeAreaLayoutGuide).inset(8)
+            make.size.equalTo(CGSize(width: 20, height: 20))
+        }
         eventNameLabel.snp.makeConstraints { make in
             make.top.equalTo(pageNameLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
@@ -245,5 +260,27 @@ extension FavouritesTableDetailView {
     func configureDetail(by image: UIImage) {
         eventImageView.image = image
     }
+    func configureBookmarkImage(with imageName: String) {
+        bookmarkImageView.image = UIImage(named: imageName)
+    }
 }
+extension FavouritesTableDetailView {
+    func animateBookmarkChange(imageName: String, completion: @escaping () -> Void) {
+        let animator = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
+            self.bookmarkImageView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }
 
+        animator.addCompletion { [weak self] _ in
+            self?.bookmarkImageView.image = UIImage(named: imageName)
+            UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut) {
+                self?.bookmarkImageView.transform = CGAffineTransform.identity
+            }.startAnimation()
+            completion()
+        }
+
+        animator.startAnimation()
+    }
+    @objc func bookmarkTapped() {
+        delegate?.bookmarkDidPressed()
+    }
+}

@@ -53,6 +53,9 @@ extension FavouritesTableDetailViewController {
 
         if let event = viewModel.fetchSelectedEvent() {
             contentView.configureDetail(by: event)
+
+            let bookmarkImageName = viewModel.getBookmarkImageNameBySelectedEventBeforeAnimation(selectedEvent: event)
+            contentView.configureBookmarkImage(with: bookmarkImageName)
         }
 
         viewModel.fetchSelectedEventImage { [weak self] image in
@@ -72,4 +75,21 @@ extension FavouritesTableDetailViewController: FavouritesTableDetailViewDelegate
     func backBarButtonItemDidPressed() {
         delegate?.goBackToTableScreen()
     }
+    
+    func bookmarkDidPressed() {
+        if let event = viewModel.fetchSelectedEvent() {
+
+            if viewModel.isEventFavourite(selectedEvent: event) {
+                contentView.animateBookmarkChange(imageName: "bookmark") { [weak self] in
+                    self?.viewModel.deleteFavouriteEvent(with: event)
+                }
+            } else {
+                contentView.animateBookmarkChange(imageName: "bookmark-black") { [weak self] in
+                    self?.viewModel.saveFavoriteEvent(with: event)
+                }
+                print("ANIMATED!!!!")
+            }
+        }
+    }
+
 }

@@ -24,7 +24,7 @@
 		284108A52BC6AF6200419447 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284108A42BC6AF6200419447 /* MainViewController.swift */; };
 		284108A72BC6AF8500419447 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284108A62BC6AF8500419447 /* MainViewModel.swift */; };
 		284F36E02C027FE200BB429E /* UserInEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F36DF2C027FE200BB429E /* UserInEvent.swift */; };
-		284F36E22C02809C00BB429E /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F36E12C02809C00BB429E /* DatabaseService.swift */; };
+		284F36E22C02809C00BB429E /* FirestoreDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F36E12C02809C00BB429E /* FirestoreDatabaseService.swift */; };
 		284F36E42C02A78E00BB429E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284F36E32C02A78E00BB429E /* UserService.swift */; };
 		2877E4F32BCEC791002B160D /* EventsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2877E4F22BCEC791002B160D /* EventsTabBarController.swift */; };
 		2877E4F62BCEC928002B160D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2877E4F52BCEC928002B160D /* ProfileViewController.swift */; };
@@ -86,7 +86,6 @@
 		28B228DB2C0389E000A1F804 /* FavouritesTableDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228DA2C0389E000A1F804 /* FavouritesTableDetailViewController.swift */; };
 		28B228DD2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B228DC2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift */; };
 		28B826552BF91FED00B42C8B /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B826542BF91FED00B42C8B /* MainTableViewCell.swift */; };
-		28C65E472C04CF920035A68C /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C65E462C04CF920035A68C /* Bookmark.swift */; };
 		28CCEBCE2BFE56210043A916 /* ImageNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCEBCD2BFE56210043A916 /* ImageNetworkManager.swift */; };
 		28CCEBD02BFE63650043A916 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCEBCF2BFE63650043A916 /* EventService.swift */; };
 		28CCEBD62BFE86880043A916 /* MainTableDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCEBD52BFE86880043A916 /* MainTableDetailViewModel.swift */; };
@@ -112,7 +111,7 @@
 		284108A42BC6AF6200419447 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		284108A62BC6AF8500419447 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		284F36DF2C027FE200BB429E /* UserInEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInEvent.swift; sourceTree = "<group>"; };
-		284F36E12C02809C00BB429E /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		284F36E12C02809C00BB429E /* FirestoreDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDatabaseService.swift; sourceTree = "<group>"; };
 		284F36E32C02A78E00BB429E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		2877E4F22BCEC791002B160D /* EventsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTabBarController.swift; sourceTree = "<group>"; };
 		2877E4F52BCEC928002B160D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -149,7 +148,6 @@
 		28B228DA2C0389E000A1F804 /* FavouritesTableDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableDetailViewController.swift; sourceTree = "<group>"; };
 		28B228DC2C0389EB00A1F804 /* FavouritesTableDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesTableDetailViewModel.swift; sourceTree = "<group>"; };
 		28B826542BF91FED00B42C8B /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		28C65E462C04CF920035A68C /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		28CCEBCD2BFE56210043A916 /* ImageNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkManager.swift; sourceTree = "<group>"; };
 		28CCEBCF2BFE63650043A916 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		28CCEBD52BFE86880043A916 /* MainTableDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableDetailViewModel.swift; sourceTree = "<group>"; };
@@ -229,8 +227,8 @@
 			children = (
 				283468812BFB8FC4009230CF /* NetworkError.swift */,
 				283468832BFB8FF5009230CF /* EndPoint.swift */,
-				2834688C2BFBC482009230CF /* NetworkServiceProtocol.swift */,
 				289ED8C02BFCEC7C0069C712 /* NetworkRequest.swift */,
+				2834688C2BFBC482009230CF /* NetworkServiceProtocol.swift */,
 				289ED8C22BFCEF890069C712 /* NetworkService.swift */,
 				28CCEBCD2BFE56210043A916 /* ImageNetworkManager.swift */,
 			);
@@ -242,7 +240,6 @@
 			children = (
 				283468862BFB908E009230CF /* Event.swift */,
 				284F36DF2C027FE200BB429E /* UserInEvent.swift */,
-				28C65E462C04CF920035A68C /* Bookmark.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -346,7 +343,7 @@
 				28A706432BD5229500298FEC /* GoogleService-Info.plist */,
 				28A706682BD58F2800298FEC /* AuthService.swift */,
 				28CCEBCF2BFE63650043A916 /* EventService.swift */,
-				284F36E12C02809C00BB429E /* DatabaseService.swift */,
+				284F36E12C02809C00BB429E /* FirestoreDatabaseService.swift */,
 				284F36E32C02A78E00BB429E /* UserService.swift */,
 			);
 			path = Services;
@@ -741,7 +738,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				284F36E22C02809C00BB429E /* DatabaseService.swift in Sources */,
+				284F36E22C02809C00BB429E /* FirestoreDatabaseService.swift in Sources */,
 				289ED8BF2BFCE8BB0069C712 /* URLSession.swift in Sources */,
 				283C1A8C2BC5907C008672F8 /* SignUpViewController.swift in Sources */,
 				284108A52BC6AF6200419447 /* MainViewController.swift in Sources */,
@@ -786,7 +783,6 @@
 				287809C42BC473F000FA737B /* StartView.swift in Sources */,
 				28A706502BD52A9400298FEC /* Coordinator.swift in Sources */,
 				28B228DB2C0389E000A1F804 /* FavouritesTableDetailViewController.swift in Sources */,
-				28C65E472C04CF920035A68C /* Bookmark.swift in Sources */,
 				28A706562BD53D7E00298FEC /* StartViewControllerCoordinator.swift in Sources */,
 				2826458D2BD41C2200DF7495 /* FavouritesView.swift in Sources */,
 				28A706692BD58F2800298FEC /* AuthService.swift in Sources */,

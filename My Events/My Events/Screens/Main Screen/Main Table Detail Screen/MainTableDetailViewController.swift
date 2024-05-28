@@ -50,7 +50,7 @@ extension MainTableDetailViewController {
         if let event = viewModel.fetchSelectedEvent() {
             contentView.configureDetail(by: event)
 
-            let bookmarkImageName = viewModel.getBookmarkImageNameBySelectedEvent(selectedEvent: event)
+            let bookmarkImageName = viewModel.getBookmarkImageNameBySelectedEventBeforeAnimation(selectedEvent: event)
             contentView.configureBookmarkImage(with: bookmarkImageName)
         }
 

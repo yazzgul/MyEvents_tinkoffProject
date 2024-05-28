@@ -3,9 +3,9 @@ import FirebaseFirestore
 
 // MARK: - сервис для работы с Firestore  (датабаза Firebase)
 
-class DatabaseService {
+class FirestoreDatabaseService {
 
-    static let shared = DatabaseService()
+    static let shared = FirestoreDatabaseService()
 
     private init() {}
 
