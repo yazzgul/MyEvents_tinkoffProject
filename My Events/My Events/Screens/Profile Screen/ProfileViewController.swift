@@ -50,6 +50,10 @@ extension ProfileViewController {
     }
 }
 extension ProfileViewController: ProfileViewDelegate {
+    func editProfileButtonDidPressed() {
+        
+    }
+    
     func favouriteButtonDidPressed() {
         delegate?.goToFavouriteTableScreen()
     }

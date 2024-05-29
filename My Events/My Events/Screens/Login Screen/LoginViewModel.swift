@@ -8,7 +8,7 @@ class LoginViewModel {
     func signInUser(email: String, password: String) {
         AuthService.shared.signIn(email: email, password: password) { result in
             switch result {
-            case .success( _ ):
+            case .success(_):
                 self.successfulyEnterLogin = true
                 print("Авторизация прошла успешно!")
             case .failure(let error):

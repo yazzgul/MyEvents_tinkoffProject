@@ -76,8 +76,7 @@ extension MainViewModel {
         return cell
     }
 
-    func saveCurrentMainTableSelectedEventInEventService(_ tableView: UITableView,
-                                                         didSelectRowAt indexPath: IndexPath,
+    func saveCurrentMainTableSelectedEventInEventService(didSelectRowAt indexPath: IndexPath,
                                                          searchController: UISearchController) {
 
         let inSearchMode = inSearchMode(searchController)

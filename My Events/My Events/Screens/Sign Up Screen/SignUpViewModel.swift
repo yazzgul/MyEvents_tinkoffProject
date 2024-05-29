@@ -18,6 +18,7 @@ class SignUpViewModel {
             AuthService.shared.signUp(email: email, password: password, firstName: userFirstName, lastName: userLastName) { result in
                 switch result {
                 case .success(let user):
+                    UserDefaults.standard.set(user.uid, forKey: "currentUser")
                     self.successfulySignUp = true
                     print("Регистрация прошла успешно!")
                 case .failure(let error):

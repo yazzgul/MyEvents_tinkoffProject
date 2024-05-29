@@ -28,7 +28,6 @@ class MainView: UIView {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search Events..."
         searchController.searchBar.showsBookmarkButton = true
-
         return searchController
     }()
     private lazy var tableRefreshControl: UIRefreshControl = {
@@ -57,13 +56,12 @@ extension MainView {
     func configureView() {
         addSubview(eventsTableView)
         addSubview(activityIndicatorView)
-        
+
         eventsTableView.addSubview(tableRefreshControl)
 
         eventsTableView.snp.makeConstraints { make in
-//            make.top.equalTo(pageNameLabel.snp.bottom).inset(5)
             make.top.equalTo(safeAreaLayoutGuide)
-            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(10)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(5)
             make.bottom.equalToSuperview().offset(-100)
         }
         activityIndicatorView.snp.makeConstraints { make in

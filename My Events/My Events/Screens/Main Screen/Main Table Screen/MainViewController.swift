@@ -59,7 +59,6 @@ extension MainViewController {
     private func setupNavigationBar() {
         navigationItem.searchController = contentView.tableSearchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        definesPresentationContext = false
     }
 }
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -70,7 +69,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.configureCell(tableView, cellForRowAt: indexPath, searchController: contentView.tableSearchController)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.saveCurrentMainTableSelectedEventInEventService(tableView, didSelectRowAt: indexPath, searchController: contentView.tableSearchController)
+        viewModel.saveCurrentMainTableSelectedEventInEventService(didSelectRowAt: indexPath, searchController: contentView.tableSearchController)
         delegate?.goToTableDetailScreen()
     }
 }

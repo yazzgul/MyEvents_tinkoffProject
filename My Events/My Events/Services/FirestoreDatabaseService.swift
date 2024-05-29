@@ -49,4 +49,13 @@ class FirestoreDatabaseService {
             }
         }
     }
+//    func deleteUser(withId id: String) async {
+//        do {
+//            try await dataBase.collection("users").document(id).delete()
+//            print("User deleted successfully.")
+//        } catch {
+//            print("Error deleting user: \(error.localizedDescription)")
+//            await alertShowable?.showCustomAlertAsync(title: "Error", message: "Error deleting user: \(error.localizedDescription)")
+//        }
+//    }
 }

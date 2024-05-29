@@ -4,8 +4,9 @@ import SnapKit
 protocol ProfileViewDelegate: AnyObject {
     func signOutButtonDidPressed()
     func favouriteButtonDidPressed()
+    func editProfileButtonDidPressed()
 }
-
+// добавить удаление пользователя кнопку + файрбэйз, добавить кнопку о нас
 class ProfileView: UIView {
     private lazy var pageNameLabel: UILabel = {
         let label = UILabel()
@@ -59,20 +60,6 @@ class ProfileView: UIView {
 
         return button
     }()
-    private lazy var commentsButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("My Comments", for: .normal)
-        button.layer.cornerRadius = 20
-        button.clipsToBounds = true
-        button.backgroundColor = UIColor.vividPinkColor()
-        button.setTitleColor(.white, for: .normal)
-
-        let action = UIAction { [weak self] _ in
-        }
-        button.addAction(action, for: .touchUpInside)
-
-        return button
-    }()
     private lazy var editProfileButton: UIButton = {
         let button = UIButton()
         button.setTitle("Edit Profile", for: .normal)
@@ -82,6 +69,7 @@ class ProfileView: UIView {
         button.setTitleColor(.white, for: .normal)
 
         let action = UIAction { [weak self] _ in
+            self?.delegate?.editProfileButtonDidPressed()
         }
         button.addAction(action, for: .touchUpInside)
 
@@ -125,7 +113,6 @@ extension ProfileView {
         addSubview(avatarImageView)
         addSubview(stackView)
         addSubview(favouriteButton)
-        addSubview(commentsButton)
         addSubview(editProfileButton)
         addSubview(signOutButton)
 
@@ -152,14 +139,8 @@ extension ProfileView {
             make.width.equalTo(350)
             make.height.equalTo(50)
         }
-        commentsButton.snp.makeConstraints { make in
-            make.top.equalTo(favouriteButton.snp.bottom).offset(15)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
-        }
         editProfileButton.snp.makeConstraints { make in
-            make.top.equalTo(commentsButton.snp.bottom).offset(15)
+            make.top.equalTo(favouriteButton.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(350)
             make.height.equalTo(50)

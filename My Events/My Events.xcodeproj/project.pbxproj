@@ -17,6 +17,7 @@
 		283468842BFB8FF5009230CF /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283468832BFB8FF5009230CF /* EndPoint.swift */; };
 		283468872BFB908E009230CF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283468862BFB908E009230CF /* Event.swift */; };
 		2834688D2BFBC482009230CF /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834688C2BFBC482009230CF /* NetworkServiceProtocol.swift */; };
+		2836FA602C0676160038CC07 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2836FA5F2C0676160038CC07 /* LocationManager.swift */; };
 		283C1A8A2BC5905F008672F8 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283C1A892BC5905F008672F8 /* SignUpViewModel.swift */; };
 		283C1A8C2BC5907C008672F8 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283C1A8B2BC5907C008672F8 /* SignUpViewController.swift */; };
 		283C1A8E2BC5908E008672F8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283C1A8D2BC5908E008672F8 /* SignUpView.swift */; };
@@ -104,6 +105,7 @@
 		283468832BFB8FF5009230CF /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		283468862BFB908E009230CF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		2834688C2BFBC482009230CF /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		2836FA5F2C0676160038CC07 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		283C1A892BC5905F008672F8 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		283C1A8B2BC5907C008672F8 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		283C1A8D2BC5908E008672F8 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -244,6 +246,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		2836FA612C06778D0038CC07 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2836FA5F2C0676160038CC07 /* LocationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		283C1A882BC5900F008672F8 /* Sign Up Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +339,7 @@
 				287809C22BC471D400FA737B /* App Life */,
 				28A7064D2BD52A4700298FEC /* Coordinators */,
 				287809C72BC4896E00FA737B /* Extensions */,
+				2836FA612C06778D0038CC07 /* Managers */,
 				28A706402BD521AB00298FEC /* Services */,
 				283468802BFB8F86009230CF /* Network */,
 				283468852BFB9061009230CF /* Models */,
@@ -548,8 +559,8 @@
 			children = (
 				28A7065E2BD543C900298FEC /* Coordinator */,
 				28A706492BD5245A00298FEC /* Views */,
-				284108A62BC6AF8500419447 /* MainViewModel.swift */,
 				284108A42BC6AF6200419447 /* MainViewController.swift */,
+				284108A62BC6AF8500419447 /* MainViewModel.swift */,
 			);
 			path = "Main Table Screen";
 			sourceTree = "<group>";
@@ -770,6 +781,7 @@
 				288FA6572BA9D49300BE9195 /* SceneDelegate.swift in Sources */,
 				284F36E02C027FE200BB429E /* UserInEvent.swift in Sources */,
 				28CCEBDC2BFE86D00043A916 /* MainTableDetailCoordinator.swift in Sources */,
+				2836FA602C0676160038CC07 /* LocationManager.swift in Sources */,
 				28A706632BD5440500298FEC /* ProfileViewControllerCoordinator.swift in Sources */,
 				284F36E42C02A78E00BB429E /* UserService.swift in Sources */,
 				283468872BFB908E009230CF /* Event.swift in Sources */,

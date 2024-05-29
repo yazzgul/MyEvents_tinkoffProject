@@ -20,7 +20,7 @@ class MainViewControllerCoordinator: BaseCoodinator {
     }
 
 }
-extension MainViewControllerCoordinator: MainViewControllerDelegate {    
+extension MainViewControllerCoordinator: MainViewControllerDelegate {
     func goToTableDetailScreen() {
         let coordinator = MainTableDetailCoordinator(navigationController: navigationController)
         coordinator.output = self
@@ -35,5 +35,4 @@ extension MainViewControllerCoordinator: MainTableDetailCoordinatorOutput {
         mainTableDetailCoordinator.map { remove(coordinator: $0) }
         navigationController.popViewController(animated: true)
     }
-
 }

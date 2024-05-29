@@ -60,5 +60,22 @@ class NetworkService: NetworkServiceProtocol {
         }
 
     }
+    func fetchAllEventsWithLocationFilter(slug: String, response: @escaping ([Event]?, NetworkError?) -> Void) {
+        let url = EndPoint(valueForQuery: slug).allEventsWithLocationFilter
+
+        NetworkRequest.shared.getData(url: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let eventsResponse = try JSONDecoder().decode(EventsResponse.self, from: data)
+                    response(eventsResponse.results, nil)
+                } catch let jsonError {
+                    print("Failed to decode JSON: ", jsonError)
+                }
+            case .failure(_):
+                response(nil, .decodingError)
+            }
+        }
+    }
 
 }
