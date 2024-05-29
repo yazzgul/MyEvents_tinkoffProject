@@ -1,7 +1,7 @@
 import Foundation
 import FirebaseFirestore
 
-// MARK: - сервис для работы с Firestore  (датабаза Firebase)
+// MARK: - сервис для работы с Firestore  (база данных Firebase)
 
 class FirestoreDatabaseService {
 
@@ -49,13 +49,11 @@ class FirestoreDatabaseService {
             }
         }
     }
-//    func deleteUser(withId id: String) async {
-//        do {
-//            try await dataBase.collection("users").document(id).delete()
-//            print("User deleted successfully.")
-//        } catch {
-//            print("Error deleting user: \(error.localizedDescription)")
-//            await alertShowable?.showCustomAlertAsync(title: "Error", message: "Error deleting user: \(error.localizedDescription)")
-//        }
-//    }
+    func deleteUser(completion: @escaping (Error?) -> Void) {
+        guard let currentUserUID = AuthService.shared.currentUser?.uid else { print("error in getting uid of current user"); return }
+        dataBase.collection("users").document(currentUserUID).delete() { error in
+            completion(error)
+        }
+    }
+
 }

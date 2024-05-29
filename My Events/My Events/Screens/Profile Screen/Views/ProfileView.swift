@@ -5,6 +5,7 @@ protocol ProfileViewDelegate: AnyObject {
     func signOutButtonDidPressed()
     func favouriteButtonDidPressed()
     func editProfileButtonDidPressed()
+    func deleteProfileButtonDidPressed()
 }
 // добавить удаление пользователя кнопку + файрбэйз, добавить кнопку о нас
 class ProfileView: UIView {
@@ -75,6 +76,21 @@ class ProfileView: UIView {
 
         return button
     }()
+    private lazy var deleteProfileButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Delete Profile", for: .normal)
+        button.layer.cornerRadius = 20
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor.vividPinkColor()
+        button.setTitleColor(.white, for: .normal)
+
+        let action = UIAction { [weak self] _ in
+            self?.delegate?.deleteProfileButtonDidPressed()
+        }
+        button.addAction(action, for: .touchUpInside)
+
+        return button
+    }()
     private lazy var signOutButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign Out", for: .normal)
@@ -114,6 +130,7 @@ extension ProfileView {
         addSubview(stackView)
         addSubview(favouriteButton)
         addSubview(editProfileButton)
+        addSubview(deleteProfileButton)
         addSubview(signOutButton)
 
         pageNameLabel.snp.makeConstraints { make in
@@ -141,6 +158,12 @@ extension ProfileView {
         }
         editProfileButton.snp.makeConstraints { make in
             make.top.equalTo(favouriteButton.snp.bottom).offset(15)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(350)
+            make.height.equalTo(50)
+        }
+        deleteProfileButton.snp.makeConstraints { make in
+            make.top.equalTo(editProfileButton.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(350)
             make.height.equalTo(50)

@@ -4,6 +4,7 @@ import Combine
 protocol ProfileViewControllerDelegate: AnyObject {
     func signOut()
     func goToFavouriteTableScreen()
+    func deleteAccountSignOut()
 }
 
 class ProfileViewController: UIViewController {
@@ -50,6 +51,18 @@ extension ProfileViewController {
     }
 }
 extension ProfileViewController: ProfileViewDelegate {
+    func deleteProfileButtonDidPressed() {
+        viewModel.deleteProfile { [weak self] success, error in
+            if error != nil {
+                // alert
+                print("error in deleting user")
+            } else if success {
+                self?.delegate?.deleteAccountSignOut()
+                print("user was deleted successfully")
+            }
+        }
+    }
+    
     func editProfileButtonDidPressed() {
         
     }

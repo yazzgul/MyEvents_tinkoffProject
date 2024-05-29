@@ -20,4 +20,14 @@ class ProfileViewModel {
         AuthService.shared.signOut()
     }
 
+    func deleteProfile(completion: @escaping (Bool, Error?) -> Void) {
+        FirestoreDatabaseService.shared.deleteUser { error in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+
 }

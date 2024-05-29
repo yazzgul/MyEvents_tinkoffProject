@@ -38,6 +38,9 @@ extension ProfileViewControllerCoordinator: ProfileViewControllerDelegate {
     func signOut() {
         output?.signOut()
     }
+    func deleteAccountSignOut() {
+        output?.signOut()
+    }
 }
 extension ProfileViewControllerCoordinator: FavouriteViewControllerCoordinatorOutput {
     func coordinatorWantsToOpenTableDetailScreen() {
