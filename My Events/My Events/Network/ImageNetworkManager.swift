@@ -1,10 +1,12 @@
 import UIKit
 import Combine
 
+// MARK: - класс для загрузки фото с сети и кэширования чтобы не отправлять повторный запрос
+
 class ImageNetworkManager {
     static let shared = ImageNetworkManager()
 
-    @Published var cashedImages: [String: Data] = [:]
+    var cashedImages: [String: Data] = [:]
 
     private init() {}
 

@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - координатор экрана регистрации
+
 protocol SignUpViewControllerCoordinatorOutput: AnyObject {
     func coordinatorDidSignUp()
     func coordinatorWantsToOpenLogin()
@@ -28,5 +30,4 @@ extension SignUpViewControllerCoordinator: SignUpViewControllerDelegate {
     func signUpUser() {
         output?.coordinatorDidSignUp()
     }
-
 }

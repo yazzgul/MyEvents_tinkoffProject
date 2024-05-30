@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - координатор экрана авторизации
+
 protocol LoginViewControllerCoordinatorOutput: AnyObject {
     func coordinatorDidLogin()
     func coordinatorWantsToSignUp()

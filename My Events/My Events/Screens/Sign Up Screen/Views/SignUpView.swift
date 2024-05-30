@@ -1,6 +1,8 @@
 import UIKit
 import SnapKit
 
+// MARK: - вью экрана регистрации
+
 protocol BackLoginButtonSignUpViewDelegate: AnyObject {
     func backLoginButtonDidPressed()
 }
@@ -9,7 +11,6 @@ protocol SignUpEnterButtonSignUpViewDelegate: AnyObject {
 }
 
 class SignUpView: UIView {
-
     private lazy var appNameLabel: UILabel = {
         let label = UILabel()
         label.text = "MY EVENTS"
@@ -46,14 +47,12 @@ class SignUpView: UIView {
         label.textAlignment = .center
         return label
     }()
-
     private lazy var ballonImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "ballon_pink_clean")
         imageView.contentMode = .scaleToFill
         return imageView
     }()
-
     private lazy var userNameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Your Name (e.g. Kendall Jenner)"
@@ -84,7 +83,6 @@ class SignUpView: UIView {
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
         return textField
-
     }()
     private lazy var passwordCheckTextField: UITextField = {
         let textField = UITextField()
@@ -97,7 +95,6 @@ class SignUpView: UIView {
         textField.isSecureTextEntry = true
         return textField
     }()
-
     private lazy var signUpEnterButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign Up", for: .normal)
@@ -108,13 +105,15 @@ class SignUpView: UIView {
 
         let action = UIAction { [weak self] _ in
             if let email = self?.emailTextField.text,
-               let password = self?.passwordTextField.text,
-               let passwordCheck = self?.passwordCheckTextField.text,
-               let userName = self?.userNameTextField.text {
-                self?.signUpEnterButtonDelegate?.signUpEnterButtonDidPressed(email: email,
-                                                                             password: password,
-                                                                             passwordAgain: passwordCheck,
-                                                                             userName: userName)
+                let password = self?.passwordTextField.text,
+                let passwordCheck = self?.passwordCheckTextField.text,
+                let userName = self?.userNameTextField.text {
+                self?.signUpEnterButtonDelegate?.signUpEnterButtonDidPressed(
+                    email: email,
+                    password: password,
+                    passwordAgain: passwordCheck,
+                    userName: userName
+                )
             }
         }
         button.addAction(action, for: .touchUpInside)
@@ -147,7 +146,7 @@ class SignUpView: UIView {
 
 }
 extension SignUpView {
-    func configureView() {
+    private func configureView() {
         addSubview(ballonImageView)
         addSubview(appNameLabel)
         addSubview(createAccountLabel)
@@ -161,71 +160,85 @@ extension SignUpView {
         addSubview(backLoginButton)
 
         ballonImageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-80)
-            make.top.equalToSuperview().inset(100)
-            make.width.equalTo(160)
-            make.height.equalTo(170)
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.trailing.equalTo(safeAreaLayoutGuide).offset(-80)
+            make.width.equalTo(120)
+            make.height.equalTo(120)
         }
         appNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(ballonImageView.snp.bottom).offset(7)
+            make.top.equalTo(ballonImageView.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
             make.width.equalTo(200)
             make.height.equalTo(20)
         }
         createAccountLabel.snp.makeConstraints { make in
-            make.top.equalTo(appNameLabel.snp.bottom).offset(25)
+            make.top.equalTo(appNameLabel.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
-            make.width.equalTo(250)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(32)
             make.height.equalTo(20)
         }
         captionLabel.snp.makeConstraints { make in
-            make.top.equalTo(createAccountLabel.snp.bottom).offset(15)
+            make.top.equalTo(createAccountLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(15)
-        }
-        haveAccountLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-100)
-            make.leading.equalToSuperview().offset(75)
-            make.width.equalTo(180)
-            make.height.equalTo(15)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(16)
         }
         userNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(captionLabel.snp.bottom).offset(20)
+            make.top.equalTo(captionLabel.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(userNameTextField.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
         passwordCheckTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
         signUpEnterButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordCheckTextField.snp.bottom).offset(29)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-64)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
+        }
+        haveAccountLabel.snp.makeConstraints { make in
+            make.top.equalTo(signUpEnterButton.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(72)
+            make.width.equalTo(180)
+            make.height.equalTo(16)
         }
         backLoginButton.snp.makeConstraints { make in
             make.centerY.equalTo(haveAccountLabel.snp.centerY)
-            make.leading.equalTo(haveAccountLabel.snp.trailing).offset(2)
-            make.width.equalTo(52)
-            make.height.equalTo(15)
+            make.leading.equalTo(haveAccountLabel.snp.trailing).offset(4)
+            make.width.equalTo(64)
+            make.height.equalTo(16)
         }
     }
 
+}
+extension SignUpView {
+    func setupUserNameTextFieldDelegate(_ delegate: UITextFieldDelegate) {
+        userNameTextField.delegate = delegate
+    }
+    func setupEmailTextFieldDelegate(_ delegate: UITextFieldDelegate) {
+        emailTextField.delegate = delegate
+    }
+    func setupPasswordTextFieldDelegate(_ delegate: UITextFieldDelegate) {
+        passwordTextField.delegate = delegate
+    }
+    func setupPasswordCheckTextFieldDelegate(_ delegate: UITextFieldDelegate) {
+        passwordCheckTextField.delegate = delegate
+    }
 }

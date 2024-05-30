@@ -1,6 +1,8 @@
 import UIKit
 import Combine
 
+// MARK: - вью модель детального экрана ивента из таблицы избранных ивентов
+
 class FavouritesTableDetailViewModel {
     private var cancellables = Set<AnyCancellable>()
     private var eventService = EventService.shared
@@ -48,8 +50,8 @@ class FavouritesTableDetailViewModel {
             //  обновляем информацию про пользователя на удаленном сервере (firebase)
             UserService.shared.updateUserInfo(with: curUser) { result in
                 switch result {
-                case .success(let user):
-                    print("USER!!! WITH ARRAY: ", user.favoriteEventsId)
+                case .success:
+                    print("event successfully saved!")
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -78,8 +80,8 @@ class FavouritesTableDetailViewModel {
             //  обновляем информацию про пользователя на удаленном сервере (firebase)
             UserService.shared.updateUserInfo(with: curUser) { result in
                 switch result {
-                case .success(let user):
-                    print("USER!!! WITH ARRAY: ", user.favoriteEventsId)
+                case .success:
+                    print("event successfully deleted!")
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -93,7 +95,7 @@ class FavouritesTableDetailViewModel {
         let selectedId = selectedEvent.id
 
         if let curUser = curUser {
-            return curUser.favoriteEventsId.contains(where: { $0 == selectedId })
+            return curUser.favoriteEventsId.contains { $0 == selectedId }
         }
         return false
     }
@@ -107,4 +109,71 @@ class FavouritesTableDetailViewModel {
         }
     }
 
+}
+extension FavouritesTableDetailViewModel {
+    func getConfiguredEventBodyTextView(with event: Event) -> String {
+        var eventText = event.bodyText ?? event.description
+
+        if eventText.hasPrefix("<p>") {
+            eventText.removeFirst(3)
+        }
+        if eventText.hasSuffix("</p>") {
+            eventText.removeLast(4)
+        }
+        return eventText
+    }
+    func getConfiguredAgeRestrictionLabel(with event: Event) -> String {
+        var ageRestriction = "No info about age restriction"
+        if let ageRestrictionEvent = event.ageRestriction {
+            if ageRestrictionEvent == "0" {
+                ageRestriction = "0+"
+            } else {
+                ageRestriction = ageRestrictionEvent
+            }
+        }
+        return ageRestriction
+    }
+    func getConfiguredPriceLabel(with event: Event) -> String {
+        var priceLabel = "No info about price"
+
+        if let priceEvent = event.price, !priceEvent.isEmpty {
+            priceLabel = priceEvent
+        }
+        return priceLabel
+    }
+    func getConfiguredCityLabel(with event: Event) -> String {
+        var cityLabel = "No info about city"
+
+        if let cityEvent = event.location?.slug, !cityEvent.isEmpty {
+            cityLabel = LocationService.shared.getFullCityName(bySlug: cityEvent)
+        }
+        return cityLabel
+    }
+    func getConfiguredDateLabel(with event: Event) -> String {
+        var dateLabel = "No info about date"
+
+        var datesEvent: [String] = []
+
+        if let dates = event.dates {
+            for dateElement in dates {
+                var fullDate = ""
+                let sDate = dateElement.startDate ?? ""
+                let eDate = dateElement.endDate ?? ""
+                if !eDate.isEmpty && !sDate.isEmpty {
+                    fullDate = "from \(sDate) to \(eDate)"
+                } else if !sDate.isEmpty && eDate.isEmpty {
+                    fullDate = "\(sDate)"
+                } else if !eDate.isEmpty && sDate.isEmpty {
+                    fullDate = "... to \(eDate)"
+                }
+                datesEvent.append(fullDate)
+            }
+        }
+        if !datesEvent.isEmpty {
+            if let firstDate = datesEvent.first {
+                dateLabel = firstDate
+            }
+        }
+        return dateLabel
+    }
 }

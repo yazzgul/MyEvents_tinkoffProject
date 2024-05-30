@@ -1,6 +1,8 @@
 import UIKit
 import Combine
 
+// MARK: - вью модель главной таблицы с ивентами
+
 class MainViewModel {
     private var eventService = EventService.shared
 
@@ -17,20 +19,20 @@ class MainViewModel {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
-
+// запрашиваем ивенты с сети по рандомной странице на которой они находятся
     func getAllEvents() {
         let randomPageNumber = String(getRandomNumber())
 
         NetworkService.shared.fetchAllEventsByPage(byPage: randomPageNumber) { [weak self] events, error in
-            guard let self else { return }
-            if error != nil {
+            if let error = error {
                 print("error: ", error)
             } else if let events {
-                eventService.saveEventsArray(with: events)
+                self?.eventService.saveEventsArray(with: events)
             }
-            checkEventsEmpty()
+            self?.checkEventsEmpty()
         }
     }
+
     func getRandomNumber() -> Int {
         let randomInt = Int.random(in: 1...100)
         return randomInt
@@ -44,20 +46,32 @@ class MainViewModel {
 extension MainViewModel {
     func numberOfRowsInSection(searchController: UISearchController) -> Int {
         let inSearchMode = inSearchMode(searchController)
-        return inSearchMode ? eventService.getSearchBarFilteredEventsCount() : eventService.getCount()
+        return inSearchMode ?
+        eventService.getSearchBarFilteredEventsCount() :
+        eventService.getCount()
     }
-    func configureCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, searchController: UISearchController) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier, for: indexPath) as? MainTableViewCell
+// чтобы свифтлинт не ругался :(
+    func configureCell(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath,
+        searchController: UISearchController
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: MainTableViewCell.reuseIdentifier,
+            for: indexPath
+        ) as? MainTableViewCell
+
         guard let cell = cell else { return UITableViewCell() }
 
         let inSearchMode = inSearchMode(searchController)
 
-        let event = inSearchMode ? eventService.searchBarFilteredEvents[indexPath.row] : eventService.events[indexPath.row]
+        let event = inSearchMode ?
+        eventService.searchBarFilteredEvents[indexPath.row] :
+        eventService.events[indexPath.row]
 
         if let imageLink = event.images?.first?.image {
             Task {
                 let image = try? await ImageNetworkManager.shared.downloadImage(by: imageLink)
-//                print(ImageNetworkManager.shared.cashedImages.count)
                 if let imageReady = image {
                     DispatchQueue.main.async {
                         cell.configureCell(with: imageReady)
@@ -67,7 +81,6 @@ extension MainViewModel {
                         await cell.configureCell(with: noPicture)
                     }
                 }
-
             }
         }
 
@@ -76,12 +89,15 @@ extension MainViewModel {
         return cell
     }
 
-    func saveCurrentMainTableSelectedEventInEventService(didSelectRowAt indexPath: IndexPath,
-                                                         searchController: UISearchController) {
-
+    func saveCurrentMainTableSelectedEventInEventService(
+        didSelectRowAt indexPath: IndexPath,
+        searchController: UISearchController
+    ) {
         let inSearchMode = inSearchMode(searchController)
 
-        let event = inSearchMode ? eventService.searchBarFilteredEvents[indexPath.row] : eventService.events[indexPath.row]
+        let event = inSearchMode ?
+        eventService.searchBarFilteredEvents[indexPath.row] :
+        eventService.events[indexPath.row]
 
         eventService.mainTableSelectedEvent = event
     }
@@ -101,7 +117,8 @@ extension MainViewModel {
         if let searchText = searchBarText?.lowercased() {
             guard !searchText.isEmpty else { print("no text in search bar"); return }
 
-            let newFilteredEventsArrayByText = eventService.getSearchBarFilteredEvents().filter({ $0.title.lowercased().contains(searchText) })
+            let newFilteredEventsArrayByText = eventService.getSearchBarFilteredEvents()
+                .filter { $0.title.lowercased().contains(searchText) }
 
             eventService.saveSearchBarFilteredEvents(with: newFilteredEventsArrayByText)
         }

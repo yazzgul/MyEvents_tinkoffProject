@@ -1,6 +1,8 @@
 import UIKit
 import Combine
 
+// MARK: - экран главной таблицы с ивентами
+
 protocol MainViewControllerDelegate: AnyObject {
     func goToTableDetailScreen()
 }
@@ -36,7 +38,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemGray6
-
+        // делегаты для таблицы
         contentView.setupDataSource(self)
         contentView.setupDelegate(self)
 
@@ -56,7 +58,7 @@ class MainViewController: UIViewController {
     
 }
 extension MainViewController {
-    private func setupNavigationBar() {
+    func setupNavigationBar() {
         navigationItem.searchController = contentView.tableSearchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
@@ -69,7 +71,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.configureCell(tableView, cellForRowAt: indexPath, searchController: contentView.tableSearchController)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.saveCurrentMainTableSelectedEventInEventService(didSelectRowAt: indexPath, searchController: contentView.tableSearchController)
+        viewModel.saveCurrentMainTableSelectedEventInEventService(
+            didSelectRowAt: indexPath,
+            searchController: contentView.tableSearchController
+        )
         delegate?.goToTableDetailScreen()
     }
 }
@@ -116,6 +121,7 @@ extension MainViewController: UISearchControllerDelegate, UISearchResultsUpdatin
     }
 }
 extension MainViewController: MainViewDelegate {
+//    функция для обновления страницы
     func refreshDataInTable() {
         viewModel.getAllEvents()
         contentView.endRefreshing()

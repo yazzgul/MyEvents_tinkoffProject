@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - координатор главной таблицы с ивентами
+
 class MainViewControllerCoordinator: BaseCoodinator {
 
     var navigationController: UINavigationController

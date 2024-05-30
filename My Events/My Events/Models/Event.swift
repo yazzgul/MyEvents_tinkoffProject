@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - модель мероприятий (ивентов)
+
 struct Event: Codable, Hashable, Equatable {
     let id: Int
     let dates: [DateElement]?
@@ -38,7 +40,7 @@ struct Event: Codable, Hashable, Equatable {
         location = try container.decodeIfPresent(Location.self, forKey: .location)
         categories = try container.decodeIfPresent([String].self, forKey: .categories)
 
-        // Попытка декодирования ageRestriction как строки и числа
+        // Попытка декодирования ageRestriction как строки и числа (т.к. при получении json там имеются и строки и числа)
         if let ageRestrictionString = try? container.decode(String.self, forKey: .ageRestriction) {
             ageRestriction = ageRestrictionString
         } else if let ageRestrictionInt = try? container.decode(Int.self, forKey: .ageRestriction) {

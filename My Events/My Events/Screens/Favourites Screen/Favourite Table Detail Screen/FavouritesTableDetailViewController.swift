@@ -1,7 +1,8 @@
 import UIKit
-import Combine
 
-protocol FavouritesTableDetailViewControllerDelegate: AnyObject {
+// MARK: - детальный экрана ивента из таблицы избранных ивентов
+
+protocol FavouritesTableDetailControllerDelegate: AnyObject {
     func goBackToTableScreen()
 }
 
@@ -10,9 +11,7 @@ class FavouritesTableDetailViewController: UIViewController {
     private let contentView: FavouritesTableDetailView = .init()
     private let viewModel: FavouritesTableDetailViewModel
 
-    private var cancellables = Set<AnyCancellable>()
-
-    weak var delegate: FavouritesTableDetailViewControllerDelegate?
+    weak var delegate: FavouritesTableDetailControllerDelegate?
 
     init(viewModel: FavouritesTableDetailViewModel) {
         self.viewModel = viewModel
@@ -24,11 +23,6 @@ class FavouritesTableDetailViewController: UIViewController {
 
     override func loadView() {
         view = contentView
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
     }
 
     override func viewDidLoad() {
@@ -52,7 +46,19 @@ extension FavouritesTableDetailViewController {
     func setupEventInfo() {
 
         if let event = viewModel.fetchSelectedEvent() {
-            contentView.configureDetail(by: event)
+            let name = event.title
+            let bodyText = viewModel.getConfiguredEventBodyTextView(with: event)
+            let ageRestriction = viewModel.getConfiguredAgeRestrictionLabel(with: event)
+            let price = viewModel.getConfiguredPriceLabel(with: event)
+            let city = viewModel.getConfiguredCityLabel(with: event)
+            let dates = viewModel.getConfiguredDateLabel(with: event)
+
+            contentView.configureEventNameLabel(with: name)
+            contentView.configureBodyTextView(with: bodyText)
+            contentView.configureAgeRestrictionLabel(with: ageRestriction)
+            contentView.configurePriceLabel(with: price)
+            contentView.configureCityLabel(with: city)
+            contentView.configureDateLabel(with: dates)
 
             let bookmarkImageName = viewModel.getBookmarkImageNameBySelectedEventBeforeAnimation(selectedEvent: event)
             contentView.configureBookmarkImage(with: bookmarkImageName)
@@ -87,7 +93,6 @@ extension FavouritesTableDetailViewController: FavouritesTableDetailViewDelegate
                 contentView.animateBookmarkChange(imageName: "bookmark-black") { [weak self] in
                     self?.viewModel.saveFavoriteEvent(with: event)
                 }
-                print("ANIMATED!!!!")
             }
         }
     }

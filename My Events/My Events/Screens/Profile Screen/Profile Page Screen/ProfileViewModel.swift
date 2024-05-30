@@ -1,9 +1,18 @@
-import Foundation
+import UIKit
+import Combine
+
+// MARK: - вью модель экрана профиля
 
 class ProfileViewModel {
-
+    
     init() {
         UserService.shared.getUserFromDatabase()
+    }
+
+    var currentUserPublisher: AnyPublisher<UserInEvent?, Never> {
+        return UserService.shared.$currentUser
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
 
     func getUserFirstName() -> String? {
@@ -14,6 +23,9 @@ class ProfileViewModel {
     }
     func getUserEmail() -> String? {
         UserService.shared.getCurrentUserEmail()
+    }
+    func getUserImage() -> UIImage? {
+        UserService.shared.getCurrentUserImage()
     }
 
     func signOutFromProfile() {

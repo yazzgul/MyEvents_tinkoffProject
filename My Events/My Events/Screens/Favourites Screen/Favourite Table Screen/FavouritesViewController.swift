@@ -1,6 +1,8 @@
 import UIKit
 import Combine
 
+// MARK: - таблица избранных ивентов
+
 protocol FavouritesViewControllerDelegate: AnyObject {
     func backToProfileScreen()
     func goToTableDetailScreen()
@@ -45,7 +47,6 @@ class FavouritesViewController: UIViewController {
         setupNavigationBar()
         setupEvents()
         checkingEventsEmpty()
-
     }
 
 }
@@ -87,7 +88,10 @@ extension FavouritesViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.saveCurrentFavouriteTableSelectedEventInEventService(didSelectRowAt: indexPath)
         delegate?.goToTableDetailScreen()
     }
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
         viewModel.deleteByLeftSwipe(tableView, trailingSwipeActionsConfigurationForRowAt: indexPath)
     }
 }

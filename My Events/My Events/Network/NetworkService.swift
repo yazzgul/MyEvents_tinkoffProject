@@ -19,12 +19,11 @@ class NetworkService: NetworkServiceProtocol {
                 } catch let jsonError {
                     print("Failed to decode JSON: ", jsonError)
                 }
-            case .failure(_):
+            case .failure:
                 response(nil, .decodingError)
             }
         }
     }
-
     func fetchAllEventsByIds(byIds: String, response: @escaping ([Event]?, NetworkError?) -> Void) {
         let url = EndPoint(valueForQuery: byIds).allEventsByIdsUrl
 
@@ -37,28 +36,10 @@ class NetworkService: NetworkServiceProtocol {
                 } catch let jsonError {
                     print("Failed to decode JSON: ", jsonError)
                 }
-            case .failure(_):
+            case .failure:
                 response(nil, .decodingError)
             }
         }
-    }
-    func fetchEventDetailById(byId: String, response: @escaping (Event?, NetworkError?) -> Void) {
-        let url = EndPoint(valueForQuery: byId).detailEventUrl
-
-        NetworkRequest.shared.getData(url: url) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let event = try JSONDecoder().decode(Event.self, from: data)
-                    response(event, nil)
-                } catch let jsonError {
-                    print("Failed to decode JSON: ", jsonError)
-                }
-            case .failure(_):
-                response(nil, .decodingError)
-            }
-        }
-
     }
     func fetchAllEventsWithLocationFilter(slug: String, response: @escaping ([Event]?, NetworkError?) -> Void) {
         let url = EndPoint(valueForQuery: slug).allEventsWithLocationFilter
@@ -72,7 +53,7 @@ class NetworkService: NetworkServiceProtocol {
                 } catch let jsonError {
                     print("Failed to decode JSON: ", jsonError)
                 }
-            case .failure(_):
+            case .failure:
                 response(nil, .decodingError)
             }
         }

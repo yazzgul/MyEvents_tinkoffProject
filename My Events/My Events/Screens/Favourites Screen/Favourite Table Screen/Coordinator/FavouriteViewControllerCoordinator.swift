@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - координатор таблицы избранных ивентов
+
 protocol FavouriteViewControllerCoordinatorOutput: AnyObject {
     func coordinatorWantsToBackToProfileScreen()
     func coordinatorWantsToOpenTableDetailScreen()
@@ -33,7 +35,7 @@ extension FavouriteViewControllerCoordinator: FavouritesViewControllerDelegate {
         output?.coordinatorWantsToBackToProfileScreen()
     }
 }
-extension FavouriteViewControllerCoordinator: FavouritesTableDetailViewControllerDelegate {
+extension FavouriteViewControllerCoordinator: FavouritesTableDetailControllerDelegate {
     func goBackToTableScreen() {
         output?.coordinatorWantsToBackToTableFromTableDetailScreen()
     }

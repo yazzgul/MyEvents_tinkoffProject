@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - координатор детального экрана ивента из главной таблицы
+
 protocol MainTableDetailCoordinatorOutput: AnyObject {
     func coordinatorWantsToBackToTable()
 }

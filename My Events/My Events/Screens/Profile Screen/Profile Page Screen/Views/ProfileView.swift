@@ -1,13 +1,15 @@
 import UIKit
 import SnapKit
 
+// MARK: - вью экрана профиля
+
 protocol ProfileViewDelegate: AnyObject {
     func signOutButtonDidPressed()
     func favouriteButtonDidPressed()
     func editProfileButtonDidPressed()
     func deleteProfileButtonDidPressed()
 }
-// добавить удаление пользователя кнопку + файрбэйз, добавить кнопку о нас
+
 class ProfileView: UIView {
     private lazy var pageNameLabel: UILabel = {
         let label = UILabel()
@@ -36,16 +38,16 @@ class ProfileView: UIView {
         label.textAlignment = .center
         return label
     }()
-
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "demoCat")
+        // imageView.image = UIImage(named: "no-avatar")
         imageView.contentMode = .scaleToFill
         imageView.layer.cornerRadius = 80
+        imageView.layer.borderWidth = 5
+        imageView.layer.borderColor = UIColor.vividPinkColor().cgColor
         imageView.clipsToBounds = true
         return imageView
     }()
-
     private lazy var favouriteButton: UIButton = {
         let button = UIButton()
         button.setTitle("My Favourites", for: .normal)
@@ -119,7 +121,7 @@ class ProfileView: UIView {
 
 }
 extension ProfileView {
-    func configureView() {
+    private func configureView() {
 
         let stackView = UIStackView(arrangedSubviews: [userFirstnameLabel, userSurnameLabel])
         stackView.axis = .horizontal
@@ -134,45 +136,46 @@ extension ProfileView {
         addSubview(signOutButton)
 
         pageNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(72)
+            make.top.equalTo(safeAreaLayoutGuide)
             make.centerX.equalToSuperview()
-            make.width.equalTo(80)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(64)
             make.height.equalTo(24)
         }
         avatarImageView.snp.makeConstraints { make in
-            make.top.equalTo(pageNameLabel.snp.bottom).offset(40)
+            make.top.equalTo(pageNameLabel.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
             make.height.equalTo(160)
         }
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(avatarImageView.snp.bottom).offset(15)
+            make.top.equalTo(avatarImageView.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
-            make.height.equalTo(30)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(72)
+            make.height.equalTo(32)
         }
         favouriteButton.snp.makeConstraints { make in
-            make.top.equalTo(userFirstnameLabel.snp.bottom).offset(40)
+            make.top.equalTo(stackView.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
         editProfileButton.snp.makeConstraints { make in
-            make.top.equalTo(favouriteButton.snp.bottom).offset(15)
+            make.top.equalTo(favouriteButton.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
         deleteProfileButton.snp.makeConstraints { make in
-            make.top.equalTo(editProfileButton.snp.bottom).offset(15)
+            make.top.equalTo(editProfileButton.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
         signOutButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-100)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-16)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
     }
 
@@ -181,5 +184,12 @@ extension ProfileView {
     func configureProfileInfo(firstName: String, lastName: String) {
         userFirstnameLabel.text = firstName
         userSurnameLabel.text = lastName
+    }
+    func configureProfileImage(image: UIImage?) {
+        if let image = image {
+            avatarImageView.image = image
+        } else {
+            avatarImageView.image = UIImage(named: "no-avatar")
+        }
     }
 }

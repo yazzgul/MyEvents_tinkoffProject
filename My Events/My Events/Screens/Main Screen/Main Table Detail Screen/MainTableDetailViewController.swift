@@ -1,15 +1,15 @@
 import UIKit
-import Combine
+
+// MARK: - детальный экран ивента из главной таблицы
 
 protocol MainTableDetailViewControllerDelegate: AnyObject {
     func goToBackToTable()
 }
 
 class MainTableDetailViewController: UIViewController {
+
     private let contentView: MainTableDetailView = .init()
     private let viewModel: MainTableDetailViewModel
-
-    private var cancellables = Set<AnyCancellable>()
 
     weak var delegate: MainTableDetailViewControllerDelegate?
 
@@ -35,20 +35,30 @@ class MainTableDetailViewController: UIViewController {
         setupNavigationBar()
 
         setupEventInfo()
-
     }
 
 }
 extension MainTableDetailViewController {
-    private func setupNavigationBar() {
+    func setupNavigationBar() {
         navigationItem.leftBarButtonItem = contentView.backBarButtonItem
     }
 }
 extension MainTableDetailViewController {
     func setupEventInfo() {
-
         if let event = viewModel.fetchSelectedEvent() {
-            contentView.configureDetail(by: event)
+            let name = event.title
+            let bodyText = viewModel.getConfiguredEventBodyTextView(with: event)
+            let ageRestriction = viewModel.getConfiguredAgeRestrictionLabel(with: event)
+            let price = viewModel.getConfiguredPriceLabel(with: event)
+            let city = viewModel.getConfiguredCityLabel(with: event)
+            let dates = viewModel.getConfiguredDateLabel(with: event)
+
+            contentView.configureEventNameLabel(with: name)
+            contentView.configureBodyTextView(with: bodyText)
+            contentView.configureAgeRestrictionLabel(with: ageRestriction)
+            contentView.configurePriceLabel(with: price)
+            contentView.configureCityLabel(with: city)
+            contentView.configureDateLabel(with: dates)
 
             let bookmarkImageName = viewModel.getBookmarkImageNameBySelectedEventBeforeAnimation(selectedEvent: event)
             contentView.configureBookmarkImage(with: bookmarkImageName)
@@ -63,7 +73,6 @@ extension MainTableDetailViewController {
                 }
             }
         }
-
     }
 
 }
@@ -83,7 +92,6 @@ extension MainTableDetailViewController: MainTableDetailViewDelegate {
                 contentView.animateBookmarkChange(imageName: "bookmark-black") { [weak self] in
                     self?.viewModel.saveFavoriteEvent(with: event)
                 }
-                print("ANIMATED!!!!")
             }
         }
     }
