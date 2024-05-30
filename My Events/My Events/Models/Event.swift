@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - модель мероприятий (ивентов)
+
 struct Event: Codable, Hashable, Equatable {
     let id: Int
     let dates: [DateElement]?
@@ -38,7 +40,7 @@ struct Event: Codable, Hashable, Equatable {
         location = try container.decodeIfPresent(Location.self, forKey: .location)
         categories = try container.decodeIfPresent([String].self, forKey: .categories)
 
-        // Попытка декодирования ageRestriction как строки и числа
+        // Попытка декодирования ageRestriction как строки и числа (т.к. при получении json там имеются и строки и числа)
         if let ageRestrictionString = try? container.decode(String.self, forKey: .ageRestriction) {
             ageRestriction = ageRestrictionString
         } else if let ageRestrictionInt = try? container.decode(Int.self, forKey: .ageRestriction) {
@@ -80,41 +82,4 @@ struct EventsResponse: Codable, Hashable {
 //    previous page link response
     let previous: String?
     let results: [Event]?
-}
-enum CitySlug: String {
-    case spb = "Санкт-Петербург"
-    case msk = "Москва"
-    case nsk = "Новосибирск"
-    case ekb = "Екатеринбург"
-    case nnv = "Нижний Новгород"
-    case kzn = "Казань"
-    case vbg = "Выборг"
-    case smr = "Самара"
-    case krd = "Краснодар"
-    case sochi = "Сочи"
-    case ufa = "Уфа"
-    case krasnoyarsk = "Красноярск"
-    case kev = "Киев"
-    case newYork = "Нью-Йорк"
-
-    static func getFullCityNameFromSlug(slug: String) -> String {
-        switch slug.lowercased() {
-        case "spb": return CitySlug.spb.rawValue
-        case "msk": return CitySlug.msk.rawValue
-        case "nsk": return CitySlug.nsk.rawValue
-        case "ekb": return CitySlug.ekb.rawValue
-        case "nnv": return CitySlug.nnv.rawValue
-        case "kzn": return CitySlug.kzn.rawValue
-        case "vbg": return CitySlug.vbg.rawValue
-        case "smr": return CitySlug.smr.rawValue
-        case "krd": return CitySlug.krd.rawValue
-        case "sochi": return CitySlug.sochi.rawValue
-        case "ufa": return CitySlug.ufa.rawValue
-        case "krasnoyarsk": return CitySlug.krasnoyarsk.rawValue
-        case "kev": return CitySlug.kev.rawValue
-        case "newYork": return CitySlug.newYork.rawValue
-        default: return slug
-        }
-    }
-
 }

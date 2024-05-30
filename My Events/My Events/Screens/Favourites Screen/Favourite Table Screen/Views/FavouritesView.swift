@@ -1,9 +1,12 @@
 import UIKit
 import SnapKit
 
+// MARK: - вью таблицы избранных ивентов
+
 protocol FavouritesViewDelegate: AnyObject {
     func backBarButtonItemDidPressed()
 }
+
 class FavouritesView: UIView {
 
     private lazy var pageNameLabel: UILabel = {
@@ -48,10 +51,9 @@ class FavouritesView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 extension FavouritesView {
-    func configureView() {
+    private func configureView() {
         addSubview(pageNameLabel)
         addSubview(eventsTableView)
         addSubview(noDataCaptionLabel)
@@ -63,9 +65,9 @@ extension FavouritesView {
             make.height.equalTo(24)
         }
         eventsTableView.snp.makeConstraints { make in
-            make.top.equalTo(pageNameLabel.snp.bottom).inset(-8)
-            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(10)
-            make.bottom.equalToSuperview().offset(-100)
+            make.top.equalTo(pageNameLabel.snp.bottom).offset(2)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(4)
+            make.bottom.equalTo(safeAreaLayoutGuide)
         }
         noDataCaptionLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()

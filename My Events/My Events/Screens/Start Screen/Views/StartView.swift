@@ -1,9 +1,12 @@
 import UIKit
 import SnapKit
 
+// MARK: - view стартового экрана
+
 protocol NextScreenStartViewDelegate: AnyObject {
     func nextScreenButtonDidPressed()
 }
+
 class StartView: UIView {
 
     private lazy var appNameLabel: UILabel = {
@@ -59,35 +62,35 @@ class StartView: UIView {
 
 }
 extension StartView {
-    func configureView() {
+    private func configureView() {
         addSubview(ballonImageView)
         addSubview(appNameLabel)
         addSubview(captionLabel)
         addSubview(nextButton)
 
         ballonImageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-5)
-            make.top.equalToSuperview().inset(100)
+            make.trailing.equalTo(safeAreaLayoutGuide).offset(-5)
+            make.top.equalTo(safeAreaLayoutGuide).offset(16)
             make.width.equalTo(280)
             make.height.equalTo(300)
         }
         appNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(ballonImageView.snp.bottom).offset(15)
+            make.top.equalTo(ballonImageView.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.width.equalTo(400)
+            make.trailing.leading.equalTo(safeAreaLayoutGuide).inset(64)
             make.height.equalTo(40)
         }
         captionLabel.snp.makeConstraints { make in
-            make.top.equalTo(appNameLabel.snp.bottom).offset(15)
-            make.leading.equalToSuperview().offset(20)
-            make.width.equalTo(400)
+            make.top.equalTo(appNameLabel.snp.bottom).offset(16)
+            make.leading.equalTo(safeAreaLayoutGuide).inset(24)
+            make.trailing.equalTo(safeAreaLayoutGuide).inset(64)
             make.height.equalTo(35)
         }
         nextButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-100)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-64)
             make.centerX.equalToSuperview()
-            make.width.equalTo(350)
-            make.height.equalTo(50)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(24)
+            make.height.equalTo(48)
         }
     }
 

@@ -1,5 +1,6 @@
 import UIKit
-import SnapKit
+
+// MARK: - стартовый экран
 
 protocol StartViewControllerDelegate: AnyObject {
     func goToLoginScreen()

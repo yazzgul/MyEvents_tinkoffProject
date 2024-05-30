@@ -7,5 +7,4 @@ class BaseCoodinator: Coordinator {
     func start() {
         fatalError("Child should implement funcStart")
     }
-
 }

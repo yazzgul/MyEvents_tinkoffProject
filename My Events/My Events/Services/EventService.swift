@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-// MARK: - класс для работы с массивами event`ов. Предназначен для кэширования обьектов с сети и для хранения выбранных обьектов для detail screens
+// MARK: - класс для работы с массивами event`ов (предназначен для кэширования обьектов)
 
 class EventService {
     public static let shared = EventService()
@@ -16,6 +16,7 @@ class EventService {
 
     var mainTableSelectedEvent: Event?
     var userFavouriteTableSelectedEvent: Event?
+
     var areUserFavouriteEventsLoaded = false
 
 // MARK: - методы для всех event в главной main table screen

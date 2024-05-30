@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - координатор стартового экрана
+
 protocol StartViewControllerCoordinatorOutput: AnyObject {
     func coordinatorDidLogin()
 }
@@ -9,8 +11,8 @@ class StartViewControllerCoordinator: BaseCoodinator {
     private var navigationController: UINavigationController
     weak var output: StartViewControllerCoordinatorOutput?
 
-    var loginViewControllerCoordinator: LoginViewControllerCoordinator?
-    var signUpViewControllerCoordinator: SignUpViewControllerCoordinator?
+    private var loginViewControllerCoordinator: LoginViewControllerCoordinator?
+    private var signUpViewControllerCoordinator: SignUpViewControllerCoordinator?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

@@ -1,8 +1,11 @@
 import UIKit
 
+// MARK: - вью главной таблицы с ивентами
+
 protocol MainViewDelegate: AnyObject {
     func refreshDataInTable()
 }
+
 class MainView: UIView {
     private lazy var pageNameLabel: UILabel = {
         let label = UILabel()
@@ -28,7 +31,6 @@ class MainView: UIView {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Search Events..."
         searchController.searchBar.showsBookmarkButton = true
-
         return searchController
     }()
     private lazy var tableRefreshControl: UIRefreshControl = {
@@ -54,17 +56,16 @@ class MainView: UIView {
 
 }
 extension MainView {
-    func configureView() {
+    private func configureView() {
         addSubview(eventsTableView)
         addSubview(activityIndicatorView)
-        
+
         eventsTableView.addSubview(tableRefreshControl)
 
         eventsTableView.snp.makeConstraints { make in
-//            make.top.equalTo(pageNameLabel.snp.bottom).inset(5)
             make.top.equalTo(safeAreaLayoutGuide)
-            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(10)
-            make.bottom.equalToSuperview().offset(-100)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide).inset(4)
+            make.bottom.equalTo(safeAreaLayoutGuide)
         }
         activityIndicatorView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
@@ -96,7 +97,6 @@ extension MainView {
 }
 extension MainView {
     @objc func refreshTableData() {
-        print("refreshing")
         delegate?.refreshDataInTable()
     }
     func endRefreshing() {

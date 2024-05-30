@@ -1,9 +1,13 @@
 import UIKit
 import Combine
 
+// MARK: - экран профиля
+
 protocol ProfileViewControllerDelegate: AnyObject {
     func signOut()
     func goToFavouriteTableScreen()
+    func deleteAccountSignOut()
+    func goToEditProfileScreen()
 }
 
 class ProfileViewController: UIViewController {
@@ -27,10 +31,7 @@ class ProfileViewController: UIViewController {
     override func loadView() {
         view = contentView
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,18 +39,50 @@ class ProfileViewController: UIViewController {
 
         contentView.delegate = self
 
-        setupUserProfile()
+        updateUserProfileInfo()
     }
     
 }
 extension ProfileViewController {
+
+    func updateUserProfileInfo() {
+        viewModel.currentUserPublisher
+            .sink { [weak self] user in
+                if let user = user {
+                    self?.setupUserProfile()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     func setupUserProfile() {
-        if let firstName = viewModel.getUserFirstName(), let lastName = viewModel.getUserLastName() {
+        if let firstName = viewModel.getUserFirstName(),
+            let lastName = viewModel.getUserLastName() {
             contentView.configureProfileInfo(firstName: firstName, lastName: lastName)
         }
+        if let userImage = viewModel.getUserImage() {
+            contentView.configureProfileImage(image: userImage)
+        }
     }
+
+
 }
 extension ProfileViewController: ProfileViewDelegate {
+    func deleteProfileButtonDidPressed() {
+        viewModel.deleteProfile { [weak self] success, error in
+            if error != nil {
+                print("error in deleting user")
+            } else if success {
+                self?.delegate?.deleteAccountSignOut()
+                print("user was deleted successfully")
+            }
+        }
+    }
+    
+    func editProfileButtonDidPressed() {
+        delegate?.goToEditProfileScreen()
+    }
+    
     func favouriteButtonDidPressed() {
         delegate?.goToFavouriteTableScreen()
     }

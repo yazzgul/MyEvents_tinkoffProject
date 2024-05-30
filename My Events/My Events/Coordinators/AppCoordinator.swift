@@ -6,12 +6,15 @@ class AppCoordinator: BaseCoodinator {
     var startViewControllerCoordinator: StartViewControllerCoordinator?
     var eventsTabBarControllerCoordinator: EventsTabBarControllerCoordinator?
 
-    private var isLogged = false
-
     private var rootNavigationController: UINavigationController?
 
-    init(window: UIWindow) {
+    private var userDefaults: UserDefaults
+
+    init(window: UIWindow, userDefaults: UserDefaults = UserDefaults.standard) {
         self.window = window
+        self.userDefaults = userDefaults
+
+        super.init()
     }
 
     override func start() {
@@ -22,8 +25,8 @@ class AppCoordinator: BaseCoodinator {
         if !childCoordinators.isEmpty {
             childCoordinators.removeAll()
         }
-        if !isLogged {
-            
+        if userDefaults.bool(forKey: "isLogged") == false {
+
             window.rootViewController = navigationController
             window.makeKeyAndVisible()
             startViewControllerCoordinator = StartViewControllerCoordinator(navigationController: navigationController)
@@ -48,16 +51,18 @@ class AppCoordinator: BaseCoodinator {
 
 extension AppCoordinator: EventsTabBarControllerCoordinatorOutput {
     func signOut() {
-        isLogged = false
+
         eventsTabBarControllerCoordinator.map { remove(coordinator: $0) }
+        userDefaults.removeObject(forKey: "isLogged")
         start()
     }
 }
 
 extension AppCoordinator: StartViewControllerCoordinatorOutput {
     func coordinatorDidLogin() {
-        isLogged = true
+
         startViewControllerCoordinator.map { remove(coordinator: $0) }
+        userDefaults.setValue(true, forKey: "isLogged")
         start()
     }
 }

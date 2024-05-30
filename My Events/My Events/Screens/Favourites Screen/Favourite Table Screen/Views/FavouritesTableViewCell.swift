@@ -1,11 +1,15 @@
 import UIKit
 import SnapKit
 
+// MARK: - ячейки главной таблицы избранных ивентов
+
 class FavouritesTableViewCell: UITableViewCell {
     private lazy var eventImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleToFill
+        image.layer.borderWidth = 3
+        image.layer.borderColor = UIColor.vividPinkColor().cgColor
         return image
     }()
     private lazy var eventNameLabel: UILabel = {
@@ -35,18 +39,9 @@ class FavouritesTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }
 extension FavouritesTableViewCell {
-    func configureView() {
+    private func configureView() {
         contentView.backgroundColor = .systemGray6
 
         contentView.addSubview(eventImageView)
@@ -54,20 +49,23 @@ extension FavouritesTableViewCell {
         contentView.addSubview(eventDescriptionLabel)
 
         eventImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(10)
+            make.leading.equalTo(safeAreaLayoutGuide).inset(4)
             make.centerY.equalToSuperview()
             make.size.equalTo(CGSize(width: 145, height: 100))
         }
         eventNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalTo(eventImageView.snp.trailing).offset(16)
-            make.size.equalTo(CGSize(width: 180, height: 40))
+            make.top.equalTo(safeAreaLayoutGuide).offset(4)
+            make.leading.equalTo(eventImageView.snp.trailing).offset(12)
+            make.trailing.equalTo(safeAreaLayoutGuide).inset(4)
+            make.height.equalTo(56)
         }
         eventDescriptionLabel.snp.makeConstraints { make in
-            make.leading.equalTo(eventImageView.snp.trailing).offset(16)
-            make.bottom.equalToSuperview().offset(-16)
-            make.size.equalTo(CGSize(width: 180, height: 40))
+            make.leading.equalTo(eventImageView.snp.trailing).offset(12)
+            make.trailing.equalTo(safeAreaLayoutGuide).inset(4)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-4)
+            make.height.equalTo(64)
         }
+        
     }
 }
 extension FavouritesTableViewCell {
@@ -79,14 +77,8 @@ extension FavouritesTableViewCell {
         eventImageView.image = image
     }
     func configureCell(with event: Event) {
-
-//        if let shortTitle = event.shortTitle {
-//            eventNameLabel.text = shortTitle
-//        } else {
-//            eventNameLabel.text = event.title
-//        }
         eventNameLabel.text = event.title
-//        у API в обьектах Event у аттрибута decription остаются префиксы, суффиксы
+        // у API в обьектах Event у аттрибута decription остаются префиксы, суффиксы
         var decriptionEvent = event.description
         if decriptionEvent.hasPrefix("<p>") {
             decriptionEvent.removeFirst(3)
@@ -94,7 +86,6 @@ extension FavouritesTableViewCell {
         if decriptionEvent.hasSuffix("</p>") {
             decriptionEvent.removeLast(4)
         }
-
         eventDescriptionLabel.text = decriptionEvent
     }
 

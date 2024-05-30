@@ -1,5 +1,7 @@
 import UIKit
 
+// MARK: - координатор таб бар контроллера
+
 protocol EventsTabBarControllerCoordinatorOutput: AnyObject {
     func signOut()
 }
@@ -9,7 +11,9 @@ class EventsTabBarControllerCoordinator: BaseCoodinator {
     private let eventsTabBarController: EventsTabBarController
 
     let mainViewControllerCoordinator = MainViewControllerCoordinator(navigationController: UINavigationController())
-    let profileViewControllerCoordinator = ProfileViewControllerCoordinator(navigationController: UINavigationController())
+    let profileViewControllerCoordinator = ProfileViewControllerCoordinator(
+        navigationController: UINavigationController()
+    )
     weak var output: EventsTabBarControllerCoordinatorOutput?
 
     init(eventsTabBarController: EventsTabBarController) {
@@ -24,13 +28,21 @@ class EventsTabBarControllerCoordinator: BaseCoodinator {
         }
 
         let mainNavigationController = UINavigationController()
-        mainNavigationController.tabBarItem = UITabBarItem(title: "Main", image: UIImage(systemName: "house"), tag: 1)
+        mainNavigationController.tabBarItem = UITabBarItem(
+            title: "Main",
+            image: UIImage(systemName: "house"),
+            tag: 1
+        )
         mainViewControllerCoordinator.navigationController = mainNavigationController
         mainViewControllerCoordinator.start()
 
         let profileNavigationController = UINavigationController()
         profileViewControllerCoordinator.output = self
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 2)
+        profileNavigationController.tabBarItem = UITabBarItem(
+            title: "Profile",
+            image: UIImage(systemName: "person"),
+            tag: 2
+        )
         profileViewControllerCoordinator.navigationController = profileNavigationController
         profileViewControllerCoordinator.start()
 
