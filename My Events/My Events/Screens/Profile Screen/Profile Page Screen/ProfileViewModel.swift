@@ -25,7 +25,14 @@ class ProfileViewModel {
         UserService.shared.getCurrentUserEmail()
     }
     func getUserImage() -> UIImage? {
-        UserService.shared.getCurrentUserImage()
+        if let userImage = UserService.shared.getCurrentUserImage() {
+            return userImage
+        }
+        if let noImage = UIImage(named: "no-avatar") {
+            return noImage
+        }
+        return nil
+
     }
 
     func signOutFromProfile() {
