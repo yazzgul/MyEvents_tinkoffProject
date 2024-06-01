@@ -46,7 +46,7 @@ class EditProfileView: UIView {
         let textField = UITextField()
         textField.placeholder = "Enter Your Last Name"
         textField.backgroundColor = .systemGray5
-        textField.textColor = .black
+        textField.textColor = .systemGray
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 13, weight: .medium)
         textField.autocapitalizationType = .none
