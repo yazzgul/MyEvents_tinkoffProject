@@ -234,7 +234,7 @@ extension MainTableDetailView {
         priceLabel.snp.makeConstraints { make in
             make.centerY.equalTo(priceNameLabel.snp.centerY)
             make.leading.equalTo(priceNameLabel.snp.trailing).offset(4)
-            make.trailing.equalTo(safeAreaLayoutGuide).inset(64)
+            make.trailing.equalTo(safeAreaLayoutGuide).inset(8)
             make.height.equalTo(20)
         }
         dateNameLabel.snp.makeConstraints { make in

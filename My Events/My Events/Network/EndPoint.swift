@@ -15,7 +15,7 @@ extension EndPoint {
         components.queryItems = [
             URLQueryItem(name: "lang", value: "en"),
             URLQueryItem(name: "page", value: valueForQuery),
-            URLQueryItem(name: "page_size", value: "50"),
+            URLQueryItem(name: "page_size", value: "80"),
             URLQueryItem(
                 name: "fields",
                 value: "id,dates,title,description,body_text,location,age_restriction,price,images"
@@ -28,7 +28,6 @@ extension EndPoint {
         }
         return url
     }
-    
 //    в valueForQuery нужно передавать строку содержащее одну или несколько id event`ов через запятую
     var allEventsByIdsUrl: URL {
         var components = URLComponents()
@@ -58,6 +57,7 @@ extension EndPoint {
         components.path = "/public-api/v1.2/events/"
         components.queryItems = [
             URLQueryItem(name: "lang", value: "en"),
+            URLQueryItem(name: "page_size", value: "80"),
             URLQueryItem(
                 name: "fields",
                 value: "id,dates,title,description,body_text,location,age_restriction,price,images"

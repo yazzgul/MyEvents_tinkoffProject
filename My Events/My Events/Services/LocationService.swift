@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 // MARK: - сервис для работы с локациями ивентов
 
@@ -9,6 +10,7 @@ class LocationService {
     private init() { }
 
     var cityMap: [String: String] = [
+        "no-slug": "Reset",
         "spb": "Saint Petersburg",
         "msk": "Moscow",
         "nsk": "Novosibirsk",
@@ -26,6 +28,27 @@ class LocationService {
         "london": "London",
         "newYork": "New York"
     ]
+    var citySlug = [
+        "no-slug",
+        "spb",
+        "msk",
+        "nsk",
+        "ekb",
+        "nnv",
+        "kzn",
+        "vbg",
+        "smr",
+        "krd",
+        "sochi",
+        "ufa",
+        "krasnoyarsk",
+        "kev",
+        "atlanta",
+        "london",
+        "newYork"
+    ]
+
+    @Published var filterTableSelectedCity: String?
 
     func getFullCityName(bySlug: String) -> String {
         if let fullName = cityMap[bySlug.lowercased()] {
@@ -33,5 +56,8 @@ class LocationService {
         } else {
             return bySlug
         }
+    }
+    func getSlug(forFullCityName value: String) -> String? {
+        return cityMap.first { $0.value == value }?.key
     }
 }

@@ -5,6 +5,7 @@ import Combine
 
 protocol MainViewControllerDelegate: AnyObject {
     func goToTableDetailScreen()
+    func goToFilterScreen()
 }
 
 class MainViewController: UIViewController {
@@ -52,6 +53,7 @@ class MainViewController: UIViewController {
 
         checkingEventsEmpty()
         setupEvents()
+        checkCityFilterState()
         setupSearchBarFilteredEvents()
 
     }
@@ -86,6 +88,17 @@ extension MainViewController {
             }
             .store(in: &cancellables)
     }
+    func checkCityFilterState() {
+        viewModel.selectedCityPublisher
+            .sink { [weak self] city in
+                if let city = city, city != "Reset" {
+                    self?.viewModel.getAllEventsByCity(cityName: city)
+                } else {
+                    self?.viewModel.getAllEvents()
+                }
+            }
+            .store(in: &cancellables)
+    }
     func setupSearchBarFilteredEvents() {
         viewModel.searchBarFilteredEventsPublisher
             .sink { [weak self] _ in
@@ -117,6 +130,7 @@ extension MainViewController: UISearchControllerDelegate, UISearchResultsUpdatin
         viewModel.updateSearchController(searchBarText: searchController.searchBar.text)
     }
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        delegate?.goToFilterScreen()
         print("Search bar button called!")
     }
 }

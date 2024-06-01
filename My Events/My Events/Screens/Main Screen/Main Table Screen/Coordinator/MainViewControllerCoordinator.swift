@@ -23,6 +23,14 @@ class MainViewControllerCoordinator: BaseCoodinator {
 
 }
 extension MainViewControllerCoordinator: MainViewControllerDelegate {
+    func goToFilterScreen() {
+        let filterViewModel = FilterViewModel()
+        let filterViewController = FilterViewController(viewModel: filterViewModel)
+        filterViewController.delegate = self
+        filterViewController.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(filterViewController, animated: true)
+    }
+    
     func goToTableDetailScreen() {
         let coordinator = MainTableDetailCoordinator(navigationController: navigationController)
         coordinator.output = self
@@ -35,6 +43,11 @@ extension MainViewControllerCoordinator: MainViewControllerDelegate {
 extension MainViewControllerCoordinator: MainTableDetailCoordinatorOutput {
     func coordinatorWantsToBackToTable() {
         mainTableDetailCoordinator.map { remove(coordinator: $0) }
+        navigationController.popViewController(animated: true)
+    }
+}
+extension MainViewControllerCoordinator: FilterViewControllerDelegate {
+    func goBackToMainTable() {
         navigationController.popViewController(animated: true)
     }
 }
