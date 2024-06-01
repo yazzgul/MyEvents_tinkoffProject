@@ -5,6 +5,7 @@ import Combine
 
 class MainViewModel {
     private var eventService = EventService.shared
+    private var locationService = LocationService.shared
 
     @Published var eventsAreEmpty = true
 
@@ -19,11 +20,31 @@ class MainViewModel {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+    var selectedCityPublisher: AnyPublisher<String?, Never> {
+        return locationService.$filterTableSelectedCity
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
 // запрашиваем ивенты с сети по рандомной странице на которой они находятся
     func getAllEvents() {
         let randomPageNumber = String(getRandomNumber())
 
         NetworkService.shared.fetchAllEventsByPage(byPage: randomPageNumber) { [weak self] events, error in
+            if let error = error {
+                print("error: ", error)
+            } else if let events {
+                self?.eventService.saveEventsArray(with: events)
+            }
+            self?.checkEventsEmpty()
+        }
+    }
+// запрашиваем ивенты с сети по городу
+    func getAllEventsByCity(cityName: String) {
+        let slug = locationService.getSlug(forFullCityName: cityName)
+        
+        guard let slug = slug else { return }
+
+        NetworkService.shared.fetchAllEventsWithLocationFilter(slug: slug) { [weak self] events, error in
             if let error = error {
                 print("error: ", error)
             } else if let events {

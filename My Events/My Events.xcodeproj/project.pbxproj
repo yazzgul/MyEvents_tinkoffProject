@@ -99,6 +99,10 @@
 		28DAB0EB2C0783A7009F51FB /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB0EA2C0783A7009F51FB /* EditProfileView.swift */; };
 		28DAB0ED2C079925009F51FB /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB0EC2C079925009F51FB /* StorageService.swift */; };
 		28DAB0EF2C07FED5009F51FB /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAB0EE2C07FED5009F51FB /* AlertViewController.swift */; };
+		28F2ABCC2C0B3A6300DA57F1 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2ABCB2C0B3A6300DA57F1 /* FilterViewModel.swift */; };
+		28F2ABCE2C0B3A7100DA57F1 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2ABCD2C0B3A7100DA57F1 /* FilterViewController.swift */; };
+		28F2ABD12C0B3A8A00DA57F1 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2ABD02C0B3A8A00DA57F1 /* FilterView.swift */; };
+		28F2ABD32C0B3DE900DA57F1 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F2ABD22C0B3DE900DA57F1 /* FilterTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,6 +171,10 @@
 		28DAB0EA2C0783A7009F51FB /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		28DAB0EC2C079925009F51FB /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		28DAB0EE2C07FED5009F51FB /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		28F2ABCB2C0B3A6300DA57F1 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		28F2ABCD2C0B3A7100DA57F1 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		28F2ABD02C0B3A8A00DA57F1 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		28F2ABD22C0B3DE900DA57F1 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		660C1B9E9F3DF5E841E18E53 /* Pods-My Events.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My Events.debug.xcconfig"; path = "Target Support Files/Pods-My Events/Pods-My Events.debug.xcconfig"; sourceTree = "<group>"; };
 		B5BD25320B62D3ABDB9A31EE /* Pods_My_Events.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Events.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -271,6 +279,7 @@
 		284108A12BC6AF1000419447 /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
+				28F2ABCA2C0B39FB00DA57F1 /* Filter Screen */,
 				28CCEBD22BFE86190043A916 /* Main Table Screen */,
 				28CCEBD12BFE86050043A916 /* Main Table Detail Screen */,
 			);
@@ -612,6 +621,25 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		28F2ABCA2C0B39FB00DA57F1 /* Filter Screen */ = {
+			isa = PBXGroup;
+			children = (
+				28F2ABCF2C0B3A7500DA57F1 /* Views */,
+				28F2ABCD2C0B3A7100DA57F1 /* FilterViewController.swift */,
+				28F2ABCB2C0B3A6300DA57F1 /* FilterViewModel.swift */,
+			);
+			path = "Filter Screen";
+			sourceTree = "<group>";
+		};
+		28F2ABCF2C0B3A7500DA57F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				28F2ABD02C0B3A8A00DA57F1 /* FilterView.swift */,
+				28F2ABD22C0B3DE900DA57F1 /* FilterTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3DE920D07473304EF5C303F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -802,6 +830,7 @@
 				28B228D52C034CEE00A1F804 /* FavouritesTableViewCell.swift in Sources */,
 				283C1A8E2BC5908E008672F8 /* SignUpView.swift in Sources */,
 				283468822BFB8FC4009230CF /* NetworkError.swift in Sources */,
+				28F2ABCC2C0B3A6300DA57F1 /* FilterViewModel.swift in Sources */,
 				2826458F2BD41C3A00DF7495 /* FavouritesViewModel.swift in Sources */,
 				28DAB0E72C07838A009F51FB /* EditProfileViewModel.swift in Sources */,
 				28CCEBD62BFE86880043A916 /* MainTableDetailViewModel.swift in Sources */,
@@ -821,6 +850,7 @@
 				28DAB0EF2C07FED5009F51FB /* AlertViewController.swift in Sources */,
 				28ADD6EE2BC565FC004C6837 /* LoginViewModel.swift in Sources */,
 				28B826552BF91FED00B42C8B /* MainTableViewCell.swift in Sources */,
+				28F2ABD12C0B3A8A00DA57F1 /* FilterView.swift in Sources */,
 				289ED8C12BFCEC7C0069C712 /* NetworkRequest.swift in Sources */,
 				284108A72BC6AF8500419447 /* MainViewModel.swift in Sources */,
 				283C1A8A2BC5905F008672F8 /* SignUpViewModel.swift in Sources */,
@@ -829,8 +859,10 @@
 				287809C42BC473F000FA737B /* StartView.swift in Sources */,
 				28A706502BD52A9400298FEC /* Coordinator.swift in Sources */,
 				28B228DB2C0389E000A1F804 /* FavouritesTableDetailViewController.swift in Sources */,
+				28F2ABCE2C0B3A7100DA57F1 /* FilterViewController.swift in Sources */,
 				28A706562BD53D7E00298FEC /* StartViewControllerCoordinator.swift in Sources */,
 				28DAB0E92C078399009F51FB /* EditProfileViewController.swift in Sources */,
+				28F2ABD32C0B3DE900DA57F1 /* FilterTableViewCell.swift in Sources */,
 				2826458D2BD41C2200DF7495 /* FavouritesView.swift in Sources */,
 				28A706692BD58F2800298FEC /* AuthService.swift in Sources */,
 				28DAB0EB2C0783A7009F51FB /* EditProfileView.swift in Sources */,
